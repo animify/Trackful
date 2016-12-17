@@ -25,8 +25,7 @@ const loginCallbackHandler = function (objectMapper, type) {
 	return function (accessToken, refreshToken, profile, done) {
 		if (accessToken !== null) {
 			rUsers
-				.getAll(profile.username)
-				.filter({type: type})
+				.filter({login: profile.username, type: type, [`${type}ID`]: profile.id})
 				.run()
 				.then((users) => {
 					if (users.length > 0) {
@@ -59,6 +58,7 @@ passport.use(new GitHubStrategy({
 		return {
 			'login': profile.username,
 			'name': profile.displayName || null,
+			'githubID': profile.id,
 			'url': profile.profileUrl,
 			'avatarUrl': profile._json.avatar_url,
 			'type': 'github',
@@ -76,6 +76,7 @@ passport.use(new TwitterStrategy({
 		return {
 			'login': profile.username,
 			'name': profile.displayName || null,
+			'twitterID': profile.id,
 			'url': profile._raw.expanded_url || null,
 			'avatarUrl': profile._json.profile_image_url,
 			'type': 'twitter',
@@ -88,8 +89,8 @@ passport.presets = function (req, res, next) {
 	if (req.user) {
 		if (req.user.keys.length < 1 && req.originalUrl != '/create/key')
 			return res.redirect('/create/key')
-		else if (req.user.keys.length > 0 && req.originalUrl == '/create/key')
-			return res.redirect('/account')
+		// else if (req.user.keys.length > 0 && req.originalUrl == '/create/key')
+		// 	return res.redirect('/account')
 
 		return next()
 	}

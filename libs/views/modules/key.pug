@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+	if hasKeys
+		p lol
+		p=trackers
+		each val, index in trackers
+			ul
+				li #{index} #{val}
+	else
+		h2 You don't have any keys, add trackers to your elements on your site to get started.

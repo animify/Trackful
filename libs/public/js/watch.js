@@ -1,7 +1,7 @@
 $(() => {
 	$('[data-watch]').bind('click', function() {
 		console.log(this);
-		data = {"key": 10, "tracker": $(this).attr('data-watch')}
+		data = {"key": "B1-f-EmNg", "tracker": $(this).attr('data-watch')}
 		console.log(data);
 		call('/test', 'POST', data)
 	})

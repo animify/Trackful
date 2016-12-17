@@ -25,8 +25,16 @@ router.get('/create/key', auth.presets, function(req, res) {
 })
 
 router.post('/create/key', auth.presets, function(req, res) {
-	actions.createKey(req,res, (result) => {
-		res.send(result);
+	actions.createKey(req, res, (err, shortKey) => {
+		if (!err)
+			res.send(shortKey)
+	})
+})
+
+router.get('/key/:key', function(req, res) {
+	actions.getTrackers(req, res, req.params.key, (err, trackers, hasKeys) => {
+		if (!err)
+			res.render('key', {hasKeys: hasKeys, trackers: trackers})
 	})
 })
 

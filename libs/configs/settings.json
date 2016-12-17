@@ -12,6 +12,9 @@
 			"version" : "v1"
 		}
 	},
+	"rethink": {
+		"clicksDB": "test_clicks"
+	},
 	"twitter": {
 		"consumerKey": "h68DhVEVPvO7drPOXb5kEFGj3",
 		"consumerSecret": "wX72GxdY0I2pYAQbZyaUsWtT2nArmh87fqUdwObl1Mw7KVUrVa"
