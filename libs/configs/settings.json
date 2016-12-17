@@ -1,0 +1,23 @@
+{
+	"port": 3000,
+	"ports": {
+		"http":3000
+	},
+	"url": "localhost",
+	"security": {
+		"tokenLife" : 3600
+	},
+	"default": {
+		"api": {
+			"version" : "v1"
+		}
+	},
+	"twitter": {
+		"consumerKey": "h68DhVEVPvO7drPOXb5kEFGj3",
+		"consumerSecret": "wX72GxdY0I2pYAQbZyaUsWtT2nArmh87fqUdwObl1Mw7KVUrVa"
+	},
+	"github": {
+		"clientID": "02b2f929c71d539808a0",
+		"clientSecret": "df8b5f51feef9728a0de9b07563f7f886db0b4f2"
+	}
+}

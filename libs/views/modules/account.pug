@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+	if user
+		img(src=user.avatarUrl, height="80")
+		p=user.id
+		p=user.login
+		p=user.name
+		p=user.type
+		p=user.url
+		a.logout(href="/auth/logout") Logout

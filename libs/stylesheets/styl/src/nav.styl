@@ -1,0 +1,39 @@
+.nav
+	span(1/1)
+	fixed bottom left
+	height 3.6em
+	padding 0 2em 0 0
+	.dropdown
+		.menu
+			width auto
+		.input input
+			width 20em
+			min-width 20em
+			background-color light-color-smoke
+			height 2.2em
+			padding 1em .8em
+			margin-top .6em
+			border-radius border-radius-normal
+			color body-color
+	.item
+		padding 0 !important
+	.time
+		float right
+		padding 1.2em 0 !important
+	.options
+		margin-left .4em
+		& > a, .toggle
+			display inline-block
+			vertical-align top
+			cursor pointer
+			color body-color
+			position relative
+			height 3.6em
+			margin .7em 1.6em
+			// border-right 1px solid lighten(nav-grey, 5%)
+			i
+				color body-color
+				font-size 1.8em
+			&:hover
+				i
+					color primary-color

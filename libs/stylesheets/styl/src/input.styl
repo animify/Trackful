@@ -1,0 +1,65 @@
+.input
+	position relative
+	font-size 0
+	font-style normal
+	input[disabled], &.disabled
+		opacity .45
+		cursor default
+		pointer-events none
+	input, textarea
+		font-family font-family-standard
+		font-size font-size-standard
+		color dark-color
+		margin 0
+		font-size font-size-standard
+		max-width 100%
+		height em-height
+		line-height em-height
+		padding 1em 1.2em
+		outline 0
+		border-radius 0
+		text-align left
+		border 0
+		transition border-color 0.14s ease
+		min-width 30em
+		font-weight 300
+		background-color #fff
+		&:focus
+			border-color color-primary
+		+placeholder()
+			font-weight 300
+			text-transform uppercase
+			letter-spacing 2px
+			color body-color
+	textarea
+		&:not([rows])
+			min-height 8em
+			max-height 22em
+		line-height 1.2em
+		min-height 3em
+		width 100%
+		resize vertical
+	&.transparent
+		input
+			padding 0
+			background-color transparent
+			border 0
+.action
+	input
+		border-radius border-radius-normal 0 0 border-radius-normal
+		display inline-block
+		vertical-align top
+		& + .button
+			border-radius 0 border-radius-normal border-radius-normal 0
+			display inline-block
+			vertical-align top
+			font-size font-size-standard
+	.button
+		border-radius border-radius-normal 0 0 border-radius-normal
+		display inline-block
+		vertical-align top
+		font-size font-size-standard
+		& + input
+			border-radius 0 border-radius-normal border-radius-normal 0
+			display inline-block
+			vertical-align top

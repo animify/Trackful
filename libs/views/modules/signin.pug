@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+	.passport
+		.logo
+			img(src="images/apse-gr.png", height="50")
+		p.explanation To continue, please sign in:
+		.split
+			.input
+				input#username(type="text", placeholder="Email")
+			.input
+				input#password(type="password", placeholder="Password")
+		.split
+			a#signin.button.primary.button-block Sign in

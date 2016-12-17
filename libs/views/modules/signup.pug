@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+	.passport
+		.logo
+			img(src="images/apse-gr.png", height="50")
+		p.explanation Sign up to Apse. It's absolutely free.
+		form(autocomplete="off")
+			.split
+				.input
+					input#username(type="text", placeholder="Username", name="username")
+				.input
+					input#firstname(type="text", placeholder="First name", name="firstname")
+				.input
+					input#lastname(type="text", placeholder="Last name", name="lastname")
+				.input
+					input#email(type="text", placeholder="Email", name="email")
+			.split
+				.input
+					input#password(type="password", placeholder="Password", name="password")
+				.input
+					input#repassword(type="password", placeholder="Repeat password", name="repassword")
+			.split
+				a#signup.button.primary.button-block Sign up
