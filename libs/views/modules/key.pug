@@ -2,29 +2,42 @@ extends ../layout
 
 block content
 	.contain
+		section.header
+			.head
+				h6 Dashboard
+				h3 Overview
+			.options
+				.dropdown.right.floating
+					a.toggle #[img(src=user.avatarUrl)] #[i.ion-arrow-down-b]
+					ul.menu
+						li.info=user.name
+						li #[a(href="/create/key") Create key]
+						li #[a(href="/account") Your account]
+						li.divider
+						li.logout #[a(href="/auth/logout") Sign out]
 		section#trackers
 			.grid-row
 				.xs-12.m-6
-					if hasClickTrackers
-						ul#clicks
-							li.header #[h5 Click trackers]
-								div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
-							each val, index in clicktrackers
-								li(data-click=index) #{index}
-									span #{val}
-					else
-						h2 You don't have any click trackers, add trackers to your elements on your site to get started.
+					ul#clicks
+						li.header #[h5 Click trackers]
+							div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
+							if hasClickTrackers
+								each val, index in clicktrackers
+									li(data-click=index) #{index}
+										span #{val}
+							else
+								li.no_trackers No click trackers
 
 				.xs-12.m-6
-					if hasHitTrackers
-						ul#hits
-							li.header #[h5 Hit trackers]
-								div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
-							each val, index in hittrackers
-								li(data-hit=index) #{index}
-									span #{val}
-					else
-						h2 You don't have any hit trackers, add trackers to your elements on your site to get started.
+					ul#hits
+						li.header #[h5 Hit trackers]
+							div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
+							if hasHitTrackers
+								each val, index in hittrackers
+									li(data-hit=index) #{index}
+										span #{val}
+							else
+								li.no_trackers No hit trackers
 
 
 block footer

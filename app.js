@@ -16,6 +16,8 @@ const session = require('express-session')
 const RDBStore = require('session-rethinkdb')(session)
 const root = require(libs + 'routes/root')
 
+const cron = require(libs + 'cron/cron')
+
 const r = require(libs + 'db/db')
 
 const auth = require(libs + 'auth/auth')

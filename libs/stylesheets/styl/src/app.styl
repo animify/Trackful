@@ -15,17 +15,45 @@ body
 	&.pass
 		padding 175px 0
 
+.header
+	padding 3em 0 1.4em 0
+	border-bottom 1px solid border-gray
+	& > *
+		vertical-align top
+		display inline-block
+	.head
+		h6
+			color body-light
+	.options
+		float right
+		.dropdown
+			&:hover, &.open
+				i
+					color body-color
+		.toggle
+			line-height 5.5em
+			i
+				relative top -.5em
+				color body-light
+				margin-left .4em
+			img
+				height 2.1em
+				border-radius 50%
+
+
 #trackers
+	padding 2em 0
 	ul li
 		border 1px solid border-gray
 		border-top 0
 		padding .8rem
+		color body-light
 		&.header
 			h5
 				font-size 1.32em
-				color darken(body-color, 30%)
 				display inline-block
 				vertical-align top
+				color body-color
 			.search
 				float right
 				cursor pointer
@@ -46,7 +74,6 @@ body
 						content 'Filter...'
 		span
 			float right
-			font-weight 600
-			color darken(body-color, 30%)
+			color body-color
 		&:first-of-type
 			border-top 1px solid border-gray

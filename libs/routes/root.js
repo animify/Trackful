@@ -50,7 +50,7 @@ router.get('/key/:key', function(req, res) {
 			})
 		}
 	}, function(err, arr) {
-			res.render('key', {hasClickTrackers: arr.clicks[1], clicktrackers: arr.clicks[0], hasHitTrackers: arr.hits[1], hittrackers: arr.hits[0] ,trackKey: req.params.key})
+			res.render('key', {user: req.user, hasClickTrackers: arr.clicks[1], clicktrackers: arr.clicks[0], hasHitTrackers: arr.hits[1], hittrackers: arr.hits[0] ,trackKey: req.params.key})
 	})
 
 })

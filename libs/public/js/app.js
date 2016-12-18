@@ -1,8 +1,7 @@
 $(() => {
 	if (typeof io == 'function') {
-		var socket = io(trackR)
+		const socket = io(trackR)
 		socket.on('change', function(r) {
-			console.log(r.type);
 			switch (r.type) {
 				case "click":
 					updateClickTrackers(r.change)
@@ -14,12 +13,14 @@ $(() => {
 		})
 
 		updateClickTrackers = (trackers) => {
+			$('#clicks').closest('.no_trackers').remove()
 			$.each(trackers, (trackerName, trackerCount) => {
 				$(`[data-click="${trackerName}"]`).length ? $(`[data-click="${trackerName}"]`).html(`${trackerName} <span>${trackerCount}</span>`) : $('#clicks').append(`<li data-click="${trackerName}">${trackerName} <span>${trackerCount}</span></li>`)
 			})
 		}
 
 		updateHitTrackers = (trackers) => {
+			$('#hits').closest('.no_trackers').remove()
 			$.each(trackers, (trackerName, trackerCount) => {
 				$(`[data-hit="${trackerName}"]`).length ? $(`[data-hit="${trackerName}"]`).html(`${trackerName} <span>${trackerCount}</span>`) : $('#hits').append(`<li data-hit="${trackerName}">${trackerName} <span>${trackerCount}</span></li>`)
 			})
@@ -63,10 +64,10 @@ $(() => {
 		$(this).closest('ul').find('li').removeClass("last_li")
 		$(this).closest('ul').find('li').each(function() {
 			if ($(this).text().indexOf(filterVal) > -1) {
-				$(this).slideDown('fast')
+				$(this).stop().slideDown('fast')
 			}
 			else {
-				$(this).slideUp('fast')
+				$(this).stop().slideUp('fast')
 			}
 		})
 	})

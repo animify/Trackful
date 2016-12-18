@@ -22,10 +22,14 @@ exports.getClickTrackers = function(req, res, key, callback) {
 	r.db(config.get("rethink").trackDB).table('trackers').filter({key:key})
 	.run((err, rest) => {
 		hasTrackers = false
-		let trackerArray = Object.keys(rest[0].clicks).map(k => rest[0].clicks[k])
-		if (trackerArray.length > 0)
-			hasTrackers = true
-		callback(null, rest[0].clicks, hasTrackers)
+		if (rest[0]) {
+			let trackerArray = Object.keys(rest[0].clicks).map(k => rest[0].clicks[k])
+			if (trackerArray.length > 0)
+				hasTrackers = true
+
+			return callback(null, rest[0].clicks, hasTrackers)
+		}
+		callback(null, true)
 	})
 }
 
