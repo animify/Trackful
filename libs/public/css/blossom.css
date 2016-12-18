@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Lato:400,700,900,300");
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -100,7 +99,7 @@ html {
   width: 100%;
 }
 body {
-  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-family: 'myriad-pro', 'Open Sans', sans-serif;
   font-size: 14px;
   color: #919ca4;
   height: 100%;
@@ -731,7 +730,7 @@ strong {
 .contain {
   *zoom: 1;
   width: auto;
-  max-width: 1024px;
+  max-width: 960px;
   float: none;
   display: block;
   margin-right: auto;
@@ -2273,7 +2272,7 @@ ol.ordered li[value]:before {
 }
 .input input,
 .input textarea {
-  font-family: 'Roboto', 'Open Sans', sans-serif;
+  font-family: 'myriad-pro', 'Open Sans', sans-serif;
   font-size: 14px;
   color: #2a3137;
   margin: 0;
@@ -3849,7 +3848,6 @@ html.auto {
   height: auto;
 }
 body {
-  background-color: #18212d;
   color: #71808c;
   *zoom: 1;
   min-height: 100%;
@@ -3869,72 +3867,46 @@ body.auto {
 body.pass {
   padding: 175px 0;
 }
-.passport {
-  *zoom: 1;
-  width: auto;
-  max-width: 800px;
-  float: none;
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  padding-left: 20px;
-  padding-right: 20px;
-  text-align: center;
-  *zoom: 1;
+#trackers ul li {
+  border: 1px solid #e4e5e6;
+  border-top: 0;
+  padding: 0.8rem;
 }
-.passport:before,
-.passport:after {
-  content: '';
-  display: table;
+#trackers ul li.header h5 {
+  font-size: 1.32em;
+  color: #4f5a62;
+  display: inline-block;
+  vertical-align: top;
 }
-.passport:after {
-  clear: both;
+#trackers ul li.header .search {
+  float: right;
+  cursor: pointer;
 }
-.passport:before,
-.passport:after {
-  content: '';
-  display: table;
+#trackers ul li.header .search i {
+  font-size: 1.32em;
+  color: #66afff;
 }
-.passport:after {
-  clear: both;
+#trackers ul li.header .search i:hover {
+  color: #007aff;
 }
-.passport p.explanation {
-  color: #fff;
-  padding: 2em 0;
-  font-weight: 300;
-  letter-spacing: 0.4px;
+#trackers ul li.header .search > * {
+  display: inline-block;
+  vertical-align: top;
 }
-.passport .split .button {
-  display: block;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 30em;
-}
-.passport .split .input:first-child input {
-  -webkit-border-radius: 3px 3px 0 0;
-  border-radius: 3px 3px 0 0;
-}
-.passport .split .input:last-child input {
-  -webkit-border-radius: 0 0 3px 3px;
-  border-radius: 0 0 3px 3px;
-}
-.passport .split .input + .input input {
-  border-top: 1px solid #fcfcfd;
-}
-.passport .split + .split {
-  margin-top: 2em;
-}
-.kollab_content {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  resize: none;
-  background-color: transparent;
-  outline: 0;
-  color: #fff;
-  padding: 2em;
+#trackers ul li.header .search .filter {
   font-size: 1em;
-  font-family: 'Source Code Pro', 'Consolas', 'Monaco', 'Lucida Console', monospace;
+  padding-left: 0.4em;
+  line-height: 1.32em;
+  color: #007aff;
+}
+#trackers ul li.header .search .filter:empty:before {
+  content: 'Filter...';
+}
+#trackers ul li span {
+  float: right;
+  font-weight: 600;
+  color: #4f5a62;
+}
+#trackers ul li:first-of-type {
+  border-top: 1px solid #e4e5e6;
 }

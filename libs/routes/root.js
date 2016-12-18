@@ -13,7 +13,7 @@ const request = require('request')
 const fs = require('fs')
 const async = require('async')
 
-io = global.socketIO;
+const io = global.socketIO
 
 router.get('/', function(req, res) {
 	res.render('index')
@@ -40,20 +40,18 @@ router.get('/key/:key', function(req, res) {
 		clicks: function(callback) {
 			actions.getClickTrackers(req, res, req.params.key, (err, clickTrackers, hasClickTrackers) => {
 				if (!err)
-					callback(null, clickTrackers, hasClickTrackers);
+					callback(null, clickTrackers, hasClickTrackers)
 			})
 		},
 		hits: function(callback) {
 			actions.getHitTrackers(req, res, req.params.key, (err, hitTrackers, hasHitTrackers) => {
 				if (!err)
-					callback(null, hitTrackers, hasHitTrackers);
+					callback(null, hitTrackers, hasHitTrackers)
 			})
 		}
-}, function(err, arr) {
-		res.render('key', {hasClickTrackers: arr.clicks[1], clicktrackers: arr.clicks[0], hasHitTrackers: arr.hits[1], hittrackers: arr.hits[0] ,trackKey: req.params.key})
-});
-
-
+	}, function(err, arr) {
+			res.render('key', {hasClickTrackers: arr.clicks[1], clicktrackers: arr.clicks[0], hasHitTrackers: arr.hits[1], hittrackers: arr.hits[0] ,trackKey: req.params.key})
+	})
 
 })
 

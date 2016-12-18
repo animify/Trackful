@@ -1,21 +1,31 @@
 extends ../layout
 
 block content
-	if hasClickTrackers
-		h5 Click tracks
-		ul#trackers
-			each val, index in clicktrackers
-				li(data-click=index) #{index} #{val}
-	else
-		h2 You don't have any click trackers, add trackers to your elements on your site to get started.
+	.contain
+		section#trackers
+			.grid-row
+				.xs-12.m-6
+					if hasClickTrackers
+						ul#clicks
+							li.header #[h5 Click trackers]
+								div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
+							each val, index in clicktrackers
+								li(data-click=index) #{index}
+									span #{val}
+					else
+						h2 You don't have any click trackers, add trackers to your elements on your site to get started.
 
-	if hasHitTrackers
-		h5 Hit tracks
-		ul#trackers
-			each val, index in hittrackers
-				li(data-hit=index) #{index} #{val}
-	else
-		h2 You don't have any hit trackers, add trackers to your elements on your site to get started.
+				.xs-12.m-6
+					if hasHitTrackers
+						ul#hits
+							li.header #[h5 Hit trackers]
+								div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
+							each val, index in hittrackers
+								li(data-hit=index) #{index}
+									span #{val}
+					else
+						h2 You don't have any hit trackers, add trackers to your elements on your site to get started.
+
 
 block footer
 	script(src="/socket.io/socket.io.js")
