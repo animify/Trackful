@@ -1,10 +1,12 @@
 $(() => {
-	$('[data-watch]').bind('click', function() {
-		console.log(this);
-		data = {"key": "B1-f-EmNg", "tracker": $(this).attr('data-watch')}
-		console.log(data);
-		call('/test', 'POST', data)
-	})
+
+	cKey = "rJSFrJNVg"
+
+	hit = (cKey) => {
+		data = {"key": cKey, "page": window.location.href}
+		console.log('called hit');
+		call('/test/hit', 'POST', data)
+	}
 
 	call = (url, type, data) => {
 		$.ajax({
@@ -17,4 +19,13 @@ $(() => {
 			}
 		})
 	}
+
+	hit(cKey)
+
+	$('[data-watch]').bind('click', function() {
+		console.log(this);
+		data = {"key": cKey, "tracker": $(this).attr('data-watch')}
+		console.log(data);
+		call('/test', 'POST', data)
+	})
 })

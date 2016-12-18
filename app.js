@@ -1,5 +1,8 @@
 const express = require('express')
 const app = express()
+const http = require('http').Server(app)
+const io = require('socket.io')(http)
+global.socketIO = io
 const fs = require('fs')
 
 const libs = process.cwd() + '/libs/'
@@ -48,6 +51,6 @@ app.set('port', process.env.PORT || config.get('port') || 80)
 app.use('/', root)
 	.use('/auth', authRouter)
 
-app.listen(app.get('port'), function () {
+http.listen(app.get('port'), function () {
 	log.info('Listening on ' + app.get('port'))
 })

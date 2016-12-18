@@ -13,7 +13,7 @@
 		}
 	},
 	"rethink": {
-		"clicksDB": "test_clicks"
+		"trackDB": "test_trackers"
 	},
 	"twitter": {
 		"consumerKey": "h68DhVEVPvO7drPOXb5kEFGj3",
