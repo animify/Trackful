@@ -13,8 +13,14 @@ $(() => {
 					console.log('no type');
 			}
 		})
+		.on('connect', function() {
+			console.log('connected to socketio')
+		})
 		.on('disconnect', function() {
-			console.error('disconnected from socketio');
+			console.error('disconnected from socketio, attempting to reconnect')
+			setTimeout(function () {
+				io.connect(null, {force:true})
+			}, 5000);
 		})
 
 

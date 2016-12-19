@@ -7,9 +7,11 @@ block content
 		include ../static/nav.pug
 		section#keys
 			.activekeys
-				h6.sub.text-green Active keys
+				h6.sub.text-green Active applications
 				if keys
 					each key in keys
 						a.key(href="/key/" + key.id)
-							h6 #{key.name}
+							.float-left
+								h6 #{key.name}
+								small #{key.domain}
 							span /#{key.id} #[i.ion-ios-arrow-forward]

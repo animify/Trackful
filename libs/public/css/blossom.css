@@ -1691,17 +1691,17 @@ strong {
 }
 .button.green {
   color: #fff;
-  background-color: #13ce66;
+  background-color: #10c35f;
 }
 .button.green.outlined {
-  color: #13ce66;
+  color: #10c35f;
   background-color: transparent;
-  -webkit-box-shadow: inset 0px 0px 0px 1px #13ce66;
-  box-shadow: inset 0px 0px 0px 1px #13ce66;
+  -webkit-box-shadow: inset 0px 0px 0px 1px #10c35f;
+  box-shadow: inset 0px 0px 0px 1px #10c35f;
 }
 .button.green:hover {
   color: #fff;
-  background-color: #11b55a;
+  background-color: #0eac54;
 }
 .button.teal {
   color: #fff;
@@ -2149,9 +2149,9 @@ ol.ordered li[value]:before {
   color: #730000;
 }
 .message.success {
-  background-color: #eafdf3;
-  border-color: #91f5c0;
-  color: #074824;
+  background-color: #e9fdf2;
+  border-color: #90f5bd;
+  color: #064421;
 }
 .message.info {
   background-color: #edf4ff;
@@ -2172,9 +2172,6 @@ ol.ordered li[value]:before {
 }
 .input input[disabled],
 .input.disabled {
-  opacity: 0.45;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=45)";
-  filter: alpha(opacity=45);
   cursor: default;
   pointer-events: none;
 }
@@ -2395,7 +2392,7 @@ ol.ordered li[value]:before {
   color: #ffc82c;
 }
 .text-green {
-  color: #13ce66;
+  color: #10c35f;
 }
 .text-teal {
   color: #00baa9;
@@ -2449,13 +2446,13 @@ ol.ordered li[value]:before {
   background-color: #efb100 !important;
 }
 .green:not(.button) {
-  background-color: #13ce66 !important;
+  background-color: #10c35f !important;
 }
 .green:not(.button).light {
-  background-color: #2eec82 !important;
+  background-color: #22ed7b !important;
 }
 .green:not(.button).dark {
-  background-color: #0fa552 !important;
+  background-color: #0d9c4c !important;
 }
 .teal:not(.button) {
   background-color: #00baa9 !important;
@@ -3069,7 +3066,7 @@ ol.ordered li[value]:before {
   filter: alpha(opacity=30);
 }
 .stages .stage.completed i {
-  color: #13ce66;
+  color: #10c35f;
 }
 .stages .stage.active {
   background-color: #f7f9fb;
@@ -3802,7 +3799,6 @@ body.auto {
 }
 .sub {
   padding: 2em 0 0.8em 0;
-  font-weight: 600;
   font-size: 1.1em;
 }
 #keys .key {
@@ -3832,18 +3828,23 @@ body.auto {
   display: block;
   color: #373e44;
 }
-#keys .key h6,
+#keys .key .float-left,
 #keys .key span {
   display: inline-block;
-  vertical-align: top;
+  vertical-align: middle;
 }
 #keys .key span {
   position: relative;
-  top: 1px;
+  top: 0.62em;
   float: right;
 }
 #keys .key span i {
   margin-left: 1em;
+}
+#keys .key small {
+  display: block;
+  color: #75848f;
+  margin-top: 0.4em;
 }
 #keys .key + .key {
   margin-top: 0.8em;
@@ -3920,7 +3921,30 @@ body.auto {
   border-top: 1px solid #e4e5e6;
 }
 #create {
-  margin-top: 1.3em;
+  margin-top: 1.6em;
+}
+#account {
+  margin-top: 1.6em;
+}
+#account .details,
+#account .profile_image {
+  display: inline-block;
+  vertical-align: top;
+}
+#account .profile_image {
+  float: right;
+  padding: 3em 4em;
+  background-color: #f7f9fb;
+}
+#account .profile_image a {
+  display: block;
+  margin-top: 1.4em;
+  color: #454e55;
+}
+#account .profile_image img {
+  height: 10em;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
 }
 .flash {
   -webkit-animation-name: flash;

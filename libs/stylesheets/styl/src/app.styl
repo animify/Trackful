@@ -41,7 +41,6 @@ body
 
 .sub
 	padding 2em 0 .8em 0
-	font-weight 600
 	font-size 1.1em
 
 #keys
@@ -55,15 +54,18 @@ body
 		h6
 			display block
 			color body-dark
-
-		h6, span
+		.float-left, span
 			display inline-block
-			vertical-align top
+			vertical-align middle
 		span
-			relative top 1px
+			relative top .62em
 			float right
 			i
 				margin-left 1em
+		small
+			display block
+			color body-light
+			margin-top .4em
 		& + .key
 			margin-top .8em
 
@@ -124,7 +126,24 @@ body
 			border-top 1px solid border-gray
 
 #create
-	margin-top 1.3em
+	margin-top 1.6em
+
+#account
+	margin-top 1.6em
+	.details, .profile_image
+		display inline-block
+		vertical-align top
+	.profile_image
+		float right
+		padding 3em 4em
+		background-color light-color-smoke
+		a
+			display block
+			margin-top 1.4em
+			color body-color
+		img
+			height 10em
+			border-radius 50%
 
 .flash
 	animation-name flash

@@ -8,10 +8,28 @@ block content
 		include ../static/nav.pug
 
 		if user
-			img(src=user.avatarUrl, height="80")
-			p=user.id
-			p=user.login
-			p=user.name
-			p=user.type
-			p=user.url
-			a.logout(href="/auth/logout") Logout
+			section#account
+				.details
+					.input
+						label User ID
+						small Your uniquely assigned user ID
+						input(type="text", value=user.id, disabled)
+					.input
+						label Login name
+						small You username you are referred to
+						input(type="text", value=user.login, disabled)
+					.input
+						label Full name
+						small Your name, pulled in by the service you logged in with
+						input(type="text", value=user.name, disabled)
+					.input
+						label Your URL
+						small The URL pulled in by the service you logged in with
+						input(type="text", value=user.url, disabled)
+					.input
+						label Login type
+						small The type of service you used to make your account
+						input(type="text", value=user.type, disabled)
+				.profile_image
+					img(src=user.avatarUrl)
+					a Change profile picture
