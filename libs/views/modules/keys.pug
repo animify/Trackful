@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+	- var title = "Your keys"
+	- var sub = "Applications"
+	.contain
+		include ../static/nav.pug
+		section#keys
+			.activekeys
+				h6.sub.text-green Active keys
+				if keys
+					each key in keys
+						a.key(href="/key/" + key.id)
+							h6 #{key.name}
+							span /#{key.id} #[i.ion-ios-arrow-forward]

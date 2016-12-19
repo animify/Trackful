@@ -9,26 +9,41 @@ $(() => {
 				case "hit":
 					updateHitTrackers(r.change)
 					break
+				default:
+					console.log('no type');
 			}
 		})
+		.on('disconnect', function() {
+			console.error('disconnected from socketio');
+		})
+
 
 		updateClickTrackers = (trackers) => {
-			$('#clicks').closest('.no_trackers').remove()
-			$.each(trackers, (trackerName, trackerCount) => {
-				$(`[data-click="${trackerName}"]`).length ? $(`[data-click="${trackerName}"]`).html(`${trackerName} <span>${trackerCount}</span>`) : $('#clicks').append(`<li data-click="${trackerName}">${trackerName} <span>${trackerCount}</span></li>`)
+			const trackerName = trackers[0]
+			const trackerCount = trackers[1]
+
+			console.log(trackers);
+			$(`[data-click="${trackerName}"]`).length ? $(`[data-click="${trackerName}"]`).html(`${trackerName} <span>${trackerCount}</span>`) : $('#clicks').append(`<li data-click="${trackerName}">${trackerName} <span>${trackerCount}</span></li>`)
+
+			$(`[data-click="${trackerName}"]`).addClass("flash").delay(1000).queue(function(){
+				$(this).removeClass("flash").dequeue()
 			})
 		}
 
 		updateHitTrackers = (trackers) => {
-			$('#hits').closest('.no_trackers').remove()
-			$.each(trackers, (trackerName, trackerCount) => {
-				$(`[data-hit="${trackerName}"]`).length ? $(`[data-hit="${trackerName}"]`).html(`${trackerName} <span>${trackerCount}</span>`) : $('#hits').append(`<li data-hit="${trackerName}">${trackerName} <span>${trackerCount}</span></li>`)
+			const trackerName = trackers[0]
+			const trackerCount = trackers[1]
+
+			$(`[data-hit="${trackerName}"]`).length ? $(`[data-hit="${trackerName}"]`).html(`${trackerName} <span>${trackerCount}</span>`).addClass('flash').delay(1000).removeClass('flash') : $('#hits').append(`<li data-hit="${trackerName}">${trackerName} <span>${trackerCount}</span></li>`)
+
+			$(`[data-hit="${trackerName}"]`).addClass("flash").delay(1000).queue(function(){
+				$(this).removeClass("flash").dequeue()
 			})
 		}
 	}
 
 	$('.create').bind('click', function() {
-		data = {name: $('#appname').val()}
+		data = {name: $('#appname').val(), domain: $('#domain').val()}
 		$.ajax({
 			url: '/create/key',
 			type: 'POST',

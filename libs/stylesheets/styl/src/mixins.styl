@@ -46,7 +46,7 @@ btn-color-outlined(c)
 	color lookup('color-' + c)
 
 btn-background(c)
-	background linear-gradient(top, lookup('color-' + c), darken(lookup('color-' + c), 15%))
+	background-color lookup('color-' + c)
 
 btn-background-hover(c)
-	background linear-gradient(top, lighten(lookup('color-' + c), 5%), darken(lookup('color-' + c), 12%))
+	background-color darken(lookup('color-' + c), 12%)

@@ -1598,13 +1598,11 @@ strong {
   color: #505050;
   background-color: #e4e9ec;
   outline: 0;
-  padding: 0 1.4em;
-  -webkit-box-shadow: inset rgba(0,0,0,0.07) 0 -1px 1px, inset rgba(255,255,255,0.12) 0 2px 1px, rgba(0,0,0,0.25) 0 1px 1px;
-  box-shadow: inset rgba(0,0,0,0.07) 0 -1px 1px, inset rgba(255,255,255,0.12) 0 2px 1px, rgba(0,0,0,0.25) 0 1px 1px;
+  padding: 0 1.8em;
   text-align: center;
   border: 0;
-  height: 4em;
-  line-height: 4em;
+  height: 3.2em;
+  line-height: 3.2em;
   font-size: 1em;
   cursor: pointer;
   -webkit-transition: all 0.2s ease;
@@ -1613,7 +1611,6 @@ strong {
   -ms-transition: all 0.2s ease;
   transition: all 0.2s ease;
   vertical-align: top;
-  text-transform: uppercase;
 }
 .button.small {
   font-size: 0.8em;
@@ -1652,11 +1649,7 @@ strong {
 }
 .button.red {
   color: #fff;
-  background: -webkit-linear-gradient(top, #ff4949, #ff1818);
-  background: -moz-linear-gradient(top, #ff4949, #ff1818);
-  background: -o-linear-gradient(top, #ff4949, #ff1818);
-  background: -ms-linear-gradient(top, #ff4949, #ff1818);
-  background: linear-gradient(to bottom, #ff4949, #ff1818);
+  background-color: #ff4949;
 }
 .button.red.outlined {
   color: #ff4949;
@@ -1666,19 +1659,11 @@ strong {
 }
 .button.red:hover {
   color: #fff;
-  background: -webkit-linear-gradient(top, #ff5252, #f22);
-  background: -moz-linear-gradient(top, #ff5252, #f22);
-  background: -o-linear-gradient(top, #ff5252, #f22);
-  background: -ms-linear-gradient(top, #ff5252, #f22);
-  background: linear-gradient(to bottom, #ff5252, #f22);
+  background-color: #f22;
 }
 .button.orange {
   color: #fff;
-  background: -webkit-linear-gradient(top, #ff7c1d, #f16500);
-  background: -moz-linear-gradient(top, #ff7c1d, #f16500);
-  background: -o-linear-gradient(top, #ff7c1d, #f16500);
-  background: -ms-linear-gradient(top, #ff7c1d, #f16500);
-  background: linear-gradient(to bottom, #ff7c1d, #f16500);
+  background-color: #ff7c1d;
 }
 .button.orange.outlined {
   color: #ff7c1d;
@@ -1688,19 +1673,11 @@ strong {
 }
 .button.orange:hover {
   color: #fff;
-  background: -webkit-linear-gradient(top, #ff8328, #fa6900);
-  background: -moz-linear-gradient(top, #ff8328, #fa6900);
-  background: -o-linear-gradient(top, #ff8328, #fa6900);
-  background: -ms-linear-gradient(top, #ff8328, #fa6900);
-  background: linear-gradient(to bottom, #ff8328, #fa6900);
+  background-color: #fa6900;
 }
 .button.yellow {
   color: #fff;
-  background: -webkit-linear-gradient(top, #ffc82c, #febc00);
-  background: -moz-linear-gradient(top, #ffc82c, #febc00);
-  background: -o-linear-gradient(top, #ffc82c, #febc00);
-  background: -ms-linear-gradient(top, #ffc82c, #febc00);
-  background: linear-gradient(to bottom, #ffc82c, #febc00);
+  background-color: #ffc82c;
 }
 .button.yellow.outlined {
   color: #ffc82c;
@@ -1710,19 +1687,11 @@ strong {
 }
 .button.yellow:hover {
   color: #fff;
-  background: -webkit-linear-gradient(top, #ffcb37, #ffbf08);
-  background: -moz-linear-gradient(top, #ffcb37, #ffbf08);
-  background: -o-linear-gradient(top, #ffcb37, #ffbf08);
-  background: -ms-linear-gradient(top, #ffcb37, #ffbf08);
-  background: linear-gradient(to bottom, #ffcb37, #ffbf08);
+  background-color: #ffbf08;
 }
 .button.green {
   color: #fff;
-  background: -webkit-linear-gradient(top, #13ce66, #10af57);
-  background: -moz-linear-gradient(top, #13ce66, #10af57);
-  background: -o-linear-gradient(top, #13ce66, #10af57);
-  background: -ms-linear-gradient(top, #13ce66, #10af57);
-  background: linear-gradient(to bottom, #13ce66, #10af57);
+  background-color: #13ce66;
 }
 .button.green.outlined {
   color: #13ce66;
@@ -1732,19 +1701,11 @@ strong {
 }
 .button.green:hover {
   color: #fff;
-  background: -webkit-linear-gradient(top, #14db6c, #11b55a);
-  background: -moz-linear-gradient(top, #14db6c, #11b55a);
-  background: -o-linear-gradient(top, #14db6c, #11b55a);
-  background: -ms-linear-gradient(top, #14db6c, #11b55a);
-  background: linear-gradient(to bottom, #14db6c, #11b55a);
+  background-color: #11b55a;
 }
 .button.teal {
   color: #fff;
-  background: -webkit-linear-gradient(top, #00baa9, #009e90);
-  background: -moz-linear-gradient(top, #00baa9, #009e90);
-  background: -o-linear-gradient(top, #00baa9, #009e90);
-  background: -ms-linear-gradient(top, #00baa9, #009e90);
-  background: linear-gradient(to bottom, #00baa9, #009e90);
+  background-color: #00baa9;
 }
 .button.teal.outlined {
   color: #00baa9;
@@ -1754,19 +1715,11 @@ strong {
 }
 .button.teal:hover {
   color: #fff;
-  background: -webkit-linear-gradient(top, #00cab8, #00a495);
-  background: -moz-linear-gradient(top, #00cab8, #00a495);
-  background: -o-linear-gradient(top, #00cab8, #00a495);
-  background: -ms-linear-gradient(top, #00cab8, #00a495);
-  background: linear-gradient(to bottom, #00cab8, #00a495);
+  background-color: #00a495;
 }
 .button.blue {
   color: #fff;
-  background: -webkit-linear-gradient(top, #1877ff, #0062ed);
-  background: -moz-linear-gradient(top, #1877ff, #0062ed);
-  background: -o-linear-gradient(top, #1877ff, #0062ed);
-  background: -ms-linear-gradient(top, #1877ff, #0062ed);
-  background: linear-gradient(to bottom, #1877ff, #0062ed);
+  background-color: #1877ff;
 }
 .button.blue.outlined {
   color: #1877ff;
@@ -1776,19 +1729,11 @@ strong {
 }
 .button.blue:hover {
   color: #fff;
-  background: -webkit-linear-gradient(top, #247eff, #0065f6);
-  background: -moz-linear-gradient(top, #247eff, #0065f6);
-  background: -o-linear-gradient(top, #247eff, #0065f6);
-  background: -ms-linear-gradient(top, #247eff, #0065f6);
-  background: linear-gradient(to bottom, #247eff, #0065f6);
+  background-color: #0065f6;
 }
 .button.violet {
   color: #fff;
-  background: -webkit-linear-gradient(top, #a104e0, #8903be);
-  background: -moz-linear-gradient(top, #a104e0, #8903be);
-  background: -o-linear-gradient(top, #a104e0, #8903be);
-  background: -ms-linear-gradient(top, #a104e0, #8903be);
-  background: linear-gradient(to bottom, #a104e0, #8903be);
+  background-color: #a104e0;
 }
 .button.violet.outlined {
   color: #a104e0;
@@ -1798,19 +1743,11 @@ strong {
 }
 .button.violet:hover {
   color: #fff;
-  background: -webkit-linear-gradient(top, #ab04ee, #8e04c5);
-  background: -moz-linear-gradient(top, #ab04ee, #8e04c5);
-  background: -o-linear-gradient(top, #ab04ee, #8e04c5);
-  background: -ms-linear-gradient(top, #ab04ee, #8e04c5);
-  background: linear-gradient(to bottom, #ab04ee, #8e04c5);
+  background-color: #8e04c5;
 }
 .button.purple {
   color: #fff;
-  background: -webkit-linear-gradient(top, #6435c9, #552dab);
-  background: -moz-linear-gradient(top, #6435c9, #552dab);
-  background: -o-linear-gradient(top, #6435c9, #552dab);
-  background: -ms-linear-gradient(top, #6435c9, #552dab);
-  background: linear-gradient(to bottom, #6435c9, #552dab);
+  background-color: #6435c9;
 }
 .button.purple.outlined {
   color: #6435c9;
@@ -1820,19 +1757,11 @@ strong {
 }
 .button.purple:hover {
   color: #fff;
-  background: -webkit-linear-gradient(top, #6c3fcc, #582fb1);
-  background: -moz-linear-gradient(top, #6c3fcc, #582fb1);
-  background: -o-linear-gradient(top, #6c3fcc, #582fb1);
-  background: -ms-linear-gradient(top, #6c3fcc, #582fb1);
-  background: linear-gradient(to bottom, #6c3fcc, #582fb1);
+  background-color: #582fb1;
 }
 .button.pink {
   color: #fff;
-  background: -webkit-linear-gradient(top, #e03997, #cf2082);
-  background: -moz-linear-gradient(top, #e03997, #cf2082);
-  background: -o-linear-gradient(top, #e03997, #cf2082);
-  background: -ms-linear-gradient(top, #e03997, #cf2082);
-  background: linear-gradient(to bottom, #e03997, #cf2082);
+  background-color: #e03997;
 }
 .button.pink.outlined {
   color: #e03997;
@@ -1842,19 +1771,11 @@ strong {
 }
 .button.pink:hover {
   color: #fff;
-  background: -webkit-linear-gradient(top, #e2439c, #d62187);
-  background: -moz-linear-gradient(top, #e2439c, #d62187);
-  background: -o-linear-gradient(top, #e2439c, #d62187);
-  background: -ms-linear-gradient(top, #e2439c, #d62187);
-  background: linear-gradient(to bottom, #e2439c, #d62187);
+  background-color: #d62187;
 }
 .button.brown {
   color: #fff;
-  background: -webkit-linear-gradient(top, #ad5e37, #93502f);
-  background: -moz-linear-gradient(top, #ad5e37, #93502f);
-  background: -o-linear-gradient(top, #ad5e37, #93502f);
-  background: -ms-linear-gradient(top, #ad5e37, #93502f);
-  background: linear-gradient(to bottom, #ad5e37, #93502f);
+  background-color: #ad5e37;
 }
 .button.brown.outlined {
   color: #ad5e37;
@@ -1864,19 +1785,11 @@ strong {
 }
 .button.brown:hover {
   color: #fff;
-  background: -webkit-linear-gradient(top, #b8643a, #985330);
-  background: -moz-linear-gradient(top, #b8643a, #985330);
-  background: -o-linear-gradient(top, #b8643a, #985330);
-  background: -ms-linear-gradient(top, #b8643a, #985330);
-  background: linear-gradient(to bottom, #b8643a, #985330);
+  background-color: #985330;
 }
 .button.grey {
   color: #fff;
-  background: -webkit-linear-gradient(top, #7e7e7e, #6b6b6b);
-  background: -moz-linear-gradient(top, #7e7e7e, #6b6b6b);
-  background: -o-linear-gradient(top, #7e7e7e, #6b6b6b);
-  background: -ms-linear-gradient(top, #7e7e7e, #6b6b6b);
-  background: linear-gradient(to bottom, #7e7e7e, #6b6b6b);
+  background-color: #7e7e7e;
 }
 .button.grey.outlined {
   color: #7e7e7e;
@@ -1886,19 +1799,11 @@ strong {
 }
 .button.grey:hover {
   color: #fff;
-  background: -webkit-linear-gradient(top, #848484, #6f6f6f);
-  background: -moz-linear-gradient(top, #848484, #6f6f6f);
-  background: -o-linear-gradient(top, #848484, #6f6f6f);
-  background: -ms-linear-gradient(top, #848484, #6f6f6f);
-  background: linear-gradient(to bottom, #848484, #6f6f6f);
+  background-color: #6f6f6f;
 }
 .button.black {
   color: #fff;
-  background: -webkit-linear-gradient(top, #000, #000);
-  background: -moz-linear-gradient(top, #000, #000);
-  background: -o-linear-gradient(top, #000, #000);
-  background: -ms-linear-gradient(top, #000, #000);
-  background: linear-gradient(to bottom, #000, #000);
+  background-color: #000;
 }
 .button.black.outlined {
   color: #000;
@@ -1908,19 +1813,11 @@ strong {
 }
 .button.black:hover {
   color: #fff;
-  background: -webkit-linear-gradient(top, #0d0d0d, #000);
-  background: -moz-linear-gradient(top, #0d0d0d, #000);
-  background: -o-linear-gradient(top, #0d0d0d, #000);
-  background: -ms-linear-gradient(top, #0d0d0d, #000);
-  background: linear-gradient(to bottom, #0d0d0d, #000);
+  background-color: #000;
 }
 .button.primary {
   color: #fff;
-  background: -webkit-linear-gradient(top, #007aff, #0068d9);
-  background: -moz-linear-gradient(top, #007aff, #0068d9);
-  background: -o-linear-gradient(top, #007aff, #0068d9);
-  background: -ms-linear-gradient(top, #007aff, #0068d9);
-  background: linear-gradient(to bottom, #007aff, #0068d9);
+  background-color: #007aff;
 }
 .button.primary.outlined {
   color: #007aff;
@@ -1930,11 +1827,7 @@ strong {
 }
 .button.primary:hover {
   color: #fff;
-  background: -webkit-linear-gradient(top, #0d81ff, #006be0);
-  background: -moz-linear-gradient(top, #0d81ff, #006be0);
-  background: -o-linear-gradient(top, #0d81ff, #006be0);
-  background: -ms-linear-gradient(top, #0d81ff, #006be0);
-  background: linear-gradient(to bottom, #0d81ff, #006be0);
+  background-color: #006be0;
 }
 .button.labeled {
   padding: 0 1.4em 0 4em;
@@ -1949,7 +1842,7 @@ strong {
   color: #fff;
   height: 100%;
   font-size: 1em;
-  line-height: 4em;
+  line-height: 3.2em;
 }
 .button.labeled.labeled-right {
   padding: 0 4em 0 1.4em;
@@ -1962,6 +1855,9 @@ strong {
 }
 .button.icon {
   padding: 0 0.8275em;
+}
+.button.block {
+  width: 100%;
 }
 .button:hover {
   color: #404040;
@@ -2264,8 +2160,15 @@ ol.ordered li[value]:before {
 }
 .input {
   position: relative;
-  font-size: 0;
-  font-style: normal;
+}
+.input label {
+  line-height: 2em;
+  display: block;
+}
+.input small {
+  display: block;
+  color: #75848f;
+  padding-bottom: 0.8em;
 }
 .input input[disabled],
 .input.disabled {
@@ -2279,18 +2182,18 @@ ol.ordered li[value]:before {
 .input textarea {
   font-family: 'myriad-pro', 'Open Sans', sans-serif;
   font-size: 14px;
-  color: #2a3137;
+  color: #454e55;
   margin: 0;
   font-size: 14px;
   max-width: 100%;
-  height: 4em;
-  line-height: 4em;
+  height: 3.2em;
+  line-height: 1em;
   padding: 1em 1.2em;
   outline: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
   text-align: left;
-  border: 0;
+  border: 1px solid #e4e5e6;
   -webkit-transition: border-color 0.14s ease;
   -moz-transition: border-color 0.14s ease;
   -o-transition: border-color 0.14s ease;
@@ -2306,31 +2209,19 @@ ol.ordered li[value]:before {
 }
 .input input::-webkit-input-placeholder,
 .input textarea::-webkit-input-placeholder {
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #454e55;
+  color: #75848f;
 }
 .input input:-moz-placeholder,
 .input textarea:-moz-placeholder {
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #454e55;
+  color: #75848f;
 }
 .input input::-moz-placeholder,
 .input textarea::-moz-placeholder {
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #454e55;
+  color: #75848f;
 }
 .input input:-ms-input-placeholder,
 .input textarea:-ms-input-placeholder {
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #454e55;
+  color: #75848f;
 }
 .input textarea {
   line-height: 1.2em;
@@ -2346,6 +2237,12 @@ ol.ordered li[value]:before {
   padding: 0;
   background-color: transparent;
   border: 0;
+}
+.input + .input {
+  margin-top: 1.2rem;
+}
+.input.block input {
+  width: 100%;
 }
 .action input {
   -webkit-border-radius: 3px 0 0 3px;
@@ -3856,7 +3753,6 @@ body {
   color: #454e55;
   *zoom: 1;
   min-height: 100%;
-  height: 100%;
 }
 body:before,
 body:after {
@@ -3869,11 +3765,11 @@ body:after {
 body.auto {
   height: auto;
 }
-body.pass {
-  padding: 175px 0;
+.contain {
+  padding-bottom: 3em;
 }
 .header {
-  padding: 3em 0 1.4em 0;
+  padding: 3.2em 0 1.4rem 0;
   border-bottom: 1px solid #e4e5e6;
 }
 .header > * {
@@ -3903,6 +3799,79 @@ body.pass {
   height: 2.1em;
   -webkit-border-radius: 50%;
   border-radius: 50%;
+}
+.sub {
+  padding: 2em 0 0.8em 0;
+  font-weight: 600;
+  font-size: 1.1em;
+}
+#keys .key {
+  display: block;
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 0%;
+  padding: 1.2em 1.8em;
+  border: 1px solid #e4e5e6;
+}
+#keys .key:before,
+#keys .key:after {
+  content: '';
+  display: table;
+}
+#keys .key:after {
+  clear: both;
+}
+#keys .key:hover {
+  border-color: #007aff;
+}
+#keys .key h6 {
+  display: block;
+  color: #373e44;
+}
+#keys .key h6,
+#keys .key span {
+  display: inline-block;
+  vertical-align: top;
+}
+#keys .key span {
+  position: relative;
+  top: 1px;
+  float: right;
+}
+#keys .key span i {
+  margin-left: 1em;
+}
+#keys .key + .key {
+  margin-top: 0.8em;
+}
+#key_info {
+  padding: 1.4rem 0;
+  border-bottom: 1px solid #e4e5e6;
+}
+#key_info .info {
+  display: inline-block;
+  vertical-align: top;
+  color: #75848f;
+}
+#key_info .info i {
+  font-size: 1.4em;
+  color: #75848f;
+  cursor: pointer;
+  position: relative;
+  top: -2px;
+}
+#key_info .info i:hover {
+  color: #373e44;
+}
+#key_info .info span {
+  color: #373e44;
+}
+#key_info .info + .info {
+  margin-left: 1.4em;
 }
 #trackers {
   padding: 2em 0;
@@ -3949,4 +3918,51 @@ body.pass {
 }
 #trackers ul li:first-of-type {
   border-top: 1px solid #e4e5e6;
+}
+#create {
+  margin-top: 1.3em;
+}
+.flash {
+  -webkit-animation-name: flash;
+  -moz-animation-name: flash;
+  -o-animation-name: flash;
+  -ms-animation-name: flash;
+  animation-name: flash;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  animation-duration: 1s;
+}
+@-moz-keyframes flash {
+  0%, 50%, 100% {
+    background-color: #fff;
+  }
+  25%, 75% {
+    background-color: rgba(250,241,196,0.4);
+  }
+}
+@-webkit-keyframes flash {
+  0%, 50%, 100% {
+    background-color: #fff;
+  }
+  25%, 75% {
+    background-color: rgba(250,241,196,0.4);
+  }
+}
+@-o-keyframes flash {
+  0%, 50%, 100% {
+    background-color: #fff;
+  }
+  25%, 75% {
+    background-color: rgba(250,241,196,0.4);
+  }
+}
+@keyframes flash {
+  0%, 50%, 100% {
+    background-color: #fff;
+  }
+  25%, 75% {
+    background-color: rgba(250,241,196,0.4);
+  }
 }

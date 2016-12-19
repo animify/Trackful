@@ -29,12 +29,22 @@ router.get('/create/key', auth.presets, function(req, res) {
 
 router.post('/create/key', auth.presets, function(req, res) {
 	actions.createKey(req, res, (err, shortKey) => {
-		if (!err)
+		if (!err) {
 			res.send(shortKey)
+		} else {
+			req.json(err)
+		}
 	})
 })
 
-router.get('/key/:key', function(req, res) {
+router.get('/keys/all', auth.presets, function(req, res) {
+	actions.getAllKeys(req, res, (err, keys) => {
+		console.log(keys);
+		res.render('keys', {user: req.user, keys: keys})
+	})
+})
+
+router.get('/key/:key', auth.presets, function(req, res) {
 
 	async.parallel({
 		clicks: function(callback) {
@@ -48,9 +58,15 @@ router.get('/key/:key', function(req, res) {
 				if (!err)
 					callback(null, hitTrackers, hasHitTrackers)
 			})
+		},
+		key: function(callback) {
+			actions.getKeyInfo(req, res, req.params.key, (err, ud) => {
+				if (!err)
+					callback(null, ud)
+			})
 		}
 	}, function(err, arr) {
-			res.render('key', {user: req.user, hasClickTrackers: arr.clicks[1], clicktrackers: arr.clicks[0], hasHitTrackers: arr.hits[1], hittrackers: arr.hits[0] ,trackKey: req.params.key})
+			res.render('key', {user: req.user, hasClickTrackers: arr.clicks[1], clicktrackers: arr.clicks[0], hasHitTrackers: arr.hits[1], hittrackers: arr.hits[0] ,trackKey: req.params.key, key: arr.key[0]})
 	})
 
 })
@@ -59,7 +75,7 @@ router.get('/test', function(req, res) {
 	res.render('test')
 })
 
-router.post('/test', function(req, res) {
+router.post('/endpoint/clicks', function(req, res) {
 	watcher.incrementClickTrack(req, res, req.body.key, req.body.tracker, (err, result) => {
 		trackR = io.of(`/track_${req.body.key}`)
 		trackR.emit('change',{
@@ -70,7 +86,7 @@ router.post('/test', function(req, res) {
 	})
 })
 
-router.post('/test/hit', function(req, res) {
+router.post('/endpoint/hits', function(req, res) {
 	watcher.incrementHitTrack(req, res, req.body.key, req.body.page, (err, result) => {
 		trackR = io.of(`/track_${req.body.key}`)
 		trackR.emit('change',{

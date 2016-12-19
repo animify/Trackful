@@ -6,8 +6,7 @@
 	color text-button-default
 	background-color background-light-gray
 	outline 0
-	padding 0 1.4em
-	box-shadow inset rgba(0, 0, 0, 0.07) 0 -1px 1px, inset rgba(255, 255, 255, 0.12) 0 2px 1px, rgba(0, 0, 0, 0.25) 0 1px 1px
+	padding 0 1.8em
 	text-align center
 	border 0
 	height em-height
@@ -16,7 +15,6 @@
 	cursor pointer
 	transition all 0.2s ease
 	vertical-align top
-	text-transform uppercase
 	for size in ('small' 'medium' 'large' 'big' 'massive')
 		&.{size}
 			btn-size(size)
@@ -62,6 +60,8 @@
 				left auto
 	&.icon
 		padding 0 0.8275em
+	&.block
+		width 100%
 	&:hover
 		color hover-text-button-default
 		background-color hover-background-light-gray

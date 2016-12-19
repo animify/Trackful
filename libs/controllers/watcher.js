@@ -9,17 +9,23 @@ exports.incrementClickTrack = function(req, res, key, track, callback) {
 		{clicks: {[track] : r.row('clicks')(track).default(0).add(1)} },
 		{returnChanges: true}
 	).run(function(err, cursor) {
-		callback(null, cursor.changes[0].new_val.clicks)
+		if (cursor.changes) {
+			return callback(null, [track, cursor.changes[0].new_val.clicks[track]])
+		}
+		callback(null, true)
 	})
 }
 
 exports.incrementHitTrack = function(req, res, key, href, callback) {
 	const preUrl = url.parse(href)
 	const page = preUrl.pathname + (preUrl.search != null ? preUrl.search : '') + (preUrl.hash != null ? preUrl.hash : '')
-	r.db(config.get("rethink").trackDB).table('trackers').filter({key: key}).update(
+	r.db(config.get("rethink").trackDB).table('trackers').filter({key: key, domain: req.headers.host}).update(
 		{hits: {[page] : r.row('hits')(page).default(0).add(1)} },
 		{returnChanges: true}
 	).run(function(err, cursor) {
-		callback(null, cursor.changes[0].new_val.hits)
+		if (cursor.changes) {
+			return callback(null, [page, cursor.changes[0].new_val.hits[page]])
+		}
+		callback(null, true)
 	})
 }

@@ -1,5 +1,18 @@
 extends ../layout
 
 block content
-	input#appname(type="text", placeholder="Application name")
-	a.create Create key
+	- var title = "Create key"
+	- var sub = "Applications"
+	.contain
+		include ../static/nav.pug
+		section#create
+			.input.block
+				label Application key name
+				small The name of the application this key will refer to
+				input#appname(type="text")
+			.input.block
+				label Domain name
+				small The domain the tracker will keep tracking (e.g localhost)
+				input#domain(type="text")
+			.input.block
+				a.button.block.primary.medium.create Create key

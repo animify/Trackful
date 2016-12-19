@@ -1,7 +1,12 @@
 .input
 	position relative
-	font-size 0
-	font-style normal
+	label
+		line-height 2em
+		display block
+	small
+		display block
+		color body-light
+		padding-bottom .8em
 	input[disabled], &.disabled
 		opacity .45
 		cursor default
@@ -9,17 +14,17 @@
 	input, textarea
 		font-family font-family-standard
 		font-size font-size-standard
-		color dark-color
+		color body-color
 		margin 0
 		font-size font-size-standard
 		max-width 100%
 		height em-height
-		line-height em-height
+		line-height 1em
 		padding 1em 1.2em
 		outline 0
 		border-radius 0
 		text-align left
-		border 0
+		border 1px solid border-gray
 		transition border-color 0.14s ease
 		min-width 30em
 		font-weight 300
@@ -27,10 +32,7 @@
 		&:focus
 			border-color color-primary
 		+placeholder()
-			font-weight 300
-			text-transform uppercase
-			letter-spacing 2px
-			color body-color
+			color body-light
 	textarea
 		&:not([rows])
 			min-height 8em
@@ -44,6 +46,11 @@
 			padding 0
 			background-color transparent
 			border 0
+	& + .input
+		margin-top 1.2rem
+	&.block
+		input
+			width 100%
 .action
 	input
 		border-radius border-radius-normal 0 0 border-radius-normal

@@ -1,11 +1,11 @@
 $(() => {
 
-	cKey = "S1-o5f4Vx"
+	cKey = "S1wyRur4x"
 
 	hit = (cKey) => {
 		data = {"key": cKey, "page": window.location.href}
 		console.log('called hit');
-		call('/test/hit', 'POST', data)
+		call('/endpoint/hits', 'POST', data)
 	}
 
 	call = (url, type, data) => {
@@ -23,9 +23,8 @@ $(() => {
 	hit(cKey)
 
 	$('[data-watch]').bind('click', function() {
-		console.log(this);
 		data = {"key": cKey, "tracker": $(this).attr('data-watch')}
 		console.log(data);
-		call('/test', 'POST', data)
+		call('/endpoint/clicks', 'POST', data)
 	})
 })

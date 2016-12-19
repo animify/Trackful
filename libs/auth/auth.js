@@ -89,12 +89,10 @@ passport.presets = function (req, res, next) {
 	if (req.user) {
 		if (req.user.keys.length < 1 && req.originalUrl != '/create/key')
 			return res.redirect('/create/key')
-		// else if (req.user.keys.length > 0 && req.originalUrl == '/create/key')
-		// 	return res.redirect('/account')
 
 		return next()
 	}
-	return res.redirect('/not')
+	return res.redirect('/')
 }
 
 module.exports = passport

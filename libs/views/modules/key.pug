@@ -1,20 +1,14 @@
 extends ../layout
 
 block content
+	- var title = "Dashboard"
+	- var sub = "Overview"
 	.contain
-		section.header
-			.head
-				h6 Dashboard
-				h3 Overview
-			.options
-				.dropdown.right.floating
-					a.toggle #[img(src=user.avatarUrl)] #[i.ion-arrow-down-b]
-					ul.menu
-						li.info=user.name
-						li #[a(href="/create/key") Create key]
-						li #[a(href="/account") Your account]
-						li.divider
-						li.logout #[a(href="/auth/logout") Sign out]
+		include ../static/nav.pug
+		section#key_info
+			.info Name: #[span=key.name]
+			.info ID: #[span=key.id]
+			.info.float-right #[i.ion-ios-gear]
 		section#trackers
 			.grid-row
 				.xs-12.m-6
