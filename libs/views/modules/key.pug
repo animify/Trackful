@@ -11,30 +11,43 @@ block content
 			.info.float-right Domain: #[span=key.domain]
 		section#trackers
 			.grid-row
-				.xs-12.m-6
-					ul#clicks
-						li.header #[h5 Click trackers]
-							div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
-							if hasClickTrackers
+				if hasClickTrackers || hasHitTrackers
+					.xs-12.m-6
+						.graph.graph_clicks
+							.stats
+								.sum
+									p Total clicks
+									h2 12000
+								span 6% #[i.ion-arrow-up-b]
+							.sparkline
+						ul#clicks
+							li.header #[h5 Click trackers]
+								div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
 								each val, index in clicktrackers
 									li(data-click=index) #{index}
 										span #{val}
-							else
-								li.no_trackers No click trackers
 
-				.xs-12.m-6
-					ul#hits
-						li.header #[h5 Hit trackers]
-							div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
-							if hasHitTrackers
+					.xs-12.m-6
+						.graph.graph_hits
+							.stats
+								.sum
+									p Total page hits
+									h2 12000
+								span 6% #[i.ion-arrow-up-b]
+						ul#hits
+							li.header #[h5 Hit trackers]
+								div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
 								each val, index in hittrackers
 									li(data-hit=index) #{index}
 										span #{val}
-							else
-								li.no_trackers No hit trackers
+				else
+					.xs-12
+						.empty
+							h4 There isn't enough data here to show just yet.
 
 
 block footer
+	script(src="//omnipotent.net/jquery.sparkline/2.1.2/jquery.sparkline.min.js")
 	script(src="/socket.io/socket.io.js")
 	script.
 		const trackR = `/track_#{trackKey}`

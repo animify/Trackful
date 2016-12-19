@@ -1,6 +1,6 @@
 $(() => {
 
-	cKey = "SkkrUYrEx"
+	cKey = "rkgqZcrEg"
 
 	hit = (cKey) => {
 		data = {"key": cKey, "page": window.location.href}

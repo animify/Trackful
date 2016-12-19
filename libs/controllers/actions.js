@@ -15,7 +15,7 @@ exports.createKey = function(req, res, callback) {
 			{keys: r.row('keys').append({key: {id: shortKey, name: req.body.name, domain: preUrl.host}})}
 		).run((err, cursor) => {
 			r.db(config.get("rethink").trackDB).table('trackers')
-				.insert({key:shortKey, clicks:{}, hits:{}, domain: preUrl.host})
+				.insert({key:shortKey, clicks:{}, hits:{}, domain: preUrl.host, status: "active"})
 				.run((err, rr) => {
 					callback(null, shortKey)
 				})

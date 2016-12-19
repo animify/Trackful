@@ -92,4 +92,7 @@ $(() => {
 			}
 		})
 	})
+
+	var myvalues = [10,8,5,7,4,4,1];
+	$('.graph_clicks .sparkline').sparkline(myvalues, {type: "line", lineColor: "#fff", fillColor: "rgba(255, 255, 255, 0.4)", width: "100%", height: "4em", disableInteraction: true, disableTooltips: true, disableHighlight: true, maxSpotColor: false, minSpotColor: false, spotRadius: 0, lineWidth: 2});
 })
