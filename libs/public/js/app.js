@@ -1,5 +1,6 @@
 $(() => {
 	call = (url, type, data, callback) => {
+		console.log(data);
 		$.ajax({
 			url: url,
 			type: type,
@@ -66,7 +67,7 @@ $(() => {
 	}
 
 	if ($('.graph .sparkline').highcharts != undefined) {
-		const data = {"key": opt.key}
+		const dataKey = {key: opt.key}
 		const hitValues = []
 		const hitCat = []
 		const clickValues = []
@@ -136,11 +137,12 @@ $(() => {
 					useHTML: true
 				}
 		}
-		call('/endpoint/data/hits', 'GET', data, (res) => {
-
+		call('/endpoint/data/hits', 'GET', dataKey, (res) => {
 
 			for (val in res) {
-				hitCat.push(Object.keys(res[val])[0])
+				let m = moment(Object.keys(res[val])[0] * 1000)
+				let s = m.format("M/D/YYYY H:mm")
+				hitCat.push(s)
 				hitValues.push(Object.values(res[val])[0])
 			}
 
@@ -154,10 +156,12 @@ $(() => {
 			$('.graph_hits .sparkline').highcharts(options);
 		})
 
-		call('/endpoint/data/clicks', 'GET', data, (res) => {
+		call('/endpoint/data/clicks', 'GET', dataKey, (res) => {
 
 			for (val in res) {
-				clickCat.push(Object.keys(res[val])[0])
+				let m = moment(Object.keys(res[val])[0] * 1000)
+				let s = m.format("M/D/YYYY H:mm")
+				clickCat.push(s)
 				clickValues.push(Object.values(res[val])[0])
 			}
 

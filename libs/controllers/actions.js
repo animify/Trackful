@@ -72,10 +72,10 @@ exports.getHitTrackers = function(req, res, key, callback) {
 }
 
 exports.getClickData = function(req, res, key, callback) {
-	r.db('data').table('sloth').filter({key:key, type: 'data'})
+	r.db('data').table('sloth').get(key)
 	.run((err, rest) => {
-		if (rest.length > 0) {
-			let dataArray = Object.keys(rest[0].clicks).map(k => rest[0].clicks[k])
+		if (rest.id) {
+			let dataArray = Object.keys(rest.clicks).map(k => rest.clicks[k])
 			return callback(null, dataArray)
 		}
 		callback(null, rest)
@@ -83,10 +83,11 @@ exports.getClickData = function(req, res, key, callback) {
 }
 
 exports.getHitData = function(req, res, key, callback) {
-	r.db('data').table('sloth').filter({key:key, type: 'data'})
+	r.db('data').table('sloth').get(key)
 	.run((err, rest) => {
-		if (rest.length > 0) {
-			let dataArray = Object.keys(rest[0].hits).map(k => rest[0].hits[k])
+		if (rest.id) {
+			let dataArray = Object.keys(rest.hits).map(k => rest.hits[k])
+			console.log(dataArray);
 			return callback(null, dataArray)
 		}
 		callback(null, rest)
