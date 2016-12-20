@@ -3766,7 +3766,7 @@ body.auto {
   height: auto;
 }
 .contain {
-  padding-bottom: 3em;
+  padding-bottom: 0.2em;
 }
 .header {
   padding: 3.2em 0 1.4rem 0;
@@ -3801,8 +3801,63 @@ body.auto {
   border-radius: 50%;
 }
 .sub {
-  padding: 2em 0 0.8em 0;
+  padding: 0 0 0.8em 0;
   font-size: 1.1em;
+}
+.nodata {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 0%;
+  text-align: center;
+  opacity: 0.6;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+  filter: alpha(opacity=60);
+  padding: 2.6em 0;
+  font-size: 1.2em;
+}
+.nodata:before,
+.nodata:after {
+  content: '';
+  display: table;
+}
+.nodata:after {
+  clear: both;
+}
+.sparkline {
+  width: 100%;
+  height: 7em;
+}
+.sparkline .highcharts-label.highcharts-no-data {
+  top: 27px !important;
+}
+.sparkline .highcharts-label.highcharts-no-data span {
+  font-weight: 300;
+  opacity: 0.7;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  filter: alpha(opacity=70);
+  font-size: 1.2em;
+}
+#keys {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 0%;
+  padding: 2em 0;
+}
+#keys:before,
+#keys:after {
+  content: '';
+  display: table;
+}
+#keys:after {
+  clear: both;
 }
 #keys .key {
   display: block;
@@ -3879,15 +3934,12 @@ body.auto {
 #key_info .info + .info {
   margin-left: 1.4em;
 }
-.dynamicsparkline {
-  position: relative;
-}
 #trackers {
   padding: 2em 0;
 }
 #trackers .graph {
   width: 100%;
-  height: 13em;
+  height: 15em;
   background-color: #fff;
   margin-bottom: 2em;
   position: relative;
@@ -3898,7 +3950,7 @@ body.auto {
 }
 #trackers .graph .sparkline {
   position: absolute;
-  bottom: -3px;
+  bottom: 0;
 }
 #trackers .graph p {
   opacity: 0.7;
@@ -3906,10 +3958,14 @@ body.auto {
   filter: alpha(opacity=70);
 }
 #trackers .graph .stats {
-  padding: 1.7em 2em 1.3em 2em;
+  padding: 1.4em 2em 1.2em 2em;
   border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 #trackers .graph .sum {
+  vertical-align: top;
+  display: inline-block;
+}
+#trackers .graph .current {
   vertical-align: top;
   display: inline-block;
 }

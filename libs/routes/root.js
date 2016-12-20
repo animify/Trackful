@@ -97,4 +97,16 @@ router.post('/endpoint/hits', function(req, res) {
 	})
 })
 
+router.get('/endpoint/data/clicks', function(req, res) {
+	actions.getClickData(req, res, req.params.key, (err, result) => {
+		res.send(result);
+	})
+})
+
+router.get('/endpoint/data/hits', function(req, res) {
+	actions.getHitData(req, res, req.params.key, (err, result) => {
+		res.send(result);
+	})
+})
+
 module.exports = router

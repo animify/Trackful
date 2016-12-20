@@ -1,6 +1,18 @@
 $(() => {
+	call = (url, type, data, callback) => {
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			contentType: 'application/json',
+			success: function(data) {
+				callback(data)
+			}
+		})
+	}
+
 	if (typeof io == 'function') {
-		const socket = io(trackR)
+		const socket = io(opt.trackR)
 		socket.on('change', function(r) {
 			switch (r.type) {
 				case "click":
@@ -28,8 +40,10 @@ $(() => {
 			const trackerName = trackers[0]
 			const trackerCount = trackers[1]
 
-			console.log(trackers);
 			$(`[data-click="${trackerName}"]`).length ? $(`[data-click="${trackerName}"]`).html(`${trackerName} <span>${trackerCount}</span>`) : $('#clicks').append(`<li data-click="${trackerName}">${trackerName} <span>${trackerCount}</span></li>`)
+
+			opt.clickTotal = parseInt(opt.clickTotal + 1)
+			$('.graph_clicks h2').text(opt.clickTotal)
 
 			$(`[data-click="${trackerName}"]`).addClass("flash").delay(1000).queue(function(){
 				$(this).removeClass("flash").dequeue()
@@ -42,10 +56,102 @@ $(() => {
 
 			$(`[data-hit="${trackerName}"]`).length ? $(`[data-hit="${trackerName}"]`).html(`${trackerName} <span>${trackerCount}</span>`).addClass('flash').delay(1000).removeClass('flash') : $('#hits').append(`<li data-hit="${trackerName}">${trackerName} <span>${trackerCount}</span></li>`)
 
+			opt.hitTotal = parseInt(opt.hitTotal + 1)
+			$('.graph_hits h2').text(opt.hitTotal)
+
 			$(`[data-hit="${trackerName}"]`).addClass("flash").delay(1000).queue(function(){
 				$(this).removeClass("flash").dequeue()
 			})
 		}
+	}
+
+	if ($('.graph .sparkline').highcharts != undefined) {
+		const data = {"key": opt.key}
+		const hitValues = []
+		const clickValues = []
+		const options = {
+				chart: {
+					type: 'spline',
+					backgroundColor: null,
+					style: {"fontFamily":"\"myriad-pro\", sans-serif","fontSize":"12px"}
+				},
+				title : {
+						text: null
+				},
+				credits: {
+					enabled: false
+				},
+				xAxis: {
+					title: {
+							enabled: false
+					},
+					labels: {
+							enabled: false
+					},
+					tickLength: 0,
+					gridLineWidth: 0,
+					minorGridLineWidth: 0,
+					lineWidth: 0
+				},
+				yAxis: {
+					title: {
+							enabled: false
+					},
+					labels: {
+							enabled: false
+					},
+					gridLineWidth: 0,
+					minorGridLineWidth: 0,
+					TickLength: 0
+				},
+				tooltip: {
+					enabled: true
+				},
+				plotOptions: {
+					spline: {
+						marker: {
+							enabled: false,
+							radius: 1,
+							states: {
+								hover: {
+									radius: 2,
+									radiusPlus: 1
+								}
+							}
+						}
+					}
+				},
+				series: [{
+					color: '#fff'
+				}],
+				legend: {
+					enabled: false
+				},
+				noData: {
+					style: {"color": "#fff"},
+					useHTML: true
+				}
+		}
+		call('/endpoint/data/hits', 'GET', data, (res) => {
+			for (val in res) {
+				hitValues.push(Object.values(res[val])[0])
+			}
+			options.series[0].name = 'Page hits'
+			options.series[0].data = hitValues
+			$('.graph_hits .sparkline').highcharts(options);
+		})
+
+		call('/endpoint/data/clicks', 'GET', data, (res) => {
+
+			for (val in res) {
+				clickValues.push(Object.values(res[val])[0])
+			}
+
+			options.series[0].name = 'Clicks'
+			options.series[0].data = clickValues
+			$('.graph_clicks .sparkline').highcharts(options)
+		})
+
 	}
 
 	$('.create').bind('click', function() {
@@ -92,7 +198,4 @@ $(() => {
 			}
 		})
 	})
-
-	var myvalues = [10,8,5,7,4,4,1];
-	$('.graph_clicks .sparkline').sparkline(myvalues, {type: "line", lineColor: "#fff", fillColor: "rgba(255, 255, 255, 0.4)", width: "100%", height: "4em", disableInteraction: true, disableTooltips: true, disableHighlight: true, maxSpotColor: false, minSpotColor: false, spotRadius: 0, lineWidth: 2});
 })

@@ -3,6 +3,14 @@ extends ../layout
 block content
 	- var title = "Dashboard"
 	- var sub = "Overview"
+	- var clickstotal = 0
+	- var hitstotal = 0
+	if hasClickTrackers
+		each val, index in clicktrackers
+			-clickstotal = clickstotal + val
+	if hasHitTrackers
+		each val, index in hittrackers
+			-hitstotal = hitstotal + val
 	.contain
 		include ../static/nav.pug
 		section#key_info
@@ -17,8 +25,8 @@ block content
 							.stats
 								.sum
 									p Total clicks
-									h2 12000
-								span 6% #[i.ion-arrow-up-b]
+									h2=clickstotal
+								//- span 6% #[i.ion-arrow-up-b]
 							.sparkline
 						ul#clicks
 							li.header #[h5 Click trackers]
@@ -32,8 +40,9 @@ block content
 							.stats
 								.sum
 									p Total page hits
-									h2 12000
-								span 6% #[i.ion-arrow-up-b]
+									h2=hitstotal
+								//- span 6% #[i.ion-arrow-up-b]
+							.sparkline
 						ul#hits
 							li.header #[h5 Hit trackers]
 								div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
@@ -47,7 +56,12 @@ block content
 
 
 block footer
-	script(src="//omnipotent.net/jquery.sparkline/2.1.2/jquery.sparkline.min.js")
+	script(src="//code.highcharts.com/highcharts.js")
+	script(src="//code.highcharts.com/modules/no-data-to-display.js")
 	script(src="/socket.io/socket.io.js")
 	script.
-		const trackR = `/track_#{trackKey}`
+		const opt = {}
+		opt.key = '#{trackKey}'
+		opt.trackR = '/track_#{trackKey}'
+		opt.clickTotal = #{clickstotal}
+		opt.hitTotal = #{hitstotal}
