@@ -23,7 +23,6 @@ exports.incrementHitTrack = function(req, res, key, href, callback) {
 		{hits: {[page] : r.row('hits')(page).default(0).add(1)} },
 		{returnChanges: true}
 	).run(function(err, cursor) {
-		console.log(cursor.changes);
 		if (cursor.changes) {
 			return callback(null, [page, cursor.changes[0].new_val.hits[page]])
 		}

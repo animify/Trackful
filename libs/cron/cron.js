@@ -8,6 +8,8 @@ const r = require(libs + 'db/db')
 const async = require('async')
 // cronTime: '0 */3 * * *',
 
+const io = global.socketIO
+
 const job = new CronJob('* * * * *', function() {
 	const d = new Date()
 	const epoch = Math.round(d.getTime() / 1000)
@@ -26,11 +28,15 @@ const job = new CronJob('* * * * *', function() {
 
 				r.db('data').table('sloth').get(rec[key].key).update(
 					{clicks: r.row('clicks').append({[epoch]: clicksSum}), hits: r.row('hits').append({[epoch]: hitsSum})}
-				).run((err, aa) => {
-					console.log(aa)
+				).run()
+
+				trackR = io.of(`/track_${rec[key].key}`)
+				trackR.emit('updated',{
+					xAxis: epoch,
+					yClicks: clicksSum,
+					yHits: hitsSum
 				})
-				console.log(clicksSum)
-				console.log(hitsSum)
+
 			})
 		}, (err) => {
 			if (err) console.error(err.message)

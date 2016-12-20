@@ -26,8 +26,10 @@ block content
 								.sum
 									p Total clicks
 									h2=clickstotal
-								span 6% #[i.ion-arrow-up-b]
-							.sparkline
+								span
+									.increase #[b.prc]% #[i.ion-arrow-up-b]
+									small.updated
+							#chart_c.sparkline
 						ul#clicks
 							li.header #[h5 Click trackers]
 								div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
@@ -41,11 +43,10 @@ block content
 								.sum
 									p Total page hits
 									h2=hitstotal
-								//- .current
-								//- 	p Total page hits
-								//- 	h2
-								span 6% #[i.ion-arrow-up-b]
-							.sparkline
+								span
+									.increase #[b.prc]% #[i.ion-arrow-up-b]
+									small.updated
+							#chart_h.sparkline
 						ul#hits
 							li.header #[h5 Hit trackers]
 								div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
@@ -64,8 +65,10 @@ block footer
 	script(src="//code.highcharts.com/modules/no-data-to-display.js")
 	script(src="/socket.io/socket.io.js")
 	script.
-		const opt = {}
+		let opt = {}
 		opt.key = '#{trackKey}'
 		opt.trackR = '/track_#{trackKey}'
 		opt.clickTotal = #{clickstotal}
 		opt.hitTotal = #{hitstotal}
+		opt.clickLast = 0
+		opt.hitLast = 0

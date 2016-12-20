@@ -3973,7 +3973,18 @@ body.auto {
   display: inline-block;
   float: right;
   position: relative;
-  top: 2.8em;
+  top: 1.9em;
+}
+#trackers .graph span .increase {
+  text-align: right;
+  display: block;
+}
+#trackers .graph span small {
+  display: block;
+  margin-top: 0.4em;
+  opacity: 0.6;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+  filter: alpha(opacity=60);
 }
 #trackers .graph span i {
   opacity: 0.8;

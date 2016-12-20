@@ -76,6 +76,10 @@ exports.getClickData = function(req, res, key, callback) {
 	.run((err, rest) => {
 		if (rest.id) {
 			let dataArray = Object.keys(rest.clicks).map(k => rest.clicks[k])
+			if (dataArray.length > 22) {
+				dataArray = dataArray.slice(dataArray.length - 21, dataArray.length - 1)
+			}
+			console.log(dataArray.length);
 			return callback(null, dataArray)
 		}
 		callback(null, rest)
@@ -87,7 +91,10 @@ exports.getHitData = function(req, res, key, callback) {
 	.run((err, rest) => {
 		if (rest.id) {
 			let dataArray = Object.keys(rest.hits).map(k => rest.hits[k])
-			console.log(dataArray);
+			console.log(parseInt(dataArray.length - 20));
+			if (dataArray.length > 22) {
+				dataArray = dataArray.slice(dataArray.length - 21, dataArray.length - 1)
+			}
 			return callback(null, dataArray)
 		}
 		callback(null, rest)
