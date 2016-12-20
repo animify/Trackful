@@ -68,12 +68,16 @@ $(() => {
 	if ($('.graph .sparkline').highcharts != undefined) {
 		const data = {"key": opt.key}
 		const hitValues = []
+		const hitCat = []
 		const clickValues = []
+		const clickCat = []
 		const options = {
 				chart: {
-					type: 'spline',
+					type: 'areaspline',
 					backgroundColor: null,
-					style: {"fontFamily":"\"myriad-pro\", sans-serif","fontSize":"12px"}
+					style: {"fontFamily":"\"myriad-pro\", sans-serif","fontSize":"12px"},
+					margin: [0,0,0,0],
+					spacingLeft: 0
 				},
 				title : {
 						text: null
@@ -108,21 +112,21 @@ $(() => {
 					enabled: true
 				},
 				plotOptions: {
-					spline: {
+					areaspline: {
+						fillColor: "rgba(255,255,255,.3)",
 						marker: {
 							enabled: false,
 							radius: 1,
 							states: {
 								hover: {
-									radius: 2,
-									radiusPlus: 1
+									enabled: false
 								}
 							}
 						}
 					}
 				},
 				series: [{
-					color: '#fff'
+					color: "#fff"
 				}],
 				legend: {
 					enabled: false
@@ -133,9 +137,18 @@ $(() => {
 				}
 		}
 		call('/endpoint/data/hits', 'GET', data, (res) => {
+
+
 			for (val in res) {
+				hitCat.push(Object.keys(res[val])[0])
 				hitValues.push(Object.values(res[val])[0])
 			}
+
+			let xMin = .5
+			let xMax = (hitCat.length - 1.5)
+			options.xAxis.min = xMin
+			options.xAxis.max = xMax
+			options.xAxis.categories = hitCat
 			options.series[0].name = 'Page hits'
 			options.series[0].data = hitValues
 			$('.graph_hits .sparkline').highcharts(options);
@@ -144,9 +157,15 @@ $(() => {
 		call('/endpoint/data/clicks', 'GET', data, (res) => {
 
 			for (val in res) {
+				clickCat.push(Object.keys(res[val])[0])
 				clickValues.push(Object.values(res[val])[0])
 			}
 
+			let xMin = .5
+			let xMax = (clickCat.length - 1.5)
+			options.xAxis.min = xMin
+			options.xAxis.max = xMax
+			options.xAxis.categories = clickCat
 			options.series[0].name = 'Clicks'
 			options.series[0].data = clickValues
 			$('.graph_clicks .sparkline').highcharts(options)
