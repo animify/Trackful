@@ -1397,10 +1397,10 @@ strong {
   position: fixed;
 }
 .hidden {
-  display: none !important;
+  display: none;
 }
 .invisible {
-  visibility: hidden !important;
+  visibility: hidden;
 }
 .borderless {
   border: 0 !important;

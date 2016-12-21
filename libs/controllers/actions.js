@@ -12,7 +12,7 @@ exports.createKey = function(req, res, callback) {
 
 	if (preUrl.host && req.body.name) {
 		r.table('users').get(req.user.id).update(
-			{keys: r.row('keys').append({key: {id: shortKey, name: req.body.name, domain: preUrl.host}})}
+			{keys: r.row('keys').append({key: {id: shortKey, name: req.body.name, domain: preUrl.host, created: r.now().toEpochTime()}})}
 		).run((err, cursor) => {
 			r.db(config.get("rethink").trackDB).table('trackers')
 				.insert({key:shortKey, clicks:{}, hits:{}, domain: preUrl.host, status: "active"})
@@ -74,7 +74,7 @@ exports.getHitTrackers = function(req, res, key, callback) {
 exports.getClickData = function(req, res, key, callback) {
 	r.db('data').table('sloth').get(key)
 	.run((err, rest) => {
-		if (rest.id) {
+		if (rest != null) {
 			let dataArray = Object.keys(rest.clicks).map(k => rest.clicks[k])
 			if (dataArray.length > 22) {
 				dataArray = dataArray.slice(dataArray.length - 21, dataArray.length - 1)
@@ -89,7 +89,7 @@ exports.getClickData = function(req, res, key, callback) {
 exports.getHitData = function(req, res, key, callback) {
 	r.db('data').table('sloth').get(key)
 	.run((err, rest) => {
-		if (rest.id) {
+		if (rest != null) {
 			let dataArray = Object.keys(rest.hits).map(k => rest.hits[k])
 			console.log(parseInt(dataArray.length - 20));
 			if (dataArray.length > 22) {

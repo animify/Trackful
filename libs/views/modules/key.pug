@@ -19,44 +19,42 @@ block content
 			.info.float-right Domain: #[span=key.domain]
 		section#trackers
 			.grid-row
-				if hasClickTrackers || hasHitTrackers
-					.xs-12.m-6
-						.graph.graph_clicks
-							.stats
-								.sum
-									p Total clicks
-									h2=clickstotal
-								span
-									.increase #[b.prc]% #[i.ion-arrow-up-b]
-									small.updated
-							#chart_c.sparkline
-						ul#clicks
-							li.header #[h5 Click trackers]
-								div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
-								each val, index in clicktrackers
-									li(data-click=index) #{index}
-										span #{val}
+				.xs-12.m-6(class=hasClickTrackers || hasHitTrackers ? "" : "hidden")
+					.graph.graph_clicks
+						.stats
+							.sum
+								p Total clicks
+								h2=clickstotal
+							span
+								.increase #[b.prc]% #[i.ion-arrow-up-b]
+								small.updated
+						#chart_c.sparkline
+					ul#clicks
+						li.header #[h5 Click trackers]
+							div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
+							each val, index in clicktrackers
+								li(data-click=index) #{index}
+									span #{val}
 
-					.xs-12.m-6
-						.graph.graph_hits
-							.stats
-								.sum
-									p Total page hits
-									h2=hitstotal
-								span
-									.increase #[b.prc]% #[i.ion-arrow-up-b]
-									small.updated
-							#chart_h.sparkline
-						ul#hits
-							li.header #[h5 Hit trackers]
-								div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
-								each val, index in hittrackers
-									li(data-hit=index) #{index}
-										span #{val}
-				else
-					.xs-12
-						.empty
-							h4 There isn't enough data here to show just yet.
+				.xs-12.m-6(class=hasClickTrackers || hasHitTrackers ? "" : "hidden")
+					.graph.graph_hits
+						.stats
+							.sum
+								p Total page hits
+								h2=hitstotal
+							span
+								.increase #[b.prc]% #[i.ion-arrow-up-b]
+								small.updated
+						#chart_h.sparkline
+					ul#hits
+						li.header #[h5 Hit trackers]
+							div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
+							each val, index in hittrackers
+								li(data-hit=index) #{index}
+									span #{val}
+				#empty.xs-12(class=hasClickTrackers || hasHitTrackers ? "hidden" : "")
+					.empty
+						h4 There isn't enough data here to show just yet.
 
 
 block footer
