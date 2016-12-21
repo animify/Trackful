@@ -39,7 +39,7 @@ router.post('/create/key', auth.presets, function(req, res) {
 
 router.get('/keys/all', auth.presets, function(req, res) {
 	actions.getAllKeys(req, res, (err, keys) => {
-		console.log(keys);
+		console.log(keys);	
 		res.render('keys', {user: req.user, keys: keys})
 	})
 })
@@ -99,13 +99,19 @@ router.post('/endpoint/hits', function(req, res) {
 
 router.get('/endpoint/data/clicks', function(req, res) {
 	actions.getClickData(req, res, req.query.key, (err, result) => {
-		res.send(result);
+		res.send(result)
 	})
 })
 
 router.get('/endpoint/data/hits', function(req, res) {
 	actions.getHitData(req, res, req.query.key, (err, result) => {
-		res.send(result);
+		res.send(result)
+	})
+})
+
+router.post('/endpoint/key/delete', function(req, res) {
+	watcher.deleteTracker(req, res, req.body.key, (err, result) => {
+		res.send(result)
 	})
 })
 

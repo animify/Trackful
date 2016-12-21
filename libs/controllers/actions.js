@@ -12,7 +12,7 @@ exports.createKey = function(req, res, callback) {
 
 	if (preUrl.host && req.body.name) {
 		r.table('users').get(req.user.id).update(
-			{keys: r.row('keys').append({key: {id: shortKey, name: req.body.name, domain: preUrl.host, created: r.now().toEpochTime()}})}
+			{keys: r.row('keys').append({id: shortKey, name: req.body.name, domain: preUrl.host, created: r.now().toEpochTime()})}
 		).run((err, cursor) => {
 			r.db(config.get("rethink").trackDB).table('trackers')
 				.insert({key:shortKey, clicks:{}, hits:{}, domain: preUrl.host, status: "active"})
@@ -23,19 +23,18 @@ exports.createKey = function(req, res, callback) {
 	} else {
 		callback({status: 404, message: "Invalid inputs"}, null)
 	}
-
 }
 
 exports.getAllKeys = function(req, res, callback) {
 	r.table('users').get(req.user.id)('keys')
 	.run((err, userKeys) => {
-		let keyArr = Object.keys(userKeys).map(k => userKeys[k].key)
+		let keyArr = Object.keys(userKeys).map(k => userKeys[k])
 		callback(null, keyArr)
 	})
 }
 
 exports.getKeyInfo = function(req, res, key, callback) {
-	r.table('users').get(req.user.id)('keys')('key').filter({id: key})
+	r.table('users').get(req.user.id)('keys').filter({id: key})
 	.run((err, keyData) => {
 		callback(null, keyData);
 	})
@@ -79,7 +78,6 @@ exports.getClickData = function(req, res, key, callback) {
 			if (dataArray.length > 22) {
 				dataArray = dataArray.slice(dataArray.length - 21, dataArray.length - 1)
 			}
-			console.log(dataArray.length);
 			return callback(null, dataArray)
 		}
 		callback(null, rest)
@@ -91,7 +89,6 @@ exports.getHitData = function(req, res, key, callback) {
 	.run((err, rest) => {
 		if (rest != null) {
 			let dataArray = Object.keys(rest.hits).map(k => rest.hits[k])
-			console.log(parseInt(dataArray.length - 20));
 			if (dataArray.length > 22) {
 				dataArray = dataArray.slice(dataArray.length - 21, dataArray.length - 1)
 			}

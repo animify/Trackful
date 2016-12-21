@@ -91,84 +91,95 @@ $(() => {
 
 		updateDataHits = () => {
 			call('/endpoint/data/hits', 'GET', dataKey, (res) => {
+				if (res) {
+					let l = ''
 
-				let l = ''
-				console.log(res);
+					for (val in res) {
+						l = Object.keys(res[val])[0]
+						let m = moment(Object.keys(res[val])[0] * 1000)
+						let s = m.format("M/D/YYYY H:mm")
+						hitCat.push(s)
+						hitValues.push(Object.values(res[val])[0])
+					}
 
-				for (val in res) {
-					l = Object.keys(res[val])[0]
-					let m = moment(Object.keys(res[val])[0] * 1000)
-					let s = m.format("M/D/YYYY H:mm")
-					hitCat.push(s)
-					hitValues.push(Object.values(res[val])[0])
+					opt.hitLast = Object.values(res[res.length - 1])[0]
+
+					let xMin = .5
+					let xMax = (hitCat.length - 1.5)
+					opt.hitOptions.xAxis.min = xMin
+					opt.hitOptions.xAxis.max = xMax
+					opt.hitOptions.xAxis.categories = hitCat
+					opt.hitOptions.series[0].name = 'Page hits'
+					opt.hitOptions.series[0].data = hitValues
+					opt.hitOptions.chart.renderTo = 'chart_h'
+					opt.hitChart = new Highcharts.Chart(opt.hitOptions)
+					$('.graph_hits span .updated').text(`Last updated ${moment(l * 1000).fromNow()}`)
+					updateIncreases(true, false)
 				}
-
-				opt.hitLast = Object.values(res[res.length - 1])[0]
-
-				let xMin = .5
-				let xMax = (hitCat.length - 1.5)
-				opt.hitOptions.xAxis.min = xMin
-				opt.hitOptions.xAxis.max = xMax
-				opt.hitOptions.xAxis.categories = hitCat
-				opt.hitOptions.series[0].name = 'Page hits'
-				opt.hitOptions.series[0].data = hitValues
-				opt.hitOptions.chart.renderTo = 'chart_h'
-				opt.hitChart = new Highcharts.Chart(opt.hitOptions)
-				$('.graph_hits span .updated').text(`Last updated ${moment(l * 1000).fromNow()}`)
-				updateIncreases(true, false)
 			})
 		}
 
 		updateDataClicks = () => {
 			call('/endpoint/data/clicks', 'GET', dataKey, (res) => {
+				if(res) {
+					let l = ''
 
-				let l = ''
+					for (val in res) {
+						l = Object.keys(res[val])[0]
+						let m = moment(l * 1000)
+						let s = m.format("M/D/YYYY H:mm")
+						clickCat.push(s)
+						clickValues.push(Object.values(res[val])[0])
+					}
 
-				for (val in res) {
-					l = Object.keys(res[val])[0]
-					let m = moment(l * 1000)
-					let s = m.format("M/D/YYYY H:mm")
-					clickCat.push(s)
-					clickValues.push(Object.values(res[val])[0])
+					opt.clickLast = Object.values(res[res.length - 1])[0]
+
+					let xMin = .5
+					let xMax = (clickCat.length - 1.5)
+					opt.clickOptions.xAxis.min = xMin
+					opt.clickOptions.xAxis.max = xMax
+					opt.clickOptions.xAxis.categories = clickCat
+					opt.clickOptions.series[0].name = 'Clicks'
+					opt.clickOptions.series[0].data = clickValues
+					opt.clickOptions.chart.renderTo = 'chart_c'
+					opt.clickChart = new Highcharts.Chart(opt.clickOptions)
+					$('.graph_clicks span .updated').text(`Last updated ${moment(l * 1000).fromNow()}`)
+					updateIncreases(false, true)
 				}
-
-				opt.clickLast = Object.values(res[res.length - 1])[0]
-
-				let xMin = .5
-				let xMax = (clickCat.length - 1.5)
-				opt.clickOptions.xAxis.min = xMin
-				opt.clickOptions.xAxis.max = xMax
-				opt.clickOptions.xAxis.categories = clickCat
-				opt.clickOptions.series[0].name = 'Clicks'
-				opt.clickOptions.series[0].data = clickValues
-				opt.clickOptions.chart.renderTo = 'chart_c'
-				opt.clickChart = new Highcharts.Chart(opt.clickOptions)
-				$('.graph_clicks span .updated').text(`Last updated ${moment(l * 1000).fromNow()}`)
-				updateIncreases(false, true)
 			})
 		}
 
 		updateCharts = (r) => {
-			epoch = moment(r.xAxis * 1000).format("M/D/YYYY H:mm")
+			if (opt.clickChart || opt.hitChart) {
+				epoch = moment(r.xAxis * 1000).format("M/D/YYYY H:mm")
+				opt.clickChart.destroy()
 
-			opt.clickChart.destroy()
-			opt.clickOptions.xAxis.categories.shift()
-			opt.clickOptions.xAxis.categories.push(epoch)
-			opt.clickOptions.series[0].data.shift()
-			opt.clickLast = r.yClicks
-			opt.clickOptions.series[0].data.push(r.yClicks)
-			opt.clickChart = new Highcharts.Chart(opt.clickOptions)
+				console.log(opt.clickOptions.series[0].data.length);
+				if (opt.clickOptions.series[0].data.length > 19) {
+					opt.clickOptions.xAxis.categories.shift()
+					opt.clickOptions.series[0].data.shift()
+				}
 
-			opt.hitChart.destroy()
-			opt.hitOptions.xAxis.categories.shift()
-			opt.hitOptions.xAxis.categories.push(epoch)
-			opt.hitOptions.series[0].data.shift()
-			opt.hitLast = r.yHits
-			opt.hitOptions.series[0].data.push(r.yHits)
-			opt.hitChart = new Highcharts.Chart(opt.hitOptions)
+				opt.clickOptions.xAxis.categories.push(epoch)
+				opt.clickLast = r.yClicks
+				opt.clickOptions.series[0].data.push(r.yClicks)
+				opt.clickOptions.xAxis.max = opt.clickOptions.series[0].data.length - 1.5
+				opt.clickChart = new Highcharts.Chart(opt.clickOptions)
 
-			$('.graph_clicks span .updated, .graph_hits span .updated').text(`Last updated ${moment(r.xAxis * 1000).fromNow()}`)
-			updateIncreases(true, true)
+				opt.hitChart.destroy()
+				if (opt.clickOptions.series[0].data.length > 19) {
+					opt.hitOptions.xAxis.categories.shift()
+					opt.hitOptions.series[0].data.shift()
+				}
+				opt.hitOptions.xAxis.categories.push(epoch)
+				opt.hitLast = r.yHits
+				opt.hitOptions.series[0].data.push(r.yHits)
+				opt.hitOptions.xAxis.max = opt.hitOptions.series[0].data.length - 1.5
+				opt.hitChart = new Highcharts.Chart(opt.hitOptions)
+
+				$('.graph_clicks span .updated, .graph_hits span .updated').text(`Last updated ${moment(r.xAxis * 1000).fromNow()}`)
+				updateIncreases(true, true)
+			}
 		}
 	}
 
@@ -183,14 +194,19 @@ $(() => {
 					updateHitTrackers(r.change)
 					break
 			}
+			if ($('#empty').is(":visible")) {
+				$('#empty').slideUp('fast')
+				$('#clicks').parent().slideDown('fast', () => {
+					updateDataClicks()
+				})
+				$('#hits').parent().slideDown('fast', () => {
+					updateDataHits()
+				})
+			}
 
-			$('#empty').slideUp('fast')
-			$('#clicks').parent().slideDown('fast')
-			$('#hits').parent().slideDown('fast')
 		})
 		.on('updated', function(r) {
 			updateCharts(r)
-
 		})
 		.on('connect', function() {
 			console.log('connected to socketio')
@@ -205,11 +221,12 @@ $(() => {
 		updateIncreases = (h, c) => {
 			if (h) {
 				opt.hitIncrease = parseInt(((opt.hitTotal - opt.hitLast) * 100) / opt.hitLast)
-				$('.graph_hits .prc').text(opt.hitIncrease)
+				$('.graph_hits .prc').text(isNaN(opt.hitIncrease) ? '0' : opt.hitIncrease)
 			}
+
 			if (c) {
 				opt.clickIncrease = parseInt(((opt.clickTotal - opt.clickLast) * 100) / opt.clickLast)
-				$('.graph_clicks .prc').text(opt.clickIncrease)
+				$('.graph_clicks .prc').text(isNaN(opt.clickIncrease) ? '0' : opt.clickIncrease)
 			}
 		}
 
@@ -257,6 +274,13 @@ $(() => {
 			success: function(data) {
 				window.location.href = `/key/${data}`
 			}
+		})
+	})
+
+	$('.d_key').bind('click', function() {
+		data = {key: opt.key}
+		call('/endpoint/key/delete', 'POST', JSON.stringify(data), (res) => {
+			console.log(res);
 		})
 	})
 

@@ -43,7 +43,6 @@ app.use(cookieParser())
 	.use(express.static("libs/public"))
 	.use(bodyParser())
 	.use(bodyParser.json())
-	.use(bodyParser.urlencoded({ extended: true }))
 
 app.set('port', process.env.PORT || config.get('port') || 80)
 	.set('views', __dirname + '/libs/views/modules')
