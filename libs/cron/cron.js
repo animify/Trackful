@@ -10,34 +10,30 @@ const async = require('async')
 
 const io = global.socketIO
 
-const job = new CronJob('0 */2 * * *', function() {
+const job = new CronJob('0 */1 * * *', function() {
 	const d = new Date()
 	const epoch = Math.round(d.getTime() / 1000)
 
 	r.db('test_trackers').table('trackers').run((err, rec) => {
 		async.forEachOf(rec, function (value, key, callback) {
 			rv = rec[key]
-			r.db('data').table('sloth').insert({id: rec[key].key, type:'data', hits: [], clicks: []})
-			.run()
-			.then((arr) => {
-				clicksArray = Object.keys(rec[key].clicks).map(k => rec[key].clicks[k])
-				clicksSum = clicksArray.reduce((a, b) => a + b, 0)
+			clicksArray = Object.keys(rec[key].clicks).map(k => rec[key].clicks[k])
+			clicksSum = clicksArray.reduce((a, b) => a + b, 0)
 
-				hitsArray = Object.keys(rec[key].hits).map(k => rec[key].hits[k])
-				hitsSum = hitsArray.reduce((a, b) => a + b, 0)
+			hitsArray = Object.keys(rec[key].hits).map(k => rec[key].hits[k])
+			hitsSum = hitsArray.reduce((a, b) => a + b, 0)
 
-				r.db('data').table('sloth').get(rec[key].key).update(
-					{clicks: r.row('clicks').append({[epoch]: clicksSum}), hits: r.row('hits').append({[epoch]: hitsSum})}
-				).run()
+			r.db('data').table('sloth').get(rec[key].key).update(
+				{clicks: r.row('clicks').append({[epoch]: clicksSum}), hits: r.row('hits').append({[epoch]: hitsSum})}
+			).run()
 
-				trackR = io.of(`/track_${rec[key].key}`)
-				trackR.emit('updated',{
-					xAxis: epoch,
-					yClicks: clicksSum,
-					yHits: hitsSum
-				})
-
+			trackR = io.of(`/track_${rec[key].key}`)
+			trackR.emit('updated',{
+				xAxis: epoch,
+				yClicks: clicksSum,
+				yHits: hitsSum
 			})
+
 		}, (err) => {
 			if (err) console.error(err.message)
 		})

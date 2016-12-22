@@ -1,6 +1,6 @@
 $(() => {
 
-	cKey = "rJp7TzYEx"
+	cKey = "Sk75D8tEx"
 
 	hit = (cKey) => {
 		data = {"key": cKey, "page": window.location.href}
@@ -26,7 +26,6 @@ $(() => {
 
 	$('[data-watch]').bind('click', function() {
 		data = {"key": cKey, "tracker": $(this).attr('data-watch')}
-		console.log(data);
 		callAJAX('/endpoint/clicks', 'POST', data)
 	})
 })

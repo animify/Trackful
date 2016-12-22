@@ -1,0 +1,35 @@
+.modal
+	fixed top left
+	width 100%
+	height 100%
+	z-index 4000
+	cf()
+	display none
+	.overlay
+		background-color rgba(#000,.39)
+		width 100%
+		height 100%
+	.box
+		absolute top 50%
+		left 50%
+		transform translate(-50%, -50%)
+		border-radius border-radius-normal
+		background-color #fff
+		width 40%
+		overflow hidden
+		display none
+		&-body
+			padding 4em 2em 7.2em 2em
+			text-align center
+		&-footer
+			padding 1.4em 2em 1.4em 2em
+			width 100%
+			background-color light-color-smoke
+			absolute bottom 0
+			.buttons
+				a
+					color body-dark
+					&.cancel
+						color body-light
+					& + a
+						margin-left 2em

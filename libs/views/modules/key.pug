@@ -18,12 +18,7 @@ block content
 			.info Name: #[span=key.name]
 			.info ID: #[span=key.id]
 			.info Domain: #[span=key.domain]
-			.info.float-right
-				.dropdown.right
-					a.toggle Options
-					ul.menu
-						li #[a(href="/create/key") Make inactive]
-						li #[a.d_key Delete application]
+			.info.float-right #[a(data-modal).text-red #[i.ion-ios-trash-outline]]
 
 		section#trackers
 			.grid-row
@@ -63,6 +58,7 @@ block content
 				#empty.xs-12(class=hasClickTrackers || hasHitTrackers ? "hidden" : "")
 					.empty
 						h4 There isn't enough data here to show just yet.
+		include ../static/modal.pug
 
 
 block footer
@@ -73,8 +69,10 @@ block footer
 	script.
 		let opt = {}
 		opt.key = '#{trackKey}'
+		opt.keyName = '#{key.name}'
 		opt.trackR = '/track_#{trackKey}'
 		opt.clickTotal = #{clickstotal}
 		opt.hitTotal = #{hitstotal}
 		opt.clickLast = 0
 		opt.hitLast = 0
+		opt.lastTime = 0

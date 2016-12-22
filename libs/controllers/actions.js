@@ -23,16 +23,20 @@ exports.validateKeyOwner = (req, res, key, callback) => {
 exports.createKey = (req, res, callback) => {
 	const shortKey = shortid.generate()
 	const preUrl = url.parse(req.body.domain)
+	const d = new Date()
+	const epoch = Math.round(d.getTime() / 1000)
 
 	if (preUrl.host && req.body.name) {
 		r.table('users').get(req.user.id).update(
 			{keys: r.row('keys').append({id: shortKey, name: req.body.name, domain: preUrl.host, created: r.now().toEpochTime()})}
 		).run((err, cursor) => {
+			r.db('data').table('sloth').insert({id: shortKey, type:'data', hits: [{[epoch]: 0}], clicks: [{[epoch]: 0}]}).run()
 			r.db(config.get("rethink").trackDB).table('trackers')
-				.insert({key:shortKey, clicks:{}, hits:{}, domain: preUrl.host, status: "active"})
-				.run((err, rr) => {
-					callback(null, shortKey)
-				})
+			.insert({key:shortKey, clicks:{}, hits:{}, domain: preUrl.host, status: "active"})
+			.run((err, rr) => {
+				callback(null, shortKey)
+			})
+
 		})
 	} else {
 		callback({status: 404, message: "Invalid inputs"}, null)

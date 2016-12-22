@@ -113,7 +113,8 @@ $(() => {
 					opt.hitOptions.series[0].data = hitValues
 					opt.hitOptions.chart.renderTo = 'chart_h'
 					opt.hitChart = new Highcharts.Chart(opt.hitOptions)
-					$('.graph_hits span .updated').text(`Last updated ${moment(l * 1000).fromNow()}`)
+					opt.lastTime = l
+					updateTimes()
 					updateIncreases(true, false)
 				}
 			})
@@ -143,10 +144,15 @@ $(() => {
 					opt.clickOptions.series[0].data = clickValues
 					opt.clickOptions.chart.renderTo = 'chart_c'
 					opt.clickChart = new Highcharts.Chart(opt.clickOptions)
-					$('.graph_clicks span .updated').text(`Last updated ${moment(l * 1000).fromNow()}`)
+					opt.lastTime = l
+					updateTimes()
 					updateIncreases(false, true)
 				}
 			})
+		}
+
+		updateTimes = () => {
+			$('.graph_clicks span .updated, .graph_hits span .updated').text(`Last updated ${moment(opt.lastTime * 1000).fromNow()}`)
 		}
 
 		updateCharts = (r) => {
@@ -176,18 +182,16 @@ $(() => {
 				opt.hitOptions.xAxis.max = opt.hitOptions.series[0].data.length - 1.5
 				opt.hitChart = new Highcharts.Chart(opt.hitOptions)
 
-				$('.graph_clicks span .updated, .graph_hits span .updated').text(`Last updated ${moment(r.xAxis * 1000).fromNow()}`)
+				opt.lastTime = r.xAxis
+
+				updateTimes()
 				updateIncreases(true, true)
 			}
 		}
 	}
 
 	if (typeof io == 'function') {
-		const socket = io.connect(opt.trackR, {
-			'reconnection': true,
-			'reconnectionDelay': 500,
-			'reconnectionAttempts': 10
-		})
+		let socket = io(opt.trackR)
 		socket.on('change', function(r) {
 			switch (r.type) {
 				case "click":
@@ -263,7 +267,6 @@ $(() => {
 		}
 	}
 
-
 	$('.create').bind('click', function() {
 		data = {name: $('#appname').val(), domain: $('#domain').val()}
 		$.ajax({
@@ -305,6 +308,19 @@ $(() => {
 		}
 	})
 
+	$('[data-modal]').bind('click', function() {
+		$('.confirm').attr('class', 'confirm')
+		$('.cancel').attr('class', 'cancel')
+		$('.modal').fadeToggle('fast')
+		$('.modal .box').slideToggle('fast')
+
+		let type = $(this).attr('data-type')
+		if (type="delete") {
+			$('.confirm').toggleClass('d_key')
+			$('.box h5').html(`Are you sure you want to delete <b>${opt.keyName}</b>?`)
+		}
+	})
+
 	$('.filter').on('input', function () {
 		let filterVal = $(this).text()
 		$(this).closest('ul').find('li').removeClass("last_li")
@@ -322,6 +338,7 @@ $(() => {
 		if ($('.graph .sparkline').highcharts != undefined) {
 			updateDataHits()
 			updateDataClicks()
+			setInterval(updateTimes, 60000);
 		}
 	}
 

@@ -13,7 +13,7 @@ const request = require('request')
 const fs = require('fs')
 const async = require('async')
 
-const io = global.socketIO
+let io = global.socketIO
 
 router.get('/', (req, res) => {
 	res.render('index')
@@ -38,13 +38,11 @@ router.post('/create/key', auth.presets, (req, res) => {
 
 router.get('/keys/all', auth.presets, (req, res) => {
 	actions.getAllKeys(req, res, (err, keys) => {
-		console.log(keys)
 		res.render('keys', {user: req.user, keys: keys})
 	})
 })
 
 router.get('/key/:key', auth.presets, (req, res) => {
-
 	actions.validateKeyOwner(req, res, req.params.key, (err, owner) => {
 		if (!err && owner) {
 			async.parallel({
@@ -67,7 +65,8 @@ router.get('/key/:key', auth.presets, (req, res) => {
 					})
 				}
 			}, (err, arr) => {
-					res.render('key', {user: req.user, hasClickTrackers: arr.clicks[1], clicktrackers: arr.clicks[0], hasHitTrackers: arr.hits[1], hittrackers: arr.hits[0] ,trackKey: req.params.key, key: arr.key[0]})
+				trackR = io.of(`/track_${req.params.key}`)
+				res.render('key', {user: req.user, hasClickTrackers: arr.clicks[1], clicktrackers: arr.clicks[0], hasHitTrackers: arr.hits[1], hittrackers: arr.hits[0] ,trackKey: req.params.key, key: arr.key[0]})
 			})
 		} else {
 			res.redirect('/account')
@@ -88,7 +87,9 @@ router.post('/endpoint/clicks', (req, res) => {
 				change: result,
 				type: 'click'
 			})
+			return res.send(result)
 		}
+		res.send(err)
 	})
 })
 
@@ -100,7 +101,9 @@ router.post('/endpoint/hits', (req, res) => {
 				change: result,
 				type: 'hit'
 			})
+			return res.send(result)
 		}
+		res.send(err)
 	})
 })
 
