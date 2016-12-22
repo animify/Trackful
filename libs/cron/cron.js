@@ -10,7 +10,7 @@ const async = require('async')
 
 const io = global.socketIO
 
-const job = new CronJob('* * * * *', function() {
+const job = new CronJob('0 */2 * * *', function() {
 	const d = new Date()
 	const epoch = Math.round(d.getTime() / 1000)
 

@@ -154,7 +154,6 @@ $(() => {
 				epoch = moment(r.xAxis * 1000).format("M/D/YYYY H:mm")
 				opt.clickChart.destroy()
 
-				console.log(opt.clickOptions.series[0].data.length);
 				if (opt.clickOptions.series[0].data.length > 19) {
 					opt.clickOptions.xAxis.categories.shift()
 					opt.clickOptions.series[0].data.shift()
@@ -184,7 +183,11 @@ $(() => {
 	}
 
 	if (typeof io == 'function') {
-		const socket = io(opt.trackR)
+		const socket = io.connect(opt.trackR, {
+			'reconnection': true,
+			'reconnectionDelay': 500,
+			'reconnectionAttempts': 10
+		})
 		socket.on('change', function(r) {
 			switch (r.type) {
 				case "click":
@@ -209,13 +212,10 @@ $(() => {
 			updateCharts(r)
 		})
 		.on('connect', function() {
-			console.log('connected to socketio')
+			$('.signal span').addClass('connected')
 		})
 		.on('disconnect', function() {
-			console.error('disconnected from socketio, attempting to reconnect')
-			setTimeout(function () {
-				io.connect(null, {force:true})
-			}, 5000);
+			$('.signal span').removeClass('connected')
 		})
 
 		updateIncreases = (h, c) => {
@@ -280,7 +280,9 @@ $(() => {
 	$('.d_key').bind('click', function() {
 		data = {key: opt.key}
 		call('/endpoint/key/delete', 'POST', JSON.stringify(data), (res) => {
-			console.log(res);
+			if (res) {
+				window.location.href = '/keys/all'
+			}
 		})
 	})
 

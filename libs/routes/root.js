@@ -82,23 +82,25 @@ router.get('/test', (req, res) => {
 
 router.post('/endpoint/clicks', (req, res) => {
 	watcher.incrementClickTrack(req, res, req.body.key, req.body.tracker, (err, result) => {
-		trackR = io.of(`/track_${req.body.key}`)
-		trackR.emit('change',{
-			change: result,
-			type: 'click'
-		})
-		res.send(result)
+		if (!err) {
+			trackR = io.of(`/track_${req.body.key}`)
+			trackR.emit('change',{
+				change: result,
+				type: 'click'
+			})
+		}
 	})
 })
 
 router.post('/endpoint/hits', (req, res) => {
 	watcher.incrementHitTrack(req, res, req.body.key, req.body.page, (err, result) => {
-		trackR = io.of(`/track_${req.body.key}`)
-		trackR.emit('change',{
-			change: result,
-			type: 'hit'
-		})
-		res.send(result)
+		if (!err) {
+			trackR = io.of(`/track_${req.body.key}`)
+			trackR.emit('change',{
+				change: result,
+				type: 'hit'
+			})
+		}
 	})
 })
 

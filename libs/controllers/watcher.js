@@ -10,9 +10,9 @@ exports.incrementClickTrack = function(req, res, key, track, callback) {
 		{returnChanges: true}
 	).run(function(err, cursor) {
 		if (cursor.changes) {
-			return callback(null, [track, cursor.changes[0].new_val.clicks[track]])
+			return callback(false, [track, cursor.changes[0].new_val.clicks[track]])
 		}
-		callback(null, true)
+		callback(true, null)
 	})
 }
 
@@ -24,9 +24,9 @@ exports.incrementHitTrack = function(req, res, key, href, callback) {
 		{returnChanges: true}
 	).run(function(err, cursor) {
 		if (cursor.changes) {
-			return callback(null, [page, cursor.changes[0].new_val.hits[page]])
+			return callback(false, [page, cursor.changes[0].new_val.hits[page]])
 		}
-		callback(null, true)
+		callback(true, null)
 	})
 }
 
@@ -40,6 +40,7 @@ exports.deleteTracker = function(req, res, key, callback) {
 	},{returnChanges: true}).run((err, cu) => {
 		if (cu.replaced) {
 			r.db(config.get("rethink").trackDB).table('trackers').filter({key: key}).delete().run()
+			r.db('data').table('sloth').filter({key: key}).delete().run()
 			return callback(null, true)
 		}
 		callback(true, null)

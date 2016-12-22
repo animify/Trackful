@@ -1,6 +1,6 @@
 $(() => {
 
-	cKey = "SJxexNuNl"
+	cKey = "rJp7TzYEx"
 
 	hit = (cKey) => {
 		data = {"key": cKey, "page": window.location.href}
@@ -17,6 +17,8 @@ $(() => {
 			success: function(data) {
 				console.log(data)
 			}
+		}).fail(function(jqXHR, textStatus, errorThrown) {
+			console.log(jqXHR, textStatus, errorThrown);
 		})
 	}
 

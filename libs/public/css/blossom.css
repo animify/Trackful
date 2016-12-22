@@ -4095,6 +4095,19 @@ footer.footer ul li a {
 footer.footer ul li a span {
   color: #373e44;
 }
+.signal span {
+  cursor: default !important;
+  color: #ff4949 !important;
+}
+.signal span:before {
+  content: 'Disconnected';
+}
+.signal span.connected {
+  color: #10c35f !important;
+}
+.signal span.connected:before {
+  content: 'Connected';
+}
 .flash {
   -webkit-animation-name: flash;
   -moz-animation-name: flash;

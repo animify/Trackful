@@ -190,6 +190,7 @@ body
 #create
 	padding 2em 0
 
+
 #account
 	padding 2rem 0
 	.details, .profile_image
@@ -228,6 +229,18 @@ footer.footer
 				color body-light
 				span
 					color body-dark
+
+.signal
+	span
+		cursor default !important
+		color color-red !important
+		&:before
+			content 'Disconnected'
+		&.connected
+			color color-green !important
+			&:before
+				content 'Connected'
+
 .flash
 	animation-name flash
 	animation-duration 1s
