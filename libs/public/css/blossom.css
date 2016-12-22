@@ -127,7 +127,7 @@ h5 {
   font-size: 1.4em;
 }
 h6 {
-  font-size: 1.08em;
+  font-size: 1.2em;
 }
 ::selection {
   color: #000;
@@ -869,7 +869,6 @@ strong {
 }
 .grid-row {
   margin: 0 -15px;
-  overflow: hidden;
 }
 .grid-row:before,
 .grid-row:after {
@@ -2985,6 +2984,58 @@ p code {
 .message code {
   background-color: rgba(0,0,0,0.06);
 }
+section.module {
+  padding: 4em 0;
+  position: relative;
+}
+section.module h4 {
+  color: #373e44;
+  line-height: 1.8em;
+}
+section.module p {
+  color: #75848f;
+  line-height: 1.8em;
+}
+section.module.hero {
+  padding: 12em 0 12em 0;
+  text-align: center;
+}
+section.module.hero h2 {
+  color: #373e44;
+  font-weight: 300;
+  line-height: 2em;
+}
+section.module.hero h6 {
+  color: #75848f;
+  line-height: 1.7em;
+}
+section.module.hero .button-group {
+  margin-top: 2.5em;
+}
+section.module.hero .button-group small {
+  display: block;
+  margin-top: 1.7em;
+  color: #c9d3d9;
+}
+section.module.hero .button-group a.button i {
+  margin-right: 0.3em;
+}
+section.module.hero .button-group a.button + a.button {
+  margin-left: 1em;
+}
+section.module .heroimg img {
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 8px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+  width: 90%;
+  position: relative;
+  top: -8em;
+  float: right;
+}
+section.module.bg {
+  background-color: #f7f9fb;
+}
 @-moz-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);
@@ -3632,23 +3683,23 @@ body.auto {
 .header .head h6 {
   color: #75848f;
 }
-.header .options {
+.options {
   float: right;
 }
-.header .options .dropdown:hover i,
-.header .options .dropdown.open i {
+.options .dropdown:hover i,
+.options .dropdown.open i {
   color: #454e55;
 }
-.header .options .toggle {
+.options .toggle {
   line-height: 5.5em;
 }
-.header .options .toggle i {
+.options .toggle i {
   position: relative;
   top: -0.5em;
   color: #75848f;
   margin-left: 0.4em;
 }
-.header .options .toggle img {
+.options .toggle img {
   height: 2.1em;
   -webkit-border-radius: 50%;
   border-radius: 50%;

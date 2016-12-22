@@ -317,7 +317,7 @@ $(() => {
 		let type = $(this).attr('data-type')
 		if (type="delete") {
 			$('.confirm').toggleClass('d_key')
-			$('.box h5').html(`Are you sure you want to delete <b>${opt.keyName}</b>?`)
+			$('.box h5').html(`Are you sure you want to delete ${opt.keyName}?`)
 		}
 	})
 

@@ -75,7 +75,7 @@ router.get('/key/:key', auth.presets, (req, res) => {
 
 })
 
-router.get('/test', (req, res) => {
+router.get('/root', (req, res) => {
 	res.render('test')
 })
 

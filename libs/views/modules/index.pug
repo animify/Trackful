@@ -1,6 +1,19 @@
 extends ../layout
 
 block content
-	a(href="/auth/login/twitter") Log in with Twitter
-	a(href="/auth/login/github") Log in with Github
-	a(href="/account") Account
+	section.module.hero
+		.contain
+			h2 Web analytics and UI tracking done simple.
+			h6 Track page hits and each element click on every page you have tracking activated on. All data is sent in real time and is visualied every hour. See your progress escalate, it only takes a few seconds to set up a new application.
+			.button-group
+				a.button.primary.large(href="/auth/login/twitter") #[i.ion-social-twitter] Sign in with Twitter
+				a.button.black.large(href="/auth/login/github") #[i.ion-social-github] Sign in with Github
+				small v1.0.0 / 2016-12-24
+	section.module.bg
+		.contain
+			.grid-row
+				.xs-12.m-6
+					h4 Track things that matter.
+					p Initialise the tracker on pages you want to track or just have it in the footer of your single page application. Attach data bindings to all elements you want to track clicks on. Integrate as many Watch applications as you need to need if you want to split up your data.
+				.xs-12.m-6.heroimg
+					img(src="/images/hero_clicks.png")
