@@ -6,7 +6,21 @@ const r = require(libs + 'db/db')
 const shortid = require('shortid')
 const url = require('url')
 
-exports.createKey = function(req, res, callback) {
+exports.validateKeyOwner = (req, res, key, callback) => {
+	if (key) {
+		r.db('users').table('users').filter({id: req.user.id}).filter((row) => {
+			return row("keys").contains((k) => {
+				return k("id").eq(key)
+			})
+		}).run((err, cursor) => {
+			(cursor[0] != undefined) ? callback(null, true) : callback(true, null)
+		})
+	} else {
+		callback({status: 404, message: "Invalid input"}, null)
+	}
+}
+
+exports.createKey = (req, res, callback) => {
 	const shortKey = shortid.generate()
 	const preUrl = url.parse(req.body.domain)
 
@@ -25,7 +39,7 @@ exports.createKey = function(req, res, callback) {
 	}
 }
 
-exports.getAllKeys = function(req, res, callback) {
+exports.getAllKeys = (req, res, callback) => {
 	r.table('users').get(req.user.id)('keys')
 	.run((err, userKeys) => {
 		let keyArr = Object.keys(userKeys).map(k => userKeys[k])
@@ -33,14 +47,14 @@ exports.getAllKeys = function(req, res, callback) {
 	})
 }
 
-exports.getKeyInfo = function(req, res, key, callback) {
+exports.getKeyInfo = (req, res, key, callback) => {
 	r.table('users').get(req.user.id)('keys').filter({id: key})
 	.run((err, keyData) => {
 		callback(null, keyData);
 	})
 }
 
-exports.getClickTrackers = function(req, res, key, callback) {
+exports.getClickTrackers = (req, res, key, callback) => {
 	r.db(config.get("rethink").trackDB).table('trackers').filter({key:key})
 	.run((err, rest) => {
 		hasTrackers = false
@@ -55,7 +69,7 @@ exports.getClickTrackers = function(req, res, key, callback) {
 	})
 }
 
-exports.getHitTrackers = function(req, res, key, callback) {
+exports.getHitTrackers = (req, res, key, callback) => {
 	r.db(config.get("rethink").trackDB).table('trackers').filter({key:key})
 	.run((err, rest) => {
 		hasTrackers = false
@@ -70,7 +84,7 @@ exports.getHitTrackers = function(req, res, key, callback) {
 	})
 }
 
-exports.getClickData = function(req, res, key, callback) {
+exports.getClickData = (req, res, key, callback) => {
 	r.db('data').table('sloth').get(key)
 	.run((err, rest) => {
 		if (rest != null) {
@@ -84,7 +98,7 @@ exports.getClickData = function(req, res, key, callback) {
 	})
 }
 
-exports.getHitData = function(req, res, key, callback) {
+exports.getHitData = (req, res, key, callback) => {
 	r.db('data').table('sloth').get(key)
 	.run((err, rest) => {
 		if (rest != null) {

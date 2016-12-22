@@ -15,67 +15,72 @@ const async = require('async')
 
 const io = global.socketIO
 
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
 	res.render('index')
 })
 
-router.get('/account', auth.presets, function(req, res) {
+router.get('/account', auth.presets, (req, res) => {
 	res.render('account', {user: req.user})
 })
 
-router.get('/create/key', auth.presets, function(req, res) {
+router.get('/create/key', auth.presets, (req, res) => {
 	res.render('createkey', {user: req.user})
 })
 
-router.post('/create/key', auth.presets, function(req, res) {
+router.post('/create/key', auth.presets, (req, res) => {
 	actions.createKey(req, res, (err, shortKey) => {
 		if (!err) {
-			res.send(shortKey)
-		} else {
-			req.json(err)
+			return res.send(shortKey)
 		}
+		res.status(500).json({ error: 'Something went wrong' })
 	})
 })
 
-router.get('/keys/all', auth.presets, function(req, res) {
+router.get('/keys/all', auth.presets, (req, res) => {
 	actions.getAllKeys(req, res, (err, keys) => {
-		console.log(keys);	
+		console.log(keys)
 		res.render('keys', {user: req.user, keys: keys})
 	})
 })
 
-router.get('/key/:key', auth.presets, function(req, res) {
+router.get('/key/:key', auth.presets, (req, res) => {
 
-	async.parallel({
-		clicks: function(callback) {
-			actions.getClickTrackers(req, res, req.params.key, (err, clickTrackers, hasClickTrackers) => {
-				if (!err)
-					callback(null, clickTrackers, hasClickTrackers)
+	actions.validateKeyOwner(req, res, req.params.key, (err, owner) => {
+		if (!err && owner) {
+			async.parallel({
+				clicks: (callback) => {
+					actions.getClickTrackers(req, res, req.params.key, (err, clickTrackers, hasClickTrackers) => {
+						if (!err)
+							callback(null, clickTrackers, hasClickTrackers)
+					})
+				},
+				hits: (callback) => {
+					actions.getHitTrackers(req, res, req.params.key, (err, hitTrackers, hasHitTrackers) => {
+						if (!err)
+							callback(null, hitTrackers, hasHitTrackers)
+					})
+				},
+				key: (callback) => {
+					actions.getKeyInfo(req, res, req.params.key, (err, ud) => {
+						if (!err)
+							callback(null, ud)
+					})
+				}
+			}, (err, arr) => {
+					res.render('key', {user: req.user, hasClickTrackers: arr.clicks[1], clicktrackers: arr.clicks[0], hasHitTrackers: arr.hits[1], hittrackers: arr.hits[0] ,trackKey: req.params.key, key: arr.key[0]})
 			})
-		},
-		hits: function(callback) {
-			actions.getHitTrackers(req, res, req.params.key, (err, hitTrackers, hasHitTrackers) => {
-				if (!err)
-					callback(null, hitTrackers, hasHitTrackers)
-			})
-		},
-		key: function(callback) {
-			actions.getKeyInfo(req, res, req.params.key, (err, ud) => {
-				if (!err)
-					callback(null, ud)
-			})
+		} else {
+			res.redirect('/account')
 		}
-	}, function(err, arr) {
-			res.render('key', {user: req.user, hasClickTrackers: arr.clicks[1], clicktrackers: arr.clicks[0], hasHitTrackers: arr.hits[1], hittrackers: arr.hits[0] ,trackKey: req.params.key, key: arr.key[0]})
 	})
 
 })
 
-router.get('/test', function(req, res) {
+router.get('/test', (req, res) => {
 	res.render('test')
 })
 
-router.post('/endpoint/clicks', function(req, res) {
+router.post('/endpoint/clicks', (req, res) => {
 	watcher.incrementClickTrack(req, res, req.body.key, req.body.tracker, (err, result) => {
 		trackR = io.of(`/track_${req.body.key}`)
 		trackR.emit('change',{
@@ -86,7 +91,7 @@ router.post('/endpoint/clicks', function(req, res) {
 	})
 })
 
-router.post('/endpoint/hits', function(req, res) {
+router.post('/endpoint/hits', (req, res) => {
 	watcher.incrementHitTrack(req, res, req.body.key, req.body.page, (err, result) => {
 		trackR = io.of(`/track_${req.body.key}`)
 		trackR.emit('change',{
@@ -97,21 +102,30 @@ router.post('/endpoint/hits', function(req, res) {
 	})
 })
 
-router.get('/endpoint/data/clicks', function(req, res) {
+router.get('/endpoint/data/clicks', (req, res) => {
 	actions.getClickData(req, res, req.query.key, (err, result) => {
-		res.send(result)
+		if (!err) {
+			return res.send(result)
+		}
+		res.status(500).json({ message: 'Error getting click data' })
 	})
 })
 
-router.get('/endpoint/data/hits', function(req, res) {
+router.get('/endpoint/data/hits', (req, res) => {
 	actions.getHitData(req, res, req.query.key, (err, result) => {
-		res.send(result)
+		if (!err) {
+			return res.send(result)
+		}
+		res.status(500).json({ message: 'Error getting hit data' })
 	})
 })
 
-router.post('/endpoint/key/delete', function(req, res) {
+router.post('/endpoint/key/delete', (req, res) => {
 	watcher.deleteTracker(req, res, req.body.key, (err, result) => {
-		res.send(result)
+		if (!err) {
+			return res.send(result)
+		}
+		res.status(500).json({ message: 'Something went wrong' })
 	})
 })
 

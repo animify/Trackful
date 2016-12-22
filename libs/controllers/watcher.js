@@ -31,15 +31,17 @@ exports.incrementHitTrack = function(req, res, key, href, callback) {
 }
 
 exports.deleteTracker = function(req, res, key, callback) {
-	r.db('users').table('users').filter({id:req.user.id})
+	r.db('users').table('users').update((row) => {
+		return {
+			'keys': row('keys')
+				.filter(function (item) { return item('id').ne(key) })
+		}
 
-	.filter(function(doc) {
-		return doc("keys").contains(function(adress) {
-				return adress("id").eq(key)
-		})
-	}).delete({returnChanges:true}).run((err, cu) => {
-		console.log(cu);
-		r.db(config.get("rethink").trackDB).table('trackers').filter({key: key}).delete()
-		.run()
+	},{returnChanges: true}).run((err, cu) => {
+		if (cu.replaced) {
+			r.db(config.get("rethink").trackDB).table('trackers').filter({key: key}).delete().run()
+			return callback(null, true)
+		}
+		callback(true, null)
 	})
 }
