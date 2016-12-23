@@ -1,17 +1,27 @@
 section.module
-	padding 4em 0
+	padding 6em 0
 	position relative
 	h4
 		color body-dark
-		line-height 1.8em
-	p
+		line-height 1.9em
+		i
+			margin-right .4em
+		a
+			i
+				margin-left .4em
+				relative top 1px
+	h6
 		color body-light
 		line-height 1.8em
+		& + h4
+			margin-top 1.6em
+	&.hasimg
+		padding 6em 0 4em 0
 	&.hero
 		padding 12em 0 12em 0
 		text-align center
 		h2
-			color body-dark
+			color #fff
 			font-weight 300
 			line-height 2em
 		h6
@@ -24,6 +34,7 @@ section.module
 				margin-top 1.7em
 				color dark-color-smoke
 			a.button
+				padding 0 6em
 				i
 					margin-right .3em
 				& + a.button
@@ -33,7 +44,14 @@ section.module
 			border-radius 8px
 			box-shadow: 0 8px 16px rgba(0, 0, 0, .08), 0 2px 6px rgba(0, 0, 0, .04)
 			width 90%
-			relative top -8em
+			relative top -1em
 			float right
 	&.bg
 		background-color light-color-smoke
+
+header.nav
+	background-color #fff
+	padding 1.6em 3em
+	.logo
+		display inline-block
+		vertical-align top
