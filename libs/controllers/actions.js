@@ -26,21 +26,25 @@ exports.createKey = (req, res, callback) => {
 	const d = new Date()
 	const epoch = Math.round(d.getTime() / 1000)
 
-	if (preUrl.host && req.body.name) {
-		r.table('users').get(req.user.id).update(
-			{keys: r.row('keys').append({id: shortKey, name: req.body.name, domain: preUrl.host, created: r.now().toEpochTime()})}
-		).run((err, cursor) => {
-			r.db('data').table('sloth').insert({id: shortKey, type:'data', hits: [{[epoch]: 0}], clicks: [{[epoch]: 0}]}).run()
-			r.db(config.get("rethink").trackDB).table('trackers')
-			.insert({key:shortKey, clicks:{}, hits:{}, countries: {}, devices: {}, domain: preUrl.host, status: "active"})
-			.run((err, rr) => {
-				callback(null, shortKey)
-			})
-
-		})
-	} else {
-		callback({status: 404, message: "Invalid inputs"}, null)
+	if (req.body.name == "") {
+		return callback({status: 500, message: "The name for your application can't be blank", element: "appname"}, null)
 	}
+
+	if (!preUrl.host) {
+		return callback({status: 500, message: "Please enter a valid full URL as your domain name e.g http://yourdomain.com", element: "domain"}, null)
+	}
+
+	r.table('users').get(req.user.id).update(
+		{keys: r.row('keys').append({id: shortKey, name: req.body.name, domain: preUrl.host, created: r.now().toEpochTime()})}
+	).run((err, cursor) => {
+		r.db('data').table('sloth').insert({id: shortKey, type:'data', hits: [{[epoch]: 0}], clicks: [{[epoch]: 0}]}).run()
+		r.db(config.get("rethink").trackDB).table('trackers')
+		.insert({key:shortKey, clicks:{}, hits:{}, countries: {}, devices: {}, domain: preUrl.host, status: "active"})
+		.run((err, rr) => {
+			if (err) return callback({status: 500, message: "Something went wrong"}, null)
+			callback(null, shortKey)
+		})
+	})
 }
 
 exports.getAllKeys = (req, res, callback) => {

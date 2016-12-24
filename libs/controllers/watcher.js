@@ -13,9 +13,8 @@ exports.incrementClickTrack = (req, res, key, track, callback) => {
 		{clicks: {[track] : r.row('clicks')(track).default(0).add(1)} },
 		{returnChanges: true}
 	).run(function(err, cursor) {
-		if (cursor.changes) {
-			return callback(false, [track, cursor.changes[0].new_val.clicks[track]])
-		}
+		if (cursor.changes) return callback(false, [track, cursor.changes[0].new_val.clicks[track]])
+		
 		callback(true, null)
 	})
 }
@@ -52,7 +51,6 @@ exports.deleteTracker = (req, res, key, callback) => {
 			'keys': row('keys')
 				.filter(function (item) { return item('id').ne(key) })
 		}
-
 	},{returnChanges: true}).run((err, cu) => {
 		if (cu.replaced) {
 			r.db(config.get("rethink").trackDB).table('trackers').filter({key: key}).delete().run()

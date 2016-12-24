@@ -32,7 +32,7 @@ router.post('/create/key', auth.presets, (req, res) => {
 		if (!err) {
 			return res.send(shortKey)
 		}
-		res.status(500).json({ error: 'Something went wrong' })
+		res.json(err)
 	})
 })
 
@@ -58,7 +58,6 @@ router.get('/key/:key', auth.presets, (req, res) => {
 					})
 				}
 			}, (err, arr) => {
-				console.log(arr.trackers);
 				trackR = io.of(`/track_${req.params.key}`)
 				res.render('key', {user: req.user, clicktrackers: arr.trackers[0], hittrackers: arr.trackers[1], countrytrackers: arr.trackers[2], devicetrackers: arr.trackers[3], hasTrackers: arr.trackers[4], trackKey: req.params.key, key: arr.key[0]})
 			})

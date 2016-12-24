@@ -2196,6 +2196,10 @@ ol.ordered li[value]:before {
   font-weight: 300;
   background-color: #fff;
 }
+.input input.error,
+.input textarea.error {
+  border-color: #ff4949;
+}
 .input input:focus,
 .input textarea:focus {
   border-color: #4184f2;
@@ -2964,6 +2968,12 @@ ol.ordered li[value]:before {
   padding: 4em 2em 7.2em 2em;
   text-align: center;
 }
+.modal .box-body h5 {
+  line-height: 2em;
+}
+.modal .box-body p {
+  color: #75848f;
+}
 .modal .box-footer {
   padding: 1.4em 2em 1.4em 2em;
   width: 100%;
@@ -2986,12 +2996,6 @@ ol.ordered li[value]:before {
 }
 .modal.log_sign .box-body {
   padding: 2.4em 3em 2.4em 3em;
-}
-.modal.log_sign .box-body h5 {
-  line-height: 2em;
-}
-.modal.log_sign .box-body p {
-  color: #75848f;
 }
 .modal.log_sign .box-footer {
   position: relative;
@@ -4099,6 +4103,23 @@ footer.footer ul li a:hover {
 }
 .signal span.connected:before {
   content: 'Connected';
+}
+div.error {
+  background-color: #ffe4e4;
+  border: 1px solid #ffbfbf;
+  padding: 1em;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  margin-top: 2em;
+  display: none;
+}
+div.error p {
+  color: #ff4949;
+}
+div.error p i {
+  margin-right: 0.4em;
+  position: relative;
+  top: 1px;
 }
 .flash {
   -webkit-animation-name: flash;

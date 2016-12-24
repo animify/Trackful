@@ -272,21 +272,32 @@ $(() => {
 
 			updateIncreases(true, false)
 
-			$(`[data-hit="${pageName}"], [data-country="${countryName}"], [data-device="${deviceName}"]`).addClass("flash").delay(1000).queue(function(){
+			$(`[data-hit="${pageName}"], [data-country="${countryName}"], [data-device="${deviceName}"]`).addClass("flash").delay(1000).queue(function() {
 				$(this).removeClass("flash").dequeue()
 			})
 		}
 	}
 
+	$('input').bind('change', function() {
+		$(this).removeClass('error')
+	})
+
 	$('.create').bind('click', function() {
-		data = {name: $('#appname').val(), domain: $('#domain').val()}
+		data = { name: $('#appname').val(), domain: $('#domain').val() }
 		$.ajax({
 			url: '/create/key',
 			type: 'POST',
 			data: JSON.stringify(data),
 			contentType: 'application/json',
 			success: function(data) {
-				window.location.href = `/key/${data}`
+				if (data.status) {
+					$('.error').slideDown('fast').find('p').html(`<i class="ion-android-alert"/> ${data.message}`).parent().delay(8000).slideUp('fast')
+					$(`#${data.element}`).addClass('error').delay(8000).queue(function(){
+						$(this).removeClass("error").dequeue()
+					})
+				} else {
+					window.location.href = `/key/${data}`
+				}
 			}
 		})
 	})
