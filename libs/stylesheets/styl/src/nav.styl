@@ -19,16 +19,18 @@
 		padding 1.2em 0 !important
 	.options
 		margin-left .4em
+		a + a
+			margin-left 2em
 		& > a, .toggle
 			display inline-block
 			vertical-align top
 			cursor pointer
-			color body-color
+			color lighten(body-color, 35%)
 			position relative
-			// border-right 1px solid lighten(nav-grey, 5%)
 			i
 				color body-color
 				font-size 1.8em
 			&:hover
+				color #fff
 				i
 					color primary-color

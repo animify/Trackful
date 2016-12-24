@@ -11,19 +11,21 @@ section.module
 				margin-left .4em
 				relative top 1px
 	h6
-		color body-light
+		color lighten(body-color, 35%)
 		line-height 1.8em
 		& + h4
 			margin-top 1.6em
 	&.hasimg
 		padding 6em 0 4em 0
 	&.hero
-		padding 12em 0 12em 0
+		padding 7.4em 0 12em 0
 		text-align center
+		background-color #0e1320
 		h2
 			color #fff
 			font-weight 300
-			line-height 2em
+			line-height 1.4em
+			margin-bottom .3em
 		h6
 			color body-light
 			line-height 1.7em
@@ -32,7 +34,7 @@ section.module
 			small
 				display block
 				margin-top 1.7em
-				color dark-color-smoke
+				color lighten(body-color, 10%)
 			a.button
 				padding 0 6em
 				i
@@ -50,8 +52,11 @@ section.module
 		background-color light-color-smoke
 
 header.nav
-	background-color #fff
-	padding 1.6em 3em
+	background-color #0e1320
+	padding 2.2em 3em
 	.logo
 		display inline-block
 		vertical-align top
+		relative top -5px
+		img
+			height 24px

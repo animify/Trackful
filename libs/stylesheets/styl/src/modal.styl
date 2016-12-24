@@ -5,6 +5,18 @@
 	z-index 4000
 	cf()
 	display none
+	.close
+		fixed top 2em right 2.2em
+		width 3em
+		height 3em
+		border-radius 50%
+		background-color rgba(#fff,.5)
+		text-align center
+		i
+			font-size 3em
+			color #000
+		&:hover
+			background-color rgba(#fff,.8)
 	.overlay
 		background-color rgba(#000,.39)
 		width 100%
@@ -26,10 +38,29 @@
 			width 100%
 			background-color light-color-smoke
 			absolute bottom 0
-			.buttons
+			.buttons.simple
 				a
 					color body-dark
 					&.cancel
 						color body-light
 					& + a
 						margin-left 2em
+	&.log_sign
+		.box
+			width 28%
+			min-width 28em
+		.box-body
+			padding 2.4em 3em 2.4em 3em
+			h5
+				line-height 2em
+			p
+				color body-light
+		.box-footer
+			position relative
+			text-align center
+			p
+				color body-light
+			a + a
+				margin-top 1em
+			a + p
+				margin-top 1.2em

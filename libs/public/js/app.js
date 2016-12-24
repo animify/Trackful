@@ -308,16 +308,38 @@ $(() => {
 		}
 	})
 
-	$('[data-modal]').bind('click', function() {
+	toggleModal = (id) => {
 		$('.confirm').attr('class', 'confirm')
 		$('.cancel').attr('class', 'cancel')
 		$('.modal').fadeToggle('fast')
-		$('.modal .box').slideToggle('fast')
+		if (id) {
+			if ($(`.modal #${id}`).is(":visible")) {
+				$(`.modal #${id}`).slideUp('fast')
+			} else {
+				$(`.modal #${id}`).slideDown('fast')
+			}
+		} else {
+			if ($(`.modal .box`).is(":visible")) {
+				$(`.modal .box`).slideUp('fast')
+			} else {
+				$(`.modal .box`).slideDown('fast')
+			}
+		}
+	}
 
+	$('[data-modal]').bind('click', function() {
+		let id = $(this).attr('data-modal')
+		toggleModal(id)
 		let type = $(this).attr('data-type')
-		if (type="delete") {
+		if (type="delete" && opt.keyName) {
 			$('.confirm').toggleClass('d_key')
 			$('.box h5').html(`Are you sure you want to delete ${opt.keyName}?`)
+		}
+	})
+
+	$(document).keyup((e) => {
+		if (e.keyCode === 27) {
+			if ($('.modal').is(":visible")) toggleModal()
 		}
 	})
 

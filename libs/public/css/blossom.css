@@ -1279,18 +1279,25 @@ strong {
 .nav .options {
   margin-left: 0.4em;
 }
+.nav .options a + a {
+  margin-left: 2em;
+}
 .nav .options > a,
 .nav .options .toggle {
   display: inline-block;
   vertical-align: top;
   cursor: pointer;
-  color: #454e55;
+  color: #7f8d97;
   position: relative;
 }
 .nav .options > a i,
 .nav .options .toggle i {
   color: #454e55;
   font-size: 1.8em;
+}
+.nav .options > a:hover,
+.nav .options .toggle:hover {
+  color: #fff;
 }
 .nav .options > a:hover i,
 .nav .options .toggle:hover i {
@@ -2914,6 +2921,24 @@ ol.ordered li[value]:before {
 .modal:after {
   clear: both;
 }
+.modal .close {
+  position: fixed;
+  top: 2em;
+  right: 2.2em;
+  width: 3em;
+  height: 3em;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.5);
+  text-align: center;
+}
+.modal .close i {
+  font-size: 3em;
+  color: #000;
+}
+.modal .close:hover {
+  background-color: rgba(255,255,255,0.8);
+}
 .modal .overlay {
   background-color: rgba(0,0,0,0.39);
   width: 100%;
@@ -2946,14 +2971,40 @@ ol.ordered li[value]:before {
   position: absolute;
   bottom: 0;
 }
-.modal .box-footer .buttons a {
+.modal .box-footer .buttons.simple a {
   color: #373e44;
 }
-.modal .box-footer .buttons a.cancel {
+.modal .box-footer .buttons.simple a.cancel {
   color: #75848f;
 }
-.modal .box-footer .buttons a + a {
+.modal .box-footer .buttons.simple a + a {
   margin-left: 2em;
+}
+.modal.log_sign .box {
+  width: 28%;
+  min-width: 28em;
+}
+.modal.log_sign .box-body {
+  padding: 2.4em 3em 2.4em 3em;
+}
+.modal.log_sign .box-body h5 {
+  line-height: 2em;
+}
+.modal.log_sign .box-body p {
+  color: #75848f;
+}
+.modal.log_sign .box-footer {
+  position: relative;
+  text-align: center;
+}
+.modal.log_sign .box-footer p {
+  color: #75848f;
+}
+.modal.log_sign .box-footer a + a {
+  margin-top: 1em;
+}
+.modal.log_sign .box-footer a + p {
+  margin-top: 1.2em;
 }
 code {
   background-color: #f1f1f1;
@@ -2988,7 +3039,7 @@ section.module h4 a i {
   top: 1px;
 }
 section.module h6 {
-  color: #75848f;
+  color: #7f8d97;
   line-height: 1.8em;
 }
 section.module h6 + h4 {
@@ -2998,13 +3049,15 @@ section.module.hasimg {
   padding: 6em 0 4em 0;
 }
 section.module.hero {
-  padding: 12em 0 12em 0;
+  padding: 7.4em 0 12em 0;
   text-align: center;
+  background-color: #0e1320;
 }
 section.module.hero h2 {
   color: #fff;
   font-weight: 300;
-  line-height: 2em;
+  line-height: 1.4em;
+  margin-bottom: 0.3em;
 }
 section.module.hero h6 {
   color: #75848f;
@@ -3016,7 +3069,7 @@ section.module.hero .button-group {
 section.module.hero .button-group small {
   display: block;
   margin-top: 1.7em;
-  color: #c9d3d9;
+  color: #556069;
 }
 section.module.hero .button-group a.button {
   padding: 0 6em;
@@ -3041,12 +3094,17 @@ section.module.bg {
   background-color: #f7f9fb;
 }
 header.nav {
-  background-color: #fff;
-  padding: 1.6em 3em;
+  background-color: #0e1320;
+  padding: 2.2em 3em;
 }
 header.nav .logo {
   display: inline-block;
   vertical-align: top;
+  position: relative;
+  top: -5px;
+}
+header.nav .logo img {
+  height: 24px;
 }
 @-moz-keyframes spin {
   0% {
