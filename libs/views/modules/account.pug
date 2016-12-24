@@ -34,4 +34,21 @@ block content
 						//- a.button.in-input Update changes
 				.profile_image
 					img(src=user.avatarUrl)
-					a Change profile picture
+					a(data-modal="image") Change profile picture
+			.modal
+				a.close(data-modal)
+					i.ion-ios-close-empty
+				.overlay
+					.box#image
+						.box-body
+							h5 Update your profile picture
+							p Enter the URL of the image you want to update your profile picture with
+							.input.block
+								input#avatarUrl(type="text", value=user.avatarUrl)
+						.box-footer
+							.buttons.float-right.simple
+								a.cancel(data-modal) Cancel
+								a.update_avatar Update
+
+	script.
+		let opt = {}

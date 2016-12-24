@@ -79,16 +79,16 @@ body
 			display inline-block
 			vertical-align middle
 		span
-			relative top .62em
+			relative top .72em
 			float right
 			i
 				margin-left 1em
 		small
 			display block
 			color body-light
-			margin-top .4em
+			margin-top .6em
 		& + .key
-			margin-top .8em
+			margin-top 1em
 
 #key_info
 	padding 1.4rem 0
@@ -194,8 +194,11 @@ body
 
 #create
 	padding 2em 0
-
-
+	.info
+		p
+			color body-light
+			& + p
+				margin-top .4em
 #account
 	padding 2rem 0
 	.details, .profile_image
@@ -209,6 +212,7 @@ body
 			display block
 			margin-top 1.4em
 			color body-color
+			text-align center
 			&:hover
 				color body-dark
 		img

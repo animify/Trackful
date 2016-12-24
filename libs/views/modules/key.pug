@@ -40,11 +40,11 @@ block content
 								li(data-click=index) #{index}
 									span #{val}
 
-					ul#countries
-						li.header #[h5 Countries #[span &nbsp;/ page hit]]
+					ul#devices
+						li.header #[h5 Devices #[span &nbsp;/ page hit]]
 							div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
-							each val, index in countrytrackers
-								li(data-country=index) #{index}
+							each val, index in devicetrackers
+								li(data-device=index) #{index}
 									span #{val}
 
 				.xs-12.m-6(class=hasTrackers ? "" : "hidden")
@@ -64,12 +64,13 @@ block content
 								li(data-hit=index) #{index}
 									span #{val}
 
-					ul#devices
-						li.header #[h5 Devices #[span &nbsp;/ page hit]]
+					ul#countries
+						li.header #[h5 Countries #[span &nbsp;/ page hit]]
 							div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
-							each val, index in devicetrackers
-								li(data-device=index) #{index}
+							each val, index in countrytrackers
+								li(data-country=index) #{index}
 									span #{val}
+
 				#empty.xs-12(class=hasTrackers ? "hidden" : "")
 					.empty
 						h4 There isn't enough data here to show just yet.

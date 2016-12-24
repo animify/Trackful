@@ -27,6 +27,7 @@
 			cursor pointer
 			color lighten(body-color, 35%)
 			position relative
+			line-height 1.74em
 			i
 				color body-color
 				font-size 1.8em
@@ -34,3 +35,9 @@
 				color #fff
 				i
 					color primary-color
+	&.primary
+		.options
+			& > a
+				color color-primary-text
+				&:hover
+					color #fff

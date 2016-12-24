@@ -312,19 +312,18 @@ $(() => {
 	})
 
 	$('.search').bind('click', function() {
-		_this = $(this)
-		if (!_this.hasClass('open')) {
-			_width = _this.css("width")
-			_this.animate({
+		if (!$(this).hasClass('open')) {
+			_width = $(this).css("width")
+			$(this).animate({
 				width: 200
 			}, 200, () => {
-				_this.addClass('open')
-				_this.find('.filter').removeClass('hidden').focus()
+				$(this).addClass('open')
+				$(this).find('.filter').removeClass('hidden').focus()
 			})
-		} else if (_this.find('.filter').is(":empty")){
-			_this.removeClass('open')
-			_this.find('.filter').addClass('hidden')
-			_this.animate({
+		} else if ($(this).find('.filter').is(":empty")){
+			$(this).removeClass('open')
+			$(this).find('.filter').addClass('hidden')
+			$(this).animate({
 				width: _width
 			}, 200)
 		}
@@ -359,10 +358,21 @@ $(() => {
 		}
 	})
 
-	$(document).keyup((e) => {
-		if (e.keyCode === 27) {
-			if ($('.modal').is(":visible")) toggleModal()
-		}
+	$('.update_avatar').bind('click', function() {
+		let avatarUrl = $('#avatarUrl').val()
+		const dataUrl = {avatar: avatarUrl}
+
+		call('/endpoint/update/avatar', 'POST', JSON.stringify(dataUrl), (res) => {
+			if (res == true) {
+				toggleModal()
+				$('.profile_image img').attr('src', avatarUrl)
+			} else {
+				$(`#${res.element}`).addClass('error').delay(8000).queue(function(){
+					$(this).removeClass("error").dequeue()
+				})
+			}
+		})
+
 	})
 
 	$('.filter').on('input', function () {
@@ -376,6 +386,10 @@ $(() => {
 				$(this).stop().slideUp('fast')
 			}
 		})
+	})
+
+	$(document).keyup((e) => {
+		if (e.keyCode === 27 && $('.modal').is(":visible")) toggleModal()
 	})
 
 	initialise = () => {

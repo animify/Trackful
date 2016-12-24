@@ -19,6 +19,10 @@ router.get('/', (req, res) => {
 	res.render('index')
 })
 
+router.get('/getting-started', (req, res) => {
+	res.render('getstarted')
+})
+
 router.get('/account', auth.presets, (req, res) => {
 	res.render('account', {user: req.user})
 })
@@ -63,7 +67,7 @@ router.get('/key/:key', auth.presets, (req, res) => {
 			})
 
 		} else {
-			res.redirect('/account')
+			res.redirect('/keys/all')
 		}
 	})
 })
@@ -124,6 +128,16 @@ router.post('/endpoint/key/delete', (req, res) => {
 			return res.send(result)
 		}
 		res.status(500).json({ message: 'Something went wrong' })
+	})
+})
+
+router.post('/endpoint/update/avatar', (req, res) => {
+	actions.updateAvatar(req, res, req.body.avatar, (err, result) => {
+		if (!err) {
+			return res.send(result)
+		}
+		console.log('err', err);
+		res.json(err)
 	})
 })
 

@@ -5,6 +5,42 @@ const r = require(libs + 'db/db')
 
 const shortid = require('shortid')
 const url = require('url')
+const request = require('request')
+
+exports.updateAvatar = (req, res, imageurl, callback) => {
+	if (imageurl) {
+
+		const magic = {
+			jpg: 'ffd8ffe0',
+			png: '89504e47',
+			gif: '47494638'
+		}
+
+		const o = {
+			method: 'GET',
+			url: imageurl,
+			encoding: null
+		}
+
+		request(o, function (err, response, body) {
+			if(!err && response.statusCode == 200) {
+				const isMagic = body.toString('hex',0,4)
+				if (isMagic == magic.jpg || isMagic == magic.png || isMagic == magic.gif) {
+					r.db('users').table('users').filter({id: req.user.id})
+					.update({avatarUrl:imageurl}, {returnChanges:true})
+					.run((e, c) => {
+						if (c.changes) {
+							return callback(null, true)
+						}
+						callback({status: 404, message: "Invalid input"}, null)
+					})
+				}
+			} else {
+				callback({status: 404, message: "Invalid image URL", element: "avatarUrl"}, null)
+			}
+		})
+	}
+}
 
 exports.validateKeyOwner = (req, res, key, callback) => {
 	if (key) {

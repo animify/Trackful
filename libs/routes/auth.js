@@ -12,17 +12,17 @@ const auth = require(libs + 'auth/auth')
 const authControllers = require(libs + 'controllers/auth')
 
 router.use('/login/callback/github',
-	auth.authenticate('github', { failureRedirect: '/login' }),
+	auth.authenticate('github', { failureRedirect: '/' }),
 	function(req, res) {
-		res.redirect('/account')
+		res.redirect('/keys/all')
 	});
 
 router.get('/login/github', auth.authenticate('github'))
 
 router.use('/login/callback/twitter',
-	auth.authenticate('twitter', { failureRedirect: '/login' }),
+	auth.authenticate('twitter', { failureRedirect: '/' }),
 	function(req, res) {
-		res.redirect('/account')
+		res.redirect('/keys/all')
 	});
 
 router.get('/login/twitter', auth.authenticate('twitter'))

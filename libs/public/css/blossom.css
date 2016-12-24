@@ -112,21 +112,27 @@ body.dark {
   background-color: #18212d;
 }
 h1 {
+  font-weight: 500;
   font-size: 3.8em;
 }
 h2 {
+  font-weight: 500;
   font-size: 3em;
 }
 h3 {
+  font-weight: 500;
   font-size: 2.2em;
 }
 h4 {
+  font-weight: 500;
   font-size: 1.8em;
 }
 h5 {
+  font-weight: 500;
   font-size: 1.4em;
 }
 h6 {
+  font-weight: 500;
   font-size: 1.2em;
 }
 ::selection {
@@ -142,7 +148,7 @@ a:hover {
   color: #0f5bd8;
 }
 p {
-  line-height: 1.4em;
+  line-height: 1.6em;
 }
 small {
   font-size: 0.875em;
@@ -1289,6 +1295,7 @@ strong {
   cursor: pointer;
   color: #7f8d97;
   position: relative;
+  line-height: 1.74em;
 }
 .nav .options > a i,
 .nav .options .toggle i {
@@ -1302,6 +1309,12 @@ strong {
 .nav .options > a:hover i,
 .nav .options .toggle:hover i {
   color: #4184f2;
+}
+.nav.primary .options > a {
+  color: #a2c3f7;
+}
+.nav.primary .options > a:hover {
+  color: #fff;
 }
 .clearfix {
   *zoom: 1;
@@ -2158,13 +2171,14 @@ ol.ordered li[value]:before {
   position: relative;
 }
 .input label {
-  line-height: 2em;
   display: block;
+  line-height: 1.4em;
+  margin-bottom: 0.4em;
 }
 .input small {
   display: block;
   color: #75848f;
-  padding-bottom: 0.8em;
+  padding-bottom: 1em;
 }
 .input input[disabled],
 .input.disabled {
@@ -2236,7 +2250,7 @@ ol.ordered li[value]:before {
   border: 0;
 }
 .input + .input {
-  margin-top: 1.2rem;
+  margin-top: 1.3rem;
 }
 .input.block input {
   width: 100%;
@@ -2552,6 +2566,9 @@ ol.ordered li[value]:before {
 }
 .smoke:not(.button).dark {
   background-color: #c9d3d9 !important;
+}
+.text-dark {
+  color: #373e44 !important;
 }
 .loader {
   border-style: solid;
@@ -2925,6 +2942,12 @@ ol.ordered li[value]:before {
 .modal:after {
   clear: both;
 }
+.modal .input {
+  margin-top: 1.4em;
+}
+.modal .input input {
+  min-width: 0;
+}
 .modal .close {
   position: fixed;
   top: 2em;
@@ -2963,6 +2986,8 @@ ol.ordered li[value]:before {
   width: 40%;
   overflow: hidden;
   display: none;
+  -webkit-box-shadow: 0 8px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
 }
 .modal .box-body {
   padding: 4em 2em 7.2em 2em;
@@ -3042,11 +3067,12 @@ section.module h4 a i {
   position: relative;
   top: 1px;
 }
-section.module h6 {
+section.module p {
   color: #7f8d97;
   line-height: 1.8em;
+  font-size: 1.2em;
 }
-section.module h6 + h4 {
+section.module p + h4 {
   margin-top: 1.6em;
 }
 section.module.hasimg {
@@ -3059,13 +3085,13 @@ section.module.hero {
 }
 section.module.hero h2 {
   color: #fff;
-  font-weight: 300;
   line-height: 1.4em;
   margin-bottom: 0.3em;
 }
 section.module.hero h6 {
   color: #75848f;
   line-height: 1.7em;
+  font-weight: 400;
 }
 section.module.hero .button-group {
   margin-top: 2.5em;
@@ -3084,6 +3110,20 @@ section.module.hero .button-group a.button i {
 section.module.hero .button-group a.button + a.button {
   margin-left: 1em;
 }
+section.module.page {
+  background-color: #4184f2;
+  text-align: center;
+  padding: 3em 0 6em 0;
+  margin-bottom: 2em;
+}
+section.module.page h3 {
+  color: #fff;
+}
+section.module.page h6 {
+  color: #a2c3f7;
+  margin-top: 0.8em;
+  font-weight: 300;
+}
 section.module .heroimg img {
   -webkit-border-radius: 8px;
   border-radius: 8px;
@@ -3097,6 +3137,29 @@ section.module .heroimg img {
 section.module.bg {
   background-color: #f7f9fb;
 }
+section.step {
+  position: relative;
+  padding: 3em 0;
+}
+section.step h5 {
+  margin-bottom: 1em;
+}
+section.step h5 span {
+  position: absolute;
+  left: -1.4em;
+  top: -3px;
+  width: 1.8rem;
+  height: 1.8rem;
+  line-height: 1.8rem;
+  text-align: center;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background-color: #4184f2;
+  color: #fff;
+}
+section.step p {
+  color: #75848f;
+}
 header.nav {
   background-color: #0e1320;
   padding: 2.2em 3em;
@@ -3104,8 +3167,6 @@ header.nav {
 header.nav .logo {
   display: inline-block;
   vertical-align: top;
-  position: relative;
-  top: -5px;
 }
 header.nav .logo img {
   height: 24px;
@@ -3873,7 +3934,7 @@ body.auto {
 }
 #keys .key span {
   position: relative;
-  top: 0.62em;
+  top: 0.72em;
   float: right;
 }
 #keys .key span i {
@@ -3882,10 +3943,10 @@ body.auto {
 #keys .key small {
   display: block;
   color: #75848f;
-  margin-top: 0.4em;
+  margin-top: 0.6em;
 }
 #keys .key + .key {
-  margin-top: 0.8em;
+  margin-top: 1em;
 }
 #key_info {
   padding: 1.4rem 0;
@@ -4030,6 +4091,12 @@ body.auto {
 #create {
   padding: 2em 0;
 }
+#create .info p {
+  color: #75848f;
+}
+#create .info p + p {
+  margin-top: 0.4em;
+}
 #account {
   padding: 2rem 0;
 }
@@ -4047,6 +4114,7 @@ body.auto {
   display: block;
   margin-top: 1.4em;
   color: #454e55;
+  text-align: center;
 }
 #account .profile_image a:hover {
   color: #373e44;
