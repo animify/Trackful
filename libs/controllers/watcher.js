@@ -7,7 +7,8 @@ const async = require('async')
 const geoip = require('geoip-lite')
 const countries = require('country-data').countries
 
-exports.incrementClickTrack = function(req, res, key, track, callback) {
+
+exports.incrementClickTrack = (req, res, key, track, callback) => {
 	r.db(config.get("rethink").trackDB).table('trackers').filter({key: key, domain:req.headers.host, status: "active"}).update(
 		{clicks: {[track] : r.row('clicks')(track).default(0).add(1)} },
 		{returnChanges: true}
@@ -19,43 +20,33 @@ exports.incrementClickTrack = function(req, res, key, track, callback) {
 	})
 }
 
-exports.incrementHitTrack = function(req, res, key, href, callback) {
+exports.incrementHitTrack = (req, res, key, href, callback) => {
 	const preUrl = url.parse(href)
 	const page = preUrl.pathname + (preUrl.search != null ? preUrl.search : '') + (preUrl.hash != null ? preUrl.hash : '')
-	const geo = geoip.lookup("5.189.140.246")
-	const country = countries[geo.country].name
-	console.log(country);
+	const device = req.device.type + '/' + req.device.name
+	const geo = geoip.lookup(req.ip)
+	geo == null ? country = "Other" : country = countries[geo.country].name
 
-	async.parallel({
-		page: (callback) => {
-			r.db(config.get("rethink").trackDB).table('trackers').filter({key: key, domain: req.headers.host, status: "active"}).update(
-				{hits: {[page] : r.row('hits')(page).default(0).add(1)} },
-				{returnChanges: true}
-			).run(function(err, cursor) {
-				if (cursor.changes) {
-					return callback(null, [page, cursor.changes[0].new_val.hits[page]])
-				}
-				callback(true, null)
-			})
-		},
-		countries: (callback) => {
-			r.db(config.get("rethink").trackDB).table('trackers').filter({key: key, domain: req.headers.host, status: "active"}).update(
-			{countries: {[country] : r.row('countries')(country).default(0).add(1)} },
-			{returnChanges: true}
-			).run(function(err, cursor) {
-				if (cursor.changes) {
-					return callback(null, cursor.changes[0].new_val.countries)
-				}
-				callback(true, null)
-			})
+	r.db(config.get("rethink").trackDB).table('trackers').filter({key: key, domain: req.headers.host, status: "active"}).update({
+		hits: {[page] : r.row('hits')(page).default(0).add(1)},
+		countries: {[country] : r.row('countries')(country).default(0).add(1)},
+		devices: {[device] : r.row('devices')(device).default(0).add(1)}
+	},
+		{returnChanges: true}
+	).run(function(err, cursor) {
+		if (cursor.changes) {
+			let cr = {}
+			cr.page = [page, cursor.changes[0].new_val.hits[page]]
+			cr.countries = [country, cursor.changes[0].new_val.countries[country]]
+			cr.devices = [device, cursor.changes[0].new_val.devices[device]]
+			return callback(null, cr)
 		}
-	}, (err, arr) => {
-		if (err) return callback(true, null)
-		callback(null, arr)
+		callback(true, null)
 	})
+
 }
 
-exports.deleteTracker = function(req, res, key, callback) {
+exports.deleteTracker = (req, res, key, callback) => {
 	r.db('users').table('users').update((row) => {
 		return {
 			'keys': row('keys')

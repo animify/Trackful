@@ -32,7 +32,7 @@ exports.createKey = (req, res, callback) => {
 		).run((err, cursor) => {
 			r.db('data').table('sloth').insert({id: shortKey, type:'data', hits: [{[epoch]: 0}], clicks: [{[epoch]: 0}]}).run()
 			r.db(config.get("rethink").trackDB).table('trackers')
-			.insert({key:shortKey, clicks:{}, hits:{}, countries: {}, domain: preUrl.host, status: "active"})
+			.insert({key:shortKey, clicks:{}, hits:{}, countries: {}, devices: {}, domain: preUrl.host, status: "active"})
 			.run((err, rr) => {
 				callback(null, shortKey)
 			})
@@ -54,52 +54,7 @@ exports.getAllKeys = (req, res, callback) => {
 exports.getKeyInfo = (req, res, key, callback) => {
 	r.table('users').get(req.user.id)('keys').filter({id: key})
 	.run((err, keyData) => {
-		callback(null, keyData);
-	})
-}
-
-exports.getClickTrackers = (req, res, key, callback) => {
-	r.db(config.get("rethink").trackDB).table('trackers').filter({key:key})
-	.run((err, rest) => {
-		hasTrackers = false
-		if (rest[0]) {
-			let trackerArray = Object.keys(rest[0].clicks).map(k => rest[0].clicks[k])
-			if (trackerArray.length > 0)
-				hasTrackers = true
-
-			return callback(null, rest[0].clicks, hasTrackers)
-		}
-		callback(null, true)
-	})
-}
-
-exports.getCountryTrackers = (req, res, key, callback) => {
-	r.db(config.get("rethink").trackDB).table('trackers').filter({key:key})
-	.run((err, rest) => {
-		hasTrackers = false
-		if (rest[0]) {
-			let trackerArray = Object.keys(rest[0].clicks).map(k => rest[0].clicks[k])
-			if (trackerArray.length > 0)
-				hasTrackers = true
-
-			return callback(null, rest[0].clicks, hasTrackers)
-		}
-		callback(null, true)
-	})
-}
-
-exports.getHitTrackers = (req, res, key, callback) => {
-	r.db(config.get("rethink").trackDB).table('trackers').filter({key:key})
-	.run((err, rest) => {
-		hasTrackers = false
-		if (rest[0]) {
-			let trackerArray = Object.keys(rest[0].hits).map(k => rest[0].hits[k])
-			if (trackerArray.length > 0)
-				hasTrackers = true
-
-			return callback(null, rest[0].hits, hasTrackers)
-		}
-		callback(null, true)
+		callback(null, keyData)
 	})
 }
 
@@ -108,11 +63,10 @@ exports.getTrackers = (req, res, key, callback) => {
 	.run((err, rest) => {
 		hasTrackers = false
 		if (rest[0]) {
-			console.log(rest[0].clicks.length);
-			if (rest[0].clicks.length > 0 || rest[0].hits.length > 0 || rest[0].countries.length > 0)
+			if (Object.keys(rest[0].clicks).length > 0 || Object.keys(rest[0].hits).length > 0 || Object.keys(rest[0].countries).length > 0 || Object.keys(rest[0].devices).length > 0)
 				hasTrackers = true
 
-			return callback(null, rest[0].clicks, rest[0].hits, rest[0].countries, hasTrackers)
+			return callback(null, rest[0].clicks, rest[0].hits, rest[0].countries, rest[0].devices, hasTrackers)
 		}
 		callback(null, true)
 	})

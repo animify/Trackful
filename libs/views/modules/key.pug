@@ -32,17 +32,19 @@ block content
 								.increase #[b.prc]% #[i.ion-arrow-up-b]
 								small.updated
 						#chart_c.sparkline
+
 					ul#clicks
-						li.header #[h5 Click trackers]
+						li.header #[h5 Clicks]
 							div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
 							each val, index in clicktrackers
 								li(data-click=index) #{index}
 									span #{val}
-					ul#clicks
-						li.header #[h5 Countries]
+
+					ul#countries
+						li.header #[h5 Countries #[span &nbsp;/ page hit]]
 							div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
-							each val, index in clicktrackers
-								li(data-click=index) #{index}
+							each val, index in countrytrackers
+								li(data-country=index) #{index}
 									span #{val}
 
 				.xs-12.m-6(class=hasTrackers ? "" : "hidden")
@@ -56,10 +58,17 @@ block content
 								small.updated
 						#chart_h.sparkline
 					ul#hits
-						li.header #[h5 Hit trackers]
+						li.header #[h5 Page hits]
 							div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
-							each val, index in countrytrackers
+							each val, index in hittrackers
 								li(data-hit=index) #{index}
+									span #{val}
+
+					ul#devices
+						li.header #[h5 Devices #[span &nbsp;/ page hit]]
+							div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
+							each val, index in devicetrackers
+								li(data-device=index) #{index}
 									span #{val}
 				#empty.xs-12(class=hasTrackers ? "hidden" : "")
 					.empty

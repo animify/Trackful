@@ -1390,7 +1390,7 @@ strong {
   position: fixed;
 }
 .hidden {
-  display: none;
+  display: none !important;
 }
 .invisible {
   visibility: hidden;
@@ -3972,6 +3972,9 @@ body.auto {
 #trackers .graph_hits {
   background-color: #9f89fc;
 }
+#trackers ul + ul {
+  margin-top: 2em;
+}
 #trackers ul li {
   border: 1px solid #e4e5e6;
   border-top: 0;
@@ -3983,6 +3986,9 @@ body.auto {
   display: inline-block;
   vertical-align: top;
   color: #454e55;
+}
+#trackers ul li.header h5 span {
+  color: #a5afb6;
 }
 #trackers ul li.header .search {
   float: right;

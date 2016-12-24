@@ -213,13 +213,13 @@ $(() => {
 			}
 
 		})
-		.on('updated', function(r) {
+		.on('updated', (r) => {
 			updateCharts(r)
 		})
-		.on('connect', function() {
+		.on('connect', () => {
 			$('.signal span').addClass('connected')
 		})
-		.on('disconnect', function() {
+		.on('disconnect', () => {
 			$('.signal span').removeClass('connected')
 		})
 
@@ -252,17 +252,27 @@ $(() => {
 		}
 
 		updateHitTrackers = (trackers) => {
-			const trackerName = trackers.page[0]
-			const trackerCount = trackers.page[1]
+			const pageName = trackers.page[0]
+			const pageCount = trackers.page[1]
 
-			$(`[data-hit="${trackerName}"]`).length ? $(`[data-hit="${trackerName}"]`).html(`${trackerName} <span>${trackerCount}</span>`).addClass('flash').delay(1000).removeClass('flash') : $('#hits').append(`<li data-hit="${trackerName}">${trackerName} <span>${trackerCount}</span></li>`)
+			const countryName = trackers.countries[0]
+			const countryCount = trackers.countries[1]
+
+			const deviceName = trackers.devices[0]
+			const deviceCount = trackers.devices[1]
+
+			$(`[data-hit="${pageName}"]`).length ? $(`[data-hit="${pageName}"]`).html(`${pageName} <span>${pageCount}</span>`) : $('#hits').append(`<li data-hit="${pageName}">${pageName} <span>${pageCount}</span></li>`)
+
+			$(`[data-country="${countryName}"]`).length ? $(`[data-country="${countryName}"]`).html(`${countryName} <span>${countryCount}</span>`) : $('#countries').append(`<li data-country="${countryName}">${countryName} <span>${countryCount}</span></li>`)
+
+			$(`[data-device="${deviceName}"]`).length ? $(`[data-device="${deviceName}"]`).html(`${deviceName} <span>${deviceCount}</span>`) : $('#countries').append(`<li data-device="${deviceName}">${deviceName} <span>${deviceCount}</span></li>`)
 
 			opt.hitTotal = parseInt(opt.hitTotal + 1)
 			$('.graph_hits h2').text(opt.hitTotal)
 
 			updateIncreases(true, false)
 
-			$(`[data-hit="${trackerName}"]`).addClass("flash").delay(1000).queue(function(){
+			$(`[data-hit="${pageName}"], [data-country="${countryName}"], [data-device="${deviceName}"]`).addClass("flash").delay(1000).queue(function(){
 				$(this).removeClass("flash").dequeue()
 			})
 		}

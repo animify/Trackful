@@ -14,8 +14,9 @@ const bodyParser = require('body-parser')
 const request = require('request').defaults({ encoding: null })
 const session = require('express-session')
 const RDBStore = require('session-rethinkdb')(session)
-const root = require(libs + 'routes/root')
+const device = require('express-device')
 
+const root = require(libs + 'routes/root')
 const cron = require(libs + 'cron/cron')
 
 const r = require(libs + 'db/db')
@@ -45,6 +46,7 @@ app.use(cookieParser())
 	.use(express.static("libs/public"))
 	.use(bodyParser())
 	.use(bodyParser.json())
+	.use(device.capture({ parseUserAgent : true }))
 
 app.set('port', process.env.PORT || config.get('port') || 80)
 	.set('views', __dirname + '/libs/views/modules')
