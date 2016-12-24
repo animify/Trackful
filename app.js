@@ -28,6 +28,8 @@ const rdbStore = new RDBStore(r, {
 	table: 'session'
 })
 
+app.enable('trust proxy')
+
 app.use(cookieParser())
 	.use(session({
 		secret: 'keyboard cat',

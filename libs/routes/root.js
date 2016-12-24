@@ -46,16 +46,10 @@ router.get('/key/:key', auth.presets, (req, res) => {
 	actions.validateKeyOwner(req, res, req.params.key, (err, owner) => {
 		if (!err && owner) {
 			async.parallel({
-				clicks: (callback) => {
-					actions.getClickTrackers(req, res, req.params.key, (err, clickTrackers, hasClickTrackers) => {
+				trackers: (callback) => {
+					actions.getTrackers(req, res, req.params.key, (err, clicksTrackers, hitsTrackers, countriesTrackers, hasClickTrackers) => {
 						if (!err)
-							callback(null, clickTrackers, hasClickTrackers)
-					})
-				},
-				hits: (callback) => {
-					actions.getHitTrackers(req, res, req.params.key, (err, hitTrackers, hasHitTrackers) => {
-						if (!err)
-							callback(null, hitTrackers, hasHitTrackers)
+							callback(null, clicksTrackers, hitsTrackers, countriesTrackers, hasClickTrackers)
 					})
 				},
 				key: (callback) => {
@@ -66,14 +60,47 @@ router.get('/key/:key', auth.presets, (req, res) => {
 				}
 			}, (err, arr) => {
 				trackR = io.of(`/track_${req.params.key}`)
-				res.render('key', {user: req.user, hasClickTrackers: arr.clicks[1], clicktrackers: arr.clicks[0], hasHitTrackers: arr.hits[1], hittrackers: arr.hits[0] ,trackKey: req.params.key, key: arr.key[0]})
+				console.log(arr.trackers);
+				res.render('key', {user: req.user, clicktrackers: arr.trackers[0], hittrackers: arr.trackers[1], countrytrackers: arr.trackers[2], hasTrackers: arr.trackers[3], trackKey: req.params.key, key: arr.key[0]})
 			})
+
 		} else {
 			res.redirect('/account')
 		}
 	})
-
 })
+// router.get('/key/:key', auth.presets, (req, res) => {
+// 	actions.validateKeyOwner(req, res, req.params.key, (err, owner) => {
+// 		if (!err && owner) {
+			// async.parallel({
+				// clicks: (callback) => {
+// 					actions.getClickTrackers(req, res, req.params.key, (err, clickTrackers, hasClickTrackers) => {
+// 						if (!err)
+// 							callback(null, clickTrackers, hasClickTrackers)
+// 					})
+// 				},
+// 				hits: (callback) => {
+// 					actions.getHitTrackers(req, res, req.params.key, (err, hitTrackers, hasHitTrackers) => {
+// 						if (!err)
+// 							callback(null, hitTrackers, hasHitTrackers)
+// 					})
+// 				},
+// 				key: (callback) => {
+// 					actions.getKeyInfo(req, res, req.params.key, (err, ud) => {
+// 						if (!err)
+// 							callback(null, ud)
+// 					})
+// 				}
+// 			}, (err, arr) => {
+// 				trackR = io.of(`/track_${req.params.key}`)
+// 				res.render('key', {user: req.user, hasClickTrackers: arr.clicks[1], clicktrackers: arr.clicks[0], hasHitTrackers: arr.hits[1], hittrackers: arr.hits[0] ,trackKey: req.params.key, key: arr.key[0]})
+// 			})
+// 		} else {
+// 			res.redirect('/account')
+// 		}
+// 	})
+//
+// })
 
 router.get('/root', (req, res) => {
 	res.render('test')

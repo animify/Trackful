@@ -32,7 +32,7 @@ exports.createKey = (req, res, callback) => {
 		).run((err, cursor) => {
 			r.db('data').table('sloth').insert({id: shortKey, type:'data', hits: [{[epoch]: 0}], clicks: [{[epoch]: 0}]}).run()
 			r.db(config.get("rethink").trackDB).table('trackers')
-			.insert({key:shortKey, clicks:{}, hits:{}, domain: preUrl.host, status: "active"})
+			.insert({key:shortKey, clicks:{}, hits:{}, countries: {}, domain: preUrl.host, status: "active"})
 			.run((err, rr) => {
 				callback(null, shortKey)
 			})
@@ -73,6 +73,21 @@ exports.getClickTrackers = (req, res, key, callback) => {
 	})
 }
 
+exports.getCountryTrackers = (req, res, key, callback) => {
+	r.db(config.get("rethink").trackDB).table('trackers').filter({key:key})
+	.run((err, rest) => {
+		hasTrackers = false
+		if (rest[0]) {
+			let trackerArray = Object.keys(rest[0].clicks).map(k => rest[0].clicks[k])
+			if (trackerArray.length > 0)
+				hasTrackers = true
+
+			return callback(null, rest[0].clicks, hasTrackers)
+		}
+		callback(null, true)
+	})
+}
+
 exports.getHitTrackers = (req, res, key, callback) => {
 	r.db(config.get("rethink").trackDB).table('trackers').filter({key:key})
 	.run((err, rest) => {
@@ -83,6 +98,21 @@ exports.getHitTrackers = (req, res, key, callback) => {
 				hasTrackers = true
 
 			return callback(null, rest[0].hits, hasTrackers)
+		}
+		callback(null, true)
+	})
+}
+
+exports.getTrackers = (req, res, key, callback) => {
+	r.db(config.get("rethink").trackDB).table('trackers').filter({key:key})
+	.run((err, rest) => {
+		hasTrackers = false
+		if (rest[0]) {
+			console.log(rest[0].clicks.length);
+			if (rest[0].clicks.length > 0 || rest[0].hits.length > 0 || rest[0].countries.length > 0)
+				hasTrackers = true
+
+			return callback(null, rest[0].clicks, rest[0].hits, rest[0].countries, hasTrackers)
 		}
 		callback(null, true)
 	})

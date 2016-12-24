@@ -5,10 +5,10 @@ block content
 	- var sub = "Overview"
 	- var clickstotal = 0
 	- var hitstotal = 0
-	if hasClickTrackers
+	if hasTrackers
 		each val, index in clicktrackers
 			-clickstotal = clickstotal + val
-	if hasHitTrackers
+	if hasTrackers
 		each val, index in hittrackers
 			-hitstotal = hitstotal + val
 	.contain
@@ -22,7 +22,7 @@ block content
 
 		section#trackers
 			.grid-row
-				.xs-12.m-6(class=hasClickTrackers || hasHitTrackers ? "" : "hidden")
+				.xs-12.m-6(class=hasTrackers ? "" : "hidden")
 					.graph.graph_clicks
 						.stats
 							.sum
@@ -38,8 +38,14 @@ block content
 							each val, index in clicktrackers
 								li(data-click=index) #{index}
 									span #{val}
+					ul#clicks
+						li.header #[h5 Countries]
+							div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
+							each val, index in clicktrackers
+								li(data-click=index) #{index}
+									span #{val}
 
-				.xs-12.m-6(class=hasClickTrackers || hasHitTrackers ? "" : "hidden")
+				.xs-12.m-6(class=hasTrackers ? "" : "hidden")
 					.graph.graph_hits
 						.stats
 							.sum
@@ -52,10 +58,10 @@ block content
 					ul#hits
 						li.header #[h5 Hit trackers]
 							div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
-							each val, index in hittrackers
+							each val, index in countrytrackers
 								li(data-hit=index) #{index}
 									span #{val}
-				#empty.xs-12(class=hasClickTrackers || hasHitTrackers ? "hidden" : "")
+				#empty.xs-12(class=hasTrackers ? "hidden" : "")
 					.empty
 						h4 There isn't enough data here to show just yet.
 		include ../static/modal.pug

@@ -4064,12 +4064,21 @@ footer.footer ul li {
   vertical-align: top;
 }
 footer.footer ul li + li {
-  margin-left: 1.6em;
+  margin-left: 2em;
+}
+footer.footer ul li p {
+  color: #75848f;
+}
+footer.footer ul li p a {
+  color: #373e44;
 }
 footer.footer ul li a {
   color: #75848f;
 }
 footer.footer ul li a span {
+  color: #373e44;
+}
+footer.footer ul li a:hover {
   color: #373e44;
 }
 .signal span {

@@ -198,6 +198,7 @@ $(() => {
 					updateClickTrackers(r.change)
 					break
 				case "hit":
+					console.log(r.change);
 					updateHitTrackers(r.change)
 					break
 			}
@@ -251,8 +252,8 @@ $(() => {
 		}
 
 		updateHitTrackers = (trackers) => {
-			const trackerName = trackers[0]
-			const trackerCount = trackers[1]
+			const trackerName = trackers.page[0]
+			const trackerCount = trackers.page[1]
 
 			$(`[data-hit="${trackerName}"]`).length ? $(`[data-hit="${trackerName}"]`).html(`${trackerName} <span>${trackerCount}</span>`).addClass('flash').delay(1000).removeClass('flash') : $('#hits').append(`<li data-hit="${trackerName}">${trackerName} <span>${trackerCount}</span></li>`)
 
