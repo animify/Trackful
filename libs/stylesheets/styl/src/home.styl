@@ -1,7 +1,36 @@
 section.module
 	padding 6em 0
 	position relative
-	h4
+	.low
+		height 2em
+		margin-top -1.2em
+	&.o_h
+		overflow hidden
+	#trackers
+		padding 0 !important
+		box-shadow 0 8px 16px rgba(0, 0, 0, .08), 0 2px 6px rgba(0, 0, 0, .04)
+		#devices
+			background-color #fff
+	.grid-row:not(.types)
+		margin 0 -3em
+		& > *
+			padding 0 3em
+			vertical-align middle
+	.types
+		margin-top 6em
+		i
+			width 1.8rem
+			height 1.8rem
+			line-height 1.9rem
+			text-align center
+			border-radius 50%
+			color #fff
+			font-size 1rem
+			display inline-block
+			margin-right .4rem
+		p
+			font-size 1rem
+	h4, .types h5
 		color body-dark
 		line-height 1.9em
 		i
@@ -14,10 +43,11 @@ section.module
 		color lighten(body-color, 35%)
 		line-height 1.8em
 		font-size 1.2em
+		font-weight 300
 		& + h4
 			margin-top 1.6em
 	&.hasimg
-		padding 6em 0 4em 0
+		padding 6em 0
 	&.hero
 		padding 7.4em 0 12em 0
 		text-align center
@@ -29,7 +59,6 @@ section.module
 		h6
 			color body-light
 			line-height 1.7em
-			font-weight 400
 		.button-group
 			margin-top 2.5em
 			small
@@ -51,35 +80,57 @@ section.module
 			color #fff
 		h6
 			color color-primary-text
-			margin-top .8em
-			font-weight 300
+			margin-top 1em
 	.heroimg
+		height 2em
+		text-align center
 		img
 			border-radius 8px
-			box-shadow: 0 8px 16px rgba(0, 0, 0, .08), 0 2px 6px rgba(0, 0, 0, .04)
-			width 90%
-			relative top -1em
-			float right
+			box-shadow 0 8px 16px rgba(0, 0, 0, .08), 0 2px 6px rgba(0, 0, 0, .04)
+			relative top -8.4em
+			max-width 90%
+			pointer-events none
+			& + img
+				top -11em
+				max-width 100%
 	&.bg
 		background-color light-color-smoke
 
 section.step
 	position relative
-	padding 3em 0
+	padding 4em 0
+	&.final
+		text-align center
+		margin-top 2em
+		background-color light-color-smoke
+		padding 6em 0
+		i
+			font-size 2.8em
+			display block
+			margin-bottom 1.4rem
 	h5
-		margin-bottom 1em
+		margin-bottom 1.1em
 		span
-			absolute left -1.4em top -3px
-			width 1.8rem
-			height 1.8rem
-			line-height 1.8rem
+			width 1.9rem
+			height 1.9rem
+			line-height 1.9rem
 			text-align center
 			border-radius 50%
 			background-color color-primary
 			color #fff
+			font-size 1rem
+			display inline-block
+			margin-right .4rem
 	p
 		color body-light
-
+	.gs_key
+		text-align center
+		margin-top 2em
+		img
+			max-width 100%
+			height auto
+			width 63%
+			min-width 30em
 header.nav
 	background-color #0e1320
 	padding 2.2em 3em

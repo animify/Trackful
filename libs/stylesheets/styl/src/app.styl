@@ -57,7 +57,6 @@ body
 	.highcharts-label.highcharts-no-data
 		top 27px !important
 		span
-			font-weight 300
 			opacity .7
 			font-size 1.2em
 
@@ -67,11 +66,11 @@ body
 	.key
 		display block
 		span(1/1)
-		padding 1.2em 1.8em
-		border 1px solid border-gray
-		border-radius border-radius-normal
+		padding 1.6em 1.8em
+		border-top 1px solid border-gray
 		&:hover
-			border-color primary-color
+			h6
+				color primary-color
 		h6
 			display block
 			color body-dark
@@ -87,8 +86,6 @@ body
 			display block
 			color body-light
 			margin-top .6em
-		& + .key
-			margin-top 1em
 
 #key_info
 	padding 1.4rem 0
@@ -191,6 +188,9 @@ body
 			&:first-of-type
 				border-top 1px solid border-gray
 				border-radius border-radius-normal border-radius-normal 0 0
+
+.highcharts-tooltip-box
+	fill rgba(0,0,0,.74)
 
 #create
 	padding 2em 0

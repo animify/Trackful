@@ -1,0 +1,22 @@
+.modal.log_sign
+	a.close(data-modal)
+		i.ion-ios-close-empty
+	.overlay
+		.box#up
+			.box-body
+				h5 Create an account
+				p Creating a Watch account is simple. Just sign in with your Twitter or Github account and your details will be pulled straight through.
+			.box-footer
+				.buttons
+					a.button.primary.block(href="/auth/login/twitter") #[i.ion-social-twitter] Sign up with Twitter
+					a.button.white.block(href="/auth/login/github") #[i.ion-social-github] Sign up with Github
+					p Already have an account? #[a Sign in]
+		.box#in
+			.box-body
+				h5 Welcome back!
+				p Sign into your account below:
+			.box-footer
+				.buttons
+					a.button.primary.block(href="/auth/login/twitter") #[i.ion-social-twitter] Sign in with Twitter
+					a.button.white.block(href="/auth/login/github") #[i.ion-social-github] Sign in with Github
+					p Don't have an account? #[a Sign up]

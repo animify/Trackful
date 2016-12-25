@@ -6,20 +6,50 @@ block content
 	section.module.hero
 		.contain
 			h2 Web analytics and UI tracking done simple
-			h6 Track page hits and each element click on every page you have tracking activated on. All data is sent in real time and is visualied every hour. See your progress escalate, it only takes a few seconds to set up a new application.
+			h6 Analyse and improve the structure of your web platform by tracking how customers use it. It only takes a few seconds to sign up, create an application and get tracking, plus it's absolutely free.
 			.button-group
 				a.button.primary.large(data-modal="up") Get started, it's free
 				small v1.0.1 / 2016-12-24
-	section.module.hasimg
+	section.module.bg.o_h
 		.contain
 			.grid-row
 				.xs-12.m-6
-					h4 #[i.ion-ios-analytics.text-yellow] Track things that matter
-					p Initialise the tracker on pages you want to track or just have it in the footer of your single page application. Attach data bindings to all elements you want to track clicks on. Integrate as many Watch applications as you need to need if you want to split up your data.
-					h4 #[i.ion-ios-stopwatch-outline.text-red] Performance obsessed
-					p You only notice speed when it isn't there. Good, because the only thing you'll notice are your stats going up in real time. With a robust, high performance database such as RethinkDB, ensure all tracking data transmitted by your users are recieved and stored safely on our servers.
+					h4 Extensive analytics for your platform
+					p Sort your users into groups by device or country and visualise their actions on your website. Watch offers realtime tracking for any website and with it being dead easy to set up, making it an ideal analytics tool for beginner to expert developers.
+				.xs-12.m-6.low
+					#trackers
+						ul#devices
+							li.header #[h5 Devices #[span &nbsp;/ page hit]]
+								div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
+									li desktop/Other #[span 234]
+									li phone/iPhone #[span 181]
+									li phone/iPod #[span 48]
+									li tablet/iPad #[span 143]
+				.grid-row.types
+					.xs-12.s-6.m-3
+						h5 #[i.ion-android-hand.yellow] Element clicks
+						p Keep track of what your users are clicking. Edit your HTML to choose what to track.
+					.xs-12.s-6.m-3
+						h5 #[i.ion-ios-pulse-strong.purple] Page hits
+						p Simply initiate Watch.js on each page you want and it'll be added to the watchlist.
+					.xs-12.s-6.m-3
+						h5 #[i.ion-android-globe.blue] Top countries
+						p Group your users by country to see where most visitors originate from.
+					.xs-12.s-6.m-3
+						h5 #[i.ion-android-phone-landscape.teal] Device type
+						p Are your visitors viewing your site from a desktop, tablet, phone or even a car? Track it!
+
+	section.module.hasimg
+		.contain
+			.grid-row
 				.xs-12.m-6.heroimg
-					img(src="/images/hero_clicks.png")
+					img(src="/images/chart-tc.png")
+					img(src="/images/chart-ph.png")
+				.xs-12.m-6
+					h4 Performance obsessed
+					p You only notice speed when it isn't there. Good, because the only thing you'll notice are your stats going up in real time. With a robust, high performance database such as RethinkDB, ensure all tracking data transmitted by your users are picked up and stored securely on our servers.
+
+
 	section.module.bg
 		.contain
 			.grid-row
@@ -30,28 +60,7 @@ block content
 					h4 #[a Need support? #[i.ion-ios-arrow-forward]]
 					p Take a look and get coding! Our documentation covers all you need to know to get an app up and running in minutes.
 
-	.modal.log_sign
-		a.close(data-modal)
-			i.ion-ios-close-empty
-		.overlay
-			.box#up
-				.box-body
-					h5 Create an account
-					p Creating a Watch account is simple. Just sign in with your Twitter or Github account and your details will be pulled straight through.
-				.box-footer
-					.buttons
-						a.button.primary.block(href="/auth/login/twitter") #[i.ion-social-twitter] Sign up with Twitter
-						a.button.white.block(href="/auth/login/github") #[i.ion-social-github] Sign up with Github
-						p Already have an account? #[a Sign in]
-			.box#in
-				.box-body
-					h5 Welcome back!
-					p Sign into your account below:
-				.box-footer
-					.buttons
-						a.button.primary.block(href="/auth/login/twitter") #[i.ion-social-twitter] Sign in with Twitter
-						a.button.white.block(href="/auth/login/github") #[i.ion-social-github] Sign in with Github
-						p Don't have an account? #[a Sign up]
+	include ../static/authmodal.pug
 
 	script(src='/js/app.js')
 	script.

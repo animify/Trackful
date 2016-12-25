@@ -21,7 +21,7 @@ $(() => {
 				chart: {
 					type: 'areaspline',
 					backgroundColor: null,
-					style: {"fontFamily":"\"myriad-pro\", sans-serif","fontSize":"12px"},
+					style: {"fontFamily":"\"canada-type-gibson\", sans-serif","fontSize":"12px"},
 					margin: [0,0,0,0],
 					spacingLeft: 0
 				},
@@ -58,7 +58,17 @@ $(() => {
 					TickLength: 0
 				},
 				tooltip: {
-					enabled: true
+					shared: true,
+					useHTML: true,
+					borderWidth: 0,
+					borderRadius: 4,
+					padding: 11,
+					shadow: false,
+					headerFormat: '<div style="color: {series.color}">{point.x} </div>',
+					pointFormat: '<div>{series.name}: <b>{point.y}</b></div>',
+					style: {
+						color: "#fff"
+					}
 				},
 				plotOptions: {
 					areaspline: {
@@ -265,7 +275,7 @@ $(() => {
 
 			$(`[data-country="${countryName}"]`).length ? $(`[data-country="${countryName}"]`).html(`${countryName} <span>${countryCount}</span>`) : $('#countries').append(`<li data-country="${countryName}">${countryName} <span>${countryCount}</span></li>`)
 
-			$(`[data-device="${deviceName}"]`).length ? $(`[data-device="${deviceName}"]`).html(`${deviceName} <span>${deviceCount}</span>`) : $('#countries').append(`<li data-device="${deviceName}">${deviceName} <span>${deviceCount}</span></li>`)
+			$(`[data-device="${deviceName}"]`).length ? $(`[data-device="${deviceName}"]`).html(`${deviceName} <span>${deviceCount}</span>`) : $('#devices').append(`<li data-device="${deviceName}">${deviceName} <span>${deviceCount}</span></li>`)
 
 			opt.hitTotal = parseInt(opt.hitTotal + 1)
 			$('.graph_hits h2').text(opt.hitTotal)
