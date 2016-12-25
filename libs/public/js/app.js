@@ -65,7 +65,7 @@ $(() => {
 					padding: 11,
 					shadow: false,
 					headerFormat: '<div style="color: {series.color}">{point.x} </div>',
-					pointFormat: '<div>{series.name}: <b>{point.y}</b></div>',
+					pointFormat: '<h6><b>{point.y}</b></h6>',
 					style: {
 						color: "#fff"
 					}
@@ -107,7 +107,7 @@ $(() => {
 					for (val in res) {
 						l = Object.keys(res[val])[0]
 						let m = moment(Object.keys(res[val])[0] * 1000)
-						let s = m.format("M/D/YYYY H:mm")
+						let s = m.format("MMMM Do, H:mm")
 						hitCat.push(s)
 						hitValues.push(Object.values(res[val])[0])
 					}
@@ -138,7 +138,7 @@ $(() => {
 					for (val in res) {
 						l = Object.keys(res[val])[0]
 						let m = moment(l * 1000)
-						let s = m.format("M/D/YYYY H:mm")
+						let s = m.format("MMMM Do, H:mm")
 						clickCat.push(s)
 						clickValues.push(Object.values(res[val])[0])
 					}
@@ -167,7 +167,7 @@ $(() => {
 
 		updateCharts = (r) => {
 			if (opt.clickChart || opt.hitChart) {
-				epoch = moment(r.xAxis * 1000).format("M/D/YYYY H:mm")
+				epoch = moment(r.xAxis * 1000).format("MMMM Do, H:mm")
 				opt.clickChart.destroy()
 
 				if (opt.clickOptions.series[0].data.length > 19) {

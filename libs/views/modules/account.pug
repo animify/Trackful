@@ -16,7 +16,7 @@ block content
 						input(type="text", value=user.id, disabled)
 					.input
 						label Login name
-						small You username you are referred to
+						small The username you sign in with
 						input(type="text", value=user.login, disabled)
 					.input
 						label Full name
@@ -36,9 +36,9 @@ block content
 					img(src=user.avatarUrl)
 					a(data-modal="image") Change profile picture
 			.modal
-				a.close(data-modal)
-					i.ion-ios-close-empty
 				.overlay
+					a.close(data-modal)
+						i.ion-ios-close-empty
 					.box#image
 						.box-body
 							h5 Update your profile picture

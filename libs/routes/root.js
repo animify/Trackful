@@ -23,6 +23,10 @@ router.get('/getting-started', (req, res) => {
 	res.render('getstarted')
 })
 
+router.get('/docs', (req, res) => {
+	res.render('docs')
+})
+
 router.get('/account', auth.presets, (req, res) => {
 	res.render('account', {user: req.user})
 })

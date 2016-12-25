@@ -1,0 +1,62 @@
+extends ../layout
+
+block content
+	-var renderfooter = true
+	-var subpage = true
+	.contain
+		nav.docnav
+			include ../static/docsnav.pug
+		.docs
+			.doc#welcome
+				h4 Watch Documentation
+				p Watch is a simple but powerful web platform analytics tool aimed for beginner to expert developers looking to see how their users use the site and gather more information about the customers.
+				.divider
+			.doc#setup
+				h4 Setup
+				p Follow the below steps to get up and running with WatchJS on the client side.
+
+				h5 Installation
+				pre
+					code &lt;script src=&quot;/path/to/watch.js&quot;&gt;&lt;/script&gt;
+				p Get the #[a latest version] of Watch.js and include it in just before the #[code &lt;/body&gt;] tag of your HTML markup. Include Watch.js on each page you want to track.
+
+				h5 Create your application key
+				p #[a(data-modal="in") Log in] or #[a(data-modal="up") create your account] and head over and create a #[a(href="/create/key") new key]. Insert an appropriate name and the full URL of your website, make sure you include the protocol (e.g http/https) and port if you're using one. When all is validated you'll be redirected to your application overview.
+				br
+				p The key can be found in the web address of the page #[code /key/{your_key}] or in the info bar of the dashboard:
+				.gs_key
+					img(src="/images/get_started-key.png")
+
+				h5 Initialisation
+				pre
+					code window.WATCH_KEY = "r1drzOF4l"
+				p Copy the key from step 2 and declare it as a global variable on the #[code window] object just before Watch.js is called.
+				.divider
+			.doc#creating
+				h4 Creating a key
+				p To create a new application key, simply navigate to #[a(href="/create/key") /create/key]. On this page you are prompted with two fields.
+				h5 Application name
+				p This is the name of the application you are creating. You are advised to name it something unique that you can refer back to and find easily in your keys list within your account.
+				h5 Domain name
+				p This is the domain URL of the website you are going to start tracking. The address you enter here has to be in its full state, including the protocol and port (if a non-default one is used).
+				p To cross validate that a key is being used on its own domain, the hostname of the client URL is checked with the one on the application key. You can try some tests if curious using the #[a(href="https://developer.mozilla.org/en-US/docs/Web/API/URL", rel="noopener noreferrer") URL API].
+				p e.g #[span.text-dark http://localhost:3000] would be valid opposed to #[span.text-dark localhost:3000]
+				.divider
+			.doc#editing
+				h4 Editing a key
+			.doc#deleting
+				h4 deleting
+			.doc#overview
+				h4 overview
+			.doc#analytics
+				h4 analytics
+			.doc#filtering
+				h4 filtering
+			.doc#exporting
+				h4 exporting
+
+	script(src='/js/scrollspy.js')
+	script(src='/js/app.js')
+	script.
+		let opt = {}
+	include ../static/homefooter.pug

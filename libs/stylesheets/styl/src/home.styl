@@ -40,7 +40,7 @@ section.module
 				margin-left .4em
 				relative top 1px
 	p
-		color lighten(body-color, 35%)
+		color body-light
 		line-height 1.8em
 		font-size 1.2em
 		font-weight 300
@@ -131,11 +131,81 @@ section.step
 			height auto
 			width 63%
 			min-width 30em
+
 header.nav
 	background-color #0e1320
-	padding 2.2em 3em
+	padding 1.9em 3em
 	.logo
 		display inline-block
 		vertical-align top
 		img
-			height 24px
+			height 2em
+
+.docnav
+	position fixed
+	width 202px
+	height 100%
+	padding 7em 0
+	overflow visible
+	overflow-y scroll
+	overflow-x visible
+	z-index 1
+
+.docnav::-webkit-scrollbar
+	display none
+	width 0
+
+.docs
+	margin-left 202px
+	padding-left 4em
+	border-left 1px solid border-gray
+	position relative
+	.doc
+		padding-top 1em
+		h4
+			line-height 1.9em
+			color body-dark
+		h5
+			line-height 1.9em
+			margin-top 1.4em
+		p
+			color body-light
+			line-height 1.7em
+			font-size 1.2em
+			font-weight 300
+			& + p
+				margin-top .7em
+		img
+			width 80%
+			max-width 100%
+			margin-top .7em
+
+#doc-menu
+	li
+		&.header
+			font-size 1.1em
+			border 0
+			padding 1.6em 0 .4em 0
+			color body-dark
+		&.item
+			padding .4em 0
+			a
+				font-size 1em
+				color body-light
+				line-height 1em
+				position relative
+				&:hover
+					color primary-color
+		&.active
+			a
+				color primary-color
+				padding-left .6em
+				&:before
+					display block
+					absolute left 0 top 0
+					content ' '
+					width 1px
+					height 100%
+					background-color primary-color
+					opacity 1
+					z-index 1
