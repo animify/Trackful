@@ -160,13 +160,28 @@ header.nav
 	border-left 1px solid border-gray
 	position relative
 	padding 7em 0 7em 4em
-	.resource > i
-		width 2em
-		height 2em
-		line-height 2em
-		color #fff
-		border-radius 50%
-		text-align center
+	.desc
+		p
+			padding-left 4rem
+		h5
+			padding-left 4rem
+			position relative
+			&:before
+				font-family 'Ionicons'
+				font-size 1em
+				absolute left 0 top .44em
+				width 2.3em
+				height 2.3em
+				line-height 2.3em
+				color #fff
+				border-radius 50%
+				text-align center
+				vertical-align top
+				display inline-block
+		&.gt h5:before
+			content '\f279'
+			background-color color-blue
+
 	.doc, .desc
 		padding-top 1em
 		#trackers

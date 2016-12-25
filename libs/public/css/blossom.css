@@ -3098,14 +3098,32 @@ header.nav .logo img {
   position: relative;
   padding: 7em 0 7em 4em;
 }
-.docs .resource > i {
-  width: 2em;
-  height: 2em;
-  line-height: 2em;
+.docs .desc p {
+  padding-left: 4rem;
+}
+.docs .desc h5 {
+  padding-left: 4rem;
+  position: relative;
+}
+.docs .desc h5:before {
+  font-family: 'Ionicons';
+  font-size: 1em;
+  position: absolute;
+  left: 0;
+  top: 0.44em;
+  width: 2.3em;
+  height: 2.3em;
+  line-height: 2.3em;
   color: #fff;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   text-align: center;
+  vertical-align: top;
+  display: inline-block;
+}
+.docs .desc.gt h5:before {
+  content: '\f279';
+  background-color: #1877ff;
 }
 .docs .doc,
 .docs .desc {
