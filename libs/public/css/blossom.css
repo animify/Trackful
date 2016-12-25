@@ -3098,6 +3098,9 @@ header.nav .logo img {
   position: relative;
   padding: 7em 0 7em 4em;
 }
+.docs .resources {
+  margin-top: 3.4em;
+}
 .docs .desc p {
   padding-left: 4rem;
 }
@@ -3123,7 +3126,15 @@ header.nav .logo img {
 }
 .docs .desc.gt h5:before {
   content: '\f279';
-  background-color: #1877ff;
+  background-color: #4692ff;
+}
+.docs .desc.hs h5:before {
+  content: '\f27c';
+  background-color: #ff6d6d;
+}
+.docs .desc.ss h5:before {
+  content: '\f3cd';
+  background-color: #12df6c;
 }
 .docs .doc,
 .docs .desc {
@@ -3175,7 +3186,7 @@ header.nav .logo img {
 }
 #doc-menu li.item p {
   line-height: 1em;
-  color: #ffc82c !important;
+  color: #b3bbc1 !important;
 }
 #doc-menu li.item a {
   font-size: 1em;

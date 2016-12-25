@@ -160,6 +160,8 @@ header.nav
 	border-left 1px solid border-gray
 	position relative
 	padding 7em 0 7em 4em
+	.resources
+		margin-top 3.4em
 	.desc
 		p
 			padding-left 4rem
@@ -180,7 +182,13 @@ header.nav
 				display inline-block
 		&.gt h5:before
 			content '\f279'
-			background-color color-blue
+			background-color lighten(color-blue, 20%)
+		&.hs h5:before
+			content '\f27c'
+			background-color lighten(color-red, 20%)
+		&.ss h5:before
+			content '\f3cd'
+			background-color lighten(color-green, 10%)
 
 	.doc, .desc
 		padding-top 1em
@@ -217,7 +225,7 @@ header.nav
 			padding .4em 0
 			p
 				line-height 1em
-				color color-yellow !important
+				color lighten(body-light, 30%) !important
 			a
 				font-size 1em
 				color body-light
