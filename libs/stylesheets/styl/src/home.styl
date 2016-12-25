@@ -157,22 +157,33 @@ header.nav
 
 .docs
 	margin-left 202px
-	padding-left 4em
 	border-left 1px solid border-gray
 	position relative
-	.doc
+	padding 7em 0 7em 4em
+	.resource > i
+		width 2em
+		height 2em
+		line-height 2em
+		color #fff
+		border-radius 50%
+		text-align center
+	.doc, .desc
 		padding-top 1em
-		h4
+		#trackers
+			padding 1rem 0 0 0
+		& > h4
 			line-height 1.9em
 			color body-dark
-		h5
+		& > h5
 			line-height 1.9em
 			margin-top 1.4em
-		p
+		& > p
 			color body-light
 			line-height 1.7em
 			font-size 1.2em
 			font-weight 300
+			i
+				margin 0 .2em
 			& + p
 				margin-top .7em
 		img
@@ -189,6 +200,9 @@ header.nav
 			color body-dark
 		&.item
 			padding .4em 0
+			p
+				line-height 1em
+				color color-yellow !important
 			a
 				font-size 1em
 				color body-light

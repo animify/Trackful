@@ -9,7 +9,13 @@ block content
 		.docs
 			.doc#welcome
 				h4 Watch Documentation
-				p Watch is a simple but powerful web platform analytics tool aimed for beginner to expert developers looking to see how their users use the site and gather more information about the customers.
+				p Watch is a simple but powerful web platform analytics tool aimed for beginner to expert developers looking to explore how their users use the site and gather more information about the customers.
+				h5 Additional Resources
+					.resource
+						i.ion-flag.primary
+						.desc
+							h4 Getting started
+							p Follow the step the step getting started guide to get up and running, or start with the #[a(href="#setup") setup] guide.
 				.divider
 			.doc#setup
 				h4 Setup
@@ -35,8 +41,10 @@ block content
 			.doc#creating
 				h4 Creating a key
 				p To create a new application key, simply navigate to #[a(href="/create/key") /create/key]. On this page you are prompted with two fields.
+
 				h5 Application name
 				p This is the name of the application you are creating. You are advised to name it something unique that you can refer back to and find easily in your keys list within your account.
+
 				h5 Domain name
 				p This is the domain URL of the website you are going to start tracking. The address you enter here has to be in its full state, including the protocol and port (if a non-default one is used).
 				p To cross validate that a key is being used on its own domain, the hostname of the client URL is checked with the one on the application key. You can try some tests if curious using the #[a(href="https://developer.mozilla.org/en-US/docs/Web/API/URL", rel="noopener noreferrer") URL API].
@@ -44,19 +52,43 @@ block content
 				.divider
 			.doc#editing
 				h4 Editing a key
+				p.text-yellow Editing a key is not yet available, scheduled to be released in #[b 1.0.2].
+				.divider
 			.doc#deleting
-				h4 deleting
+				h4 Deleting a key
+				p To delete a key, visit the application page and find the #[i.ion-ios-trash-outline.text-dark] icon within the information bar. Once you click on it you'll be promted with a confirmation modal. If you are sure you'd like to delete the key, press #[b.text-dark Delete], found in the footer of the modal; otherwise close the modal.
+				p.text-red #[b Warning: ] This will delete all analytics associated with the application key and all statistics pulled from the hourly chart data store.
+				.divider
 			.doc#overview
-				h4 overview
+				h4 Application Overview
+				p Once Watch.js is initialised on a page, any client that connects and visits that page counts towards the total #[span.text-dark page hits]. More data about that specific user is analysed such as the #[span.text-dark device type] and #[span.text-dark country] of origin.
+				p If a user then clicks on any HTML elements that are initialised, those click statistics are also sent to Watch and grouped according to their #[a data-watch] attribute.
+				p All statistics sent to Watch are displayed in realtime as long as the status on your application key dashboard is #[b.text-green connected].
+				.divider
 			.doc#analytics
-				h4 analytics
+				h4 Analytics
+				p On an hourly basis, the sum of clicks and page hits are collected for each key. When the data is successfully collected the charts on the application key dashboard are updated. This will happen in realtime if you're on the page at the time.
+				p On each chart, there is a percentage increase section. This shows the percentage increase in the total of clicks and page hits from the last hourly collection against the current totals.
+				.divider
 			.doc#filtering
-				h4 filtering
+				h4 Filtering Data
+				p On each statistics module on the application key dashboard, you can search through and filter the data using the #[i.text-dark.ion-ios-search-strong] icon in the top right corner. You can filter each row by searching for the attribute name, or by the statistics number.
+				p Try it out below on the devices module:
+				#trackers
+					ul#devices
+						li.header #[h5 Devices #[span &nbsp;/ page hit]]
+							div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
+						li desktop/Other #[span 234]
+						li phone/iPhone #[span 181]
+						li phone/iPod #[span 48]
+						li tablet/iPad #[span 143]
+			.divider
 			.doc#exporting
-				h4 exporting
+				h4 Exporting Data
+				p.text-yellow Exporting data is not yet available, scheduled to be released in #[b 1.0.3] as a perk along with the introduction of premium plans.
+
 
 	script(src='/js/scrollspy.js')
 	script(src='/js/app.js')
 	script.
 		let opt = {}
-	include ../static/homefooter.pug
