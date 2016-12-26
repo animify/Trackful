@@ -2,7 +2,11 @@ extends ../layout
 
 block content
 	-var renderfooter = true
-	include ../static/homenav.pug
+	header.nav
+		.contain
+			a.logo(href="/")
+				img(src="/images/logo_white.png")
+			include ../static/homenav.pug
 	section.module.hero
 		.contain
 			h2 Web analytics and UI tracking done simple
@@ -57,8 +61,8 @@ block content
 					h4 #[a(href="/getting-started") Getting started #[i.ion-ios-arrow-forward]]
 					p Learn more about how to get started with Watch. We'll cover the basics and get you started with a new application in no time.
 				.xs-12.m-6
-					h4 #[a Need support? #[i.ion-ios-arrow-forward]]
-					p Take a look and get coding! Our documentation covers all you need to know to get an app up and running in minutes.
+					h4 #[a(href="/docs") Explore the docs #[i.ion-ios-arrow-forward]]
+					p Our documentation covers all you need to know to get an application key set up and running in minutes.
 
 	include ../static/authmodal.pug
 

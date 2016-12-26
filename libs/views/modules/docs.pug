@@ -3,6 +3,11 @@ extends ../layout
 block content
 	-var renderfooter = true
 	-var subpage = true
+	nav#docs.nav.dark
+		.contain
+			a.logo(href="/")
+				img(src="/images/logo_dark.png")
+			include ../static/homenav.pug
 	.contain
 		nav.docnav
 			include ../static/docsnav.pug
@@ -58,7 +63,7 @@ block content
 				.divider
 			.doc#editing
 				h4 Editing a key
-				p.text-yellow Editing a key is not yet available, scheduled to be released in #[b 1.0.2].
+				p.text-lightest Editing a key is not yet available, scheduled to be released in #[b.text-yellow 1.0.2].
 				.divider
 			.doc#deleting
 				h4 Deleting a key
@@ -91,9 +96,9 @@ block content
 			.divider
 			.doc#exporting
 				h4 Exporting Data
-				p.text-yellow Exporting data is not yet available, scheduled to be released in #[b 1.0.3] as a perk along with the introduction of premium plans.
+				p.text-lightest Exporting data is not yet available, scheduled to be released in #[b.text-yellow 1.0.3] as a perk along with the introduction of premium plans.
 
-
+	include ../static/authmodal.pug
 	script(src='/js/scrollspy.js')
 	script(src='/js/app.js')
 	script.
