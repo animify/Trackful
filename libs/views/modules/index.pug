@@ -3,10 +3,9 @@ extends ../layout
 block content
 	-var renderfooter = true
 	header.nav
-		.contain
-			a.logo(href="/")
-				img(src="/images/logo_white.png")
-			include ../static/homenav.pug
+		a.logo(href="/")
+			img(src="/images/logo_white.png")
+		include ../static/homenav.pug
 	section.module.hero
 		.contain
 			h2 Web analytics and UI tracking done simple

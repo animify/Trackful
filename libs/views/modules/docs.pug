@@ -4,10 +4,9 @@ block content
 	-var renderfooter = true
 	-var subpage = true
 	nav#docs.nav.dark
-		.contain
-			a.logo(href="/")
-				img(src="/images/logo_dark.png")
-			include ../static/homenav.pug
+		a.logo(href="/")
+			img(src="/images/logo_dark.png")
+		include ../static/homenav.pug
 	.contain
 		nav.docnav
 			include ../static/docsnav.pug
