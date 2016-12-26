@@ -16,23 +16,27 @@ const async = require('async')
 let io = global.socketIO
 
 router.get('/', (req, res) => {
-	res.render('index')
+	res.render('index', {title: "Watch"})
 })
 
 router.get('/getting-started', (req, res) => {
-	res.render('getstarted')
+	res.render('getstarted', {title: "Getting Started - Watch"})
 })
 
 router.get('/docs', (req, res) => {
-	res.render('docs')
+	res.render('docs', {title: "Docs - Watch"})
+})
+
+router.get('/pricing', (req, res) => {
+	res.render('plans', {title: "Plans & Pricing - Watch"})
 })
 
 router.get('/account', auth.presets, (req, res) => {
-	res.render('account', {user: req.user})
+	res.render('account', {user: req.user, title: "Account - Watch"})
 })
 
 router.get('/create/key', auth.presets, (req, res) => {
-	res.render('createkey', {user: req.user})
+	res.render('createkey', {user: req.user, title: "Create Key - Watch"})
 })
 
 router.post('/create/key', auth.presets, (req, res) => {
@@ -46,7 +50,7 @@ router.post('/create/key', auth.presets, (req, res) => {
 
 router.get('/keys/all', auth.presets, (req, res) => {
 	actions.getAllKeys(req, res, (err, keys) => {
-		res.render('keys', {user: req.user, keys: keys})
+		res.render('keys', {user: req.user, title: "All Keys - Watch", keys: keys})
 	})
 })
 
@@ -67,7 +71,7 @@ router.get('/key/:key', auth.presets, (req, res) => {
 				}
 			}, (err, arr) => {
 				trackR = io.of(`/track_${req.params.key}`)
-				res.render('key', {user: req.user, clicktrackers: arr.trackers[0], hittrackers: arr.trackers[1], countrytrackers: arr.trackers[2], devicetrackers: arr.trackers[3], hasTrackers: arr.trackers[4], trackKey: req.params.key, key: arr.key[0]})
+				res.render('key', {user: req.user, title: "Key Dashboard - Watch", clicktrackers: arr.trackers[0], hittrackers: arr.trackers[1], countrytrackers: arr.trackers[2], devicetrackers: arr.trackers[3], hasTrackers: arr.trackers[4], trackKey: req.params.key, key: arr.key[0]})
 			})
 
 		} else {

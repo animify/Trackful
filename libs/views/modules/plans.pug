@@ -1,0 +1,45 @@
+extends ../layout
+
+block content
+	-var renderfooter = true
+	-var subpage = true
+	header.nav.dark
+		a.logo(href="/")
+			img(src="/images/logo_white.png")
+		include ../static/homenav.pug
+	section.module.pricing
+		.contain
+			h2 Plans &amp; Pricing
+			h5 Upgrade to paid plans with no commitment to contracts.
+	section.module.plans
+		.contain
+			.cf
+				.plan.free
+					.head
+						h6.text-yellow Newbie
+						h3 Free
+						p Get your tracking and anaytics started. Forever free!
+					.list
+						p Free analytics
+						p Realtime statistics feed
+						p Track all types of variables
+						p Up to 2 Application Keys
+						p Only last 20 hours of data saved for charts
+				.plan.expert
+					.head
+						h6.text-red Expert
+						h3 $9.99/month
+						p For the expert trackers hunting down vital data.
+					.list
+						p Free analytics
+						p Realtime statistics feed
+						p Track all types of variables
+						p Unlimited keys
+						p Chart data is never deleted
+						p Statistics exporting as .csv or JSON
+						p Early access to new features
+	include ../static/authmodal.pug
+	script(src='/js/scrollspy.js')
+	script(src='/js/app.js')
+	script.
+		let opt = {}

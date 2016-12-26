@@ -49,15 +49,16 @@ section.module
 	&.hasimg
 		padding 6em 0
 	&.hero
-		padding 13em 0 12em 0
+		padding 12em 0 12em 0
 		text-align center
 		background-color #0e1320
 		h2
 			color #fff
 			line-height 1.4em
 			margin-bottom .3em
-		h6
+		h5
 			color body-light
+			font-weight 300
 			line-height 1.7em
 		.button-group
 			margin-top 2.5em
@@ -74,13 +75,26 @@ section.module
 	&.page
 		background-color color-primary
 		text-align center
-		padding 6em 0 6em 0
+		padding 8em 0 6em 0
 		margin-bottom 2em
-		h3
+		h2
 			color #fff
-		h6
+		h5
 			color color-primary-text
 			margin-top 1em
+			font-weight 300
+	&.pricing
+		text-align center
+		padding 8em 0 12em 0
+		margin-bottom 2em
+		background linear-gradient(450deg, #a79bee, #DEBBE4)
+		h2
+			color body-dark
+		h5
+			color body-dark
+			opacity .7
+			margin-top 1em
+			font-weight 300
 	.heroimg
 		height 2em
 		text-align center
@@ -135,7 +149,10 @@ section.step
 header.nav
 	width 100%
 	padding 1em 3em
-	background-color #0e1320
+	absolute top left
+	z-index 3000
+	&.dark
+		background-color transparent
 	.logo
 		display inline-block
 		vertical-align top
@@ -264,3 +281,40 @@ header.nav
 					background-color primary-color
 					opacity 1
 					z-index 1
+
+.plans
+	margin-top -15em
+
+.plan
+	width 50%
+	display inline-block
+	vertical-align top
+	clear none
+	text-align center
+	border 1px solid border-gray
+	background-color #fff
+	position relative
+	border-radius border-radius-normal 0 0 border-radius-normal
+	.head
+		padding 3em 0
+		h3
+			line-height 1.6em
+		h6
+			font-size 1em
+			margin-bottom .4em
+	&.free
+		border-right 0
+	&.expert
+		border-radius 0 border-radius-normal border-radius-normal border-radius-normal
+	.list
+		p
+			padding .7em 0
+			border-top 1px solid border-gray
+			color body-color
+			font-size 1em
+			font-weight 500
+	&:before, &:after
+		display table
+		content ''
+	&:after
+		clear both

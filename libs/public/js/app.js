@@ -330,7 +330,7 @@ $(() => {
 				$(this).addClass('open')
 				$(this).find('.filter').removeClass('hidden').focus()
 			})
-		} else if ($(this).find('.filter').is(":empty")){
+		} else if ($(this).find('.filter').is(":empty")) {
 			$(this).removeClass('open')
 			$(this).find('.filter').addClass('hidden')
 			$(this).animate({
@@ -400,6 +400,17 @@ $(() => {
 
 	$(document).keyup((e) => {
 		if (e.keyCode === 27 && $('.modal').is(":visible")) toggleModal()
+	}).mouseup(function (e) {
+		var filterinput = $('.search')
+		var filter = $('.search.open')
+		console.log(filter.find('.filter').text() != "");
+		if (!filterinput.is(e.target) && filterinput.has(e.target).length === 0 && (filter.find('.filter').text() == "")) {
+			filterinput.removeClass('open')
+			filterinput.find('.filter').addClass('hidden')
+			filterinput.animate({
+				width: _width
+			}, 200)
+		}
 	})
 
 	initialise = () => {
