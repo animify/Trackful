@@ -9,11 +9,16 @@ block content
 			include ../static/homenav.pug
 	section.module.hero
 		.contain
-			h1 Web analytics and UI tracking done simple
-			h5 Analyse and improve the structure of your web platform by tracking how your visitors use it. It only takes a few seconds to sign up, create an application and get tracking, plus it's absolutely free.
-			.button-group
-				a.button.primary.large(data-modal="up") Get started, it's free
-				small v1.0.1 / 2016-12-24
+			.grid-row
+				.xs-12.m-6
+					h1 Web analytics and UI tracking done simple
+					p Analyse and improve the structure of your web platform by tracking how your visitors use it. It only takes a few seconds to sign up, create an application and get tracking, plus it's absolutely free.
+					.button-group
+						a.button.primary.large(data-modal="up") Get started now - for free #[i.ion-arrow-right-c]
+						small v1.0.1 / 2016-12-24
+				.xs-12.m-6.infochart
+					img(src="/images/infochart.png")
+
 	section.module.bg.o_h
 		.contain
 			.grid-row

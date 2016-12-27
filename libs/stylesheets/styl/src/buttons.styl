@@ -15,6 +15,7 @@
 	cursor pointer
 	transition all 0.2s ease
 	vertical-align top
+	font-weight 600
 	&.in-input
 		min-width 30em
 	for size in ('small' 'medium' 'large' 'big' 'massive')
@@ -33,7 +34,7 @@
 	&:hover
 		box-shadow none
 		background-color background-light-gray
-	for clr in ('red' 'orange' 'yellow' 'green' 'teal' 'blue' 'violet' 'purple' 'pink' 'brown' 'grey' 'black' 'primary')
+	for clr in ('red' 'orange' 'yellow' 'green' 'teal' 'blue' 'violet' 'purple' 'pink' 'brown' 'grey' 'black' 'twitter' 'primary')
 		&.{clr}
 			btn-color(clr)
 			btn-background(clr)
