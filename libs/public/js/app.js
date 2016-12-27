@@ -21,7 +21,7 @@ $(() => {
 				chart: {
 					type: 'areaspline',
 					backgroundColor: null,
-					style: {"fontFamily":"\"canada-type-gibson\", sans-serif","fontSize":"12px"},
+					style: {"fontFamily":"\"Avenir W01\", sans-serif","fontSize":"12px"},
 					margin: [0,0,0,0],
 					spacingLeft: 0
 				},
@@ -325,7 +325,7 @@ $(() => {
 		if (!$(this).hasClass('open')) {
 			_width = $(this).css("width")
 			$(this).animate({
-				width: 200
+				width: 130
 			}, 200, () => {
 				$(this).addClass('open')
 				$(this).find('.filter').removeClass('hidden').focus()

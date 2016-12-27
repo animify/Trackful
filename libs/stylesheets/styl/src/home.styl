@@ -1,6 +1,10 @@
 section.module
-	padding 6em 0
+	padding 7em 0
 	position relative
+	h3
+		margin-bottom .5rem
+	.contain > h5
+		margin-top .5rem
 	.low
 		height 2em
 		margin-top -1.2em
@@ -16,56 +20,64 @@ section.module
 		& > *
 			padding 0 3em
 			vertical-align middle
-	.types
-		margin-top 6em
+	&.types
+		.grid-row + .grid-row
+			margin-top 3em
+		.text-center
+			margin-bottom 5em
+		.type
+			p
+				font-size 1rem
+		h5
+			margin-bottom .5rem
+			color body-dark
+			line-height 1.34em
 		i
-			width 1.8rem
-			height 1.8rem
-			line-height 1.9rem
+			width 1.6rem
+			height 1.6rem
+			line-height 1.7rem
 			text-align center
 			border-radius 50%
 			color #fff
-			font-size 1rem
+			font-size .825rem
 			display inline-block
 			margin-right .4rem
-		p
-			font-size 1rem
-	h4, .types h5
+			relative top -2px
+	h4
 		color body-dark
-		line-height 1.9em
+		line-height 1.34em
+		margin-bottom .5rem
 		i
 			margin-right .4em
 		a
 			i
 				margin-left .4em
-				relative top 1px
+				relative top 2px
 	p
 		color body-light
-		line-height 1.8em
-		font-size 1.2em
-		font-weight 300
+		font-size font-size-hero
 		& + h4
 			margin-top 1.6em
 	&.hasimg
 		padding 6em 0
 	&.hero
-		padding 12em 0 12em 0
+		padding 14em 0 12em 0
 		text-align center
-		background-color #0e1320
-		h2
-			color #fff
-			line-height 1.4em
+		h1
+			color body-dark
+			line-height 1.34em
 			margin-bottom .3em
+			font-weight 600
 		h5
 			color body-light
-			font-weight 300
-			line-height 1.7em
+			line-height 1.5em
+			font-weight 400
 		.button-group
 			margin-top 2.5em
 			small
 				display block
 				margin-top 1.7em
-				color lighten(body-color, 10%)
+				color lighten(body-light, 20%)
 			a.button
 				padding 0 6em
 				i
@@ -81,31 +93,25 @@ section.module
 			color #fff
 		h5
 			color color-primary-text
-			margin-top 1em
-			font-weight 300
 	&.pricing
 		text-align center
 		padding 8em 0 12em 0
 		margin-bottom 2em
-		background linear-gradient(450deg, #a79bee, #DEBBE4)
-		h2
-			color body-dark
+		background url('/images/geo.png')
+		border-bottom 1px solid border-gray
 		h5
-			color body-dark
-			opacity .7
-			margin-top 1em
-			font-weight 300
+			color body-light
 	.heroimg
 		height 2em
 		text-align center
 		img
 			border-radius 8px
 			box-shadow 0 8px 16px rgba(0, 0, 0, .08), 0 2px 6px rgba(0, 0, 0, .04)
-			relative top -8.4em
+			relative top -3.4em
 			max-width 90%
 			pointer-events none
 			& + img
-				top -11em
+				top -6em
 				max-width 100%
 	&.bg
 		background-color light-color-smoke
@@ -122,8 +128,8 @@ section.step
 			font-size 2.8em
 			display block
 			margin-bottom 1.4rem
-	h5
-		margin-bottom 1.1em
+	h4
+		margin-bottom .8rem
 		span
 			width 1.9rem
 			height 1.9rem
@@ -134,7 +140,8 @@ section.step
 			color #fff
 			font-size 1rem
 			display inline-block
-			margin-right .4rem
+			margin-right .5rem
+			vertical-align text-top
 	p
 		color body-light
 	.gs_key
@@ -164,7 +171,7 @@ header.nav
 	position fixed
 	width 202px
 	height 100%
-	padding 7em 0
+	padding 6.2em 0
 	overflow visible
 	overflow-y scroll
 	overflow-x visible
@@ -215,9 +222,11 @@ header.nav
 				text-align center
 				vertical-align top
 				display inline-block
-		&.gt h5:before
-			content '\f279'
-			background-color lighten(color-blue, 20%)
+		&.gt
+			margin-top -1em
+			h5:before
+				content '\f279'
+				background-color lighten(color-blue, 20%)
 		&.hs h5:before
 			content '\f27c'
 			background-color lighten(color-red, 20%)
@@ -229,21 +238,20 @@ header.nav
 		padding-top 1em
 		#trackers
 			padding 1rem 0 0 0
-		& > h4
-			line-height 1.9em
+		& > h3
 			color body-dark
+			margin-bottom .8rem
+		& > h4
+			color body-dark
+			margin-bottom 1rem
 		& > h5
-			line-height 1.9em
-			margin-top 1.4em
+			margin 2rem 0 1rem 0
 		& > p
 			color body-light
-			line-height 1.7em
-			font-size 1.2em
-			font-weight 300
 			i
 				margin 0 .2em
 			& + p
-				margin-top .7em
+				margin-top .8em
 		img
 			width 80%
 			max-width 100%
@@ -256,6 +264,8 @@ header.nav
 			border 0
 			padding 1.6em 0 .4em 0
 			color body-dark
+			p
+				font-weight 600
 		&.item
 			padding .4em 0
 			p
@@ -284,9 +294,10 @@ header.nav
 
 .plans
 	margin-top -15em
+	padding 7em 0 0 0 !important
 
 .plan
-	width 50%
+	width 33.3333333%
 	display inline-block
 	vertical-align top
 	clear none
@@ -294,23 +305,39 @@ header.nav
 	border 1px solid border-gray
 	background-color #fff
 	position relative
-	border-radius border-radius-normal 0 0 border-radius-normal
 	.head
-		padding 3em 0
+		padding 3em 2em 2em 2em
 		h3
 			line-height 1.6em
+			font-weight 600
+			span
+				font-size .6em
+				font-weight 400
+				color body-light
 		h6
 			font-size 1em
 			margin-bottom .4em
+			font-weight 600
 	&.free
+		border-radius border-radius-normal 0 0 border-radius-normal
 		border-right 0
 	&.expert
+		border-radius 0 0 0 border-radius-normal
+		border-right 0
+	&.company
 		border-radius 0 border-radius-normal border-radius-normal border-radius-normal
 	.list
 		p
-			padding .7em 0
-			border-top 1px solid border-gray
+			padding .4em 2em
 			color body-color
+			font-size 1em
+	.actions
+		padding 2em
+		p
+			height em-height
+			line-height em-height
+			width 100%
+			background-color light-color-smoke
 			font-size 1em
 			font-weight 500
 	&:before, &:after
@@ -318,3 +345,11 @@ header.nav
 		content ''
 	&:after
 		clear both
+
+.plan-info
+	.grid-row
+		text-align center
+		i
+			font-size 3em
+			margin-bottom 1.4rem
+			display inline-block

@@ -24,7 +24,9 @@ body
 	.head
 		h6
 			color body-light
-			
+			font-weight 400
+			line-height 1.4em
+
 .options
 	float right
 	.dropdown
@@ -44,13 +46,6 @@ body
 .sub
 	padding 0 0 .8em 0
 	font-size 1.1em
-
-.nodata
-	span(1/1)
-	text-align center
-	opacity .6
-	padding 2.6em 0
-	font-size 1.2em
 
 .sparkline
 	width 100%
@@ -79,14 +74,13 @@ body
 			display inline-block
 			vertical-align middle
 		span
-			relative top .72em
+			relative top 1em
 			float right
 			i
 				margin-left 1em
 		small
 			display block
 			color body-light
-			margin-top .6em
 
 #key_info
 	padding 1.4rem 0
@@ -120,8 +114,6 @@ body
 		overflow hidden
 		.sparkline
 			absolute bottom 0
-		p
-			opacity .7
 		.stats
 			padding 1.4em 2em 1.2em 2em
 			border-bottom 1px solid rgba(255, 255, 255, 0.2)
@@ -141,7 +133,7 @@ body
 			small
 				display block
 				margin-top .4em
-				opacity .6
+				color rgba(#fff, 80%)
 			i
 				opacity .8
 				margin-left .2em
@@ -155,11 +147,11 @@ body
 		li
 			border 1px solid border-gray
 			border-top 0
-			padding .8rem
+			padding .8rem 1rem
 			color body-light
 			&.header
 				h5
-					font-size 1.32em
+					font-size 1.1em
 					display inline-block
 					vertical-align top
 					color body-color

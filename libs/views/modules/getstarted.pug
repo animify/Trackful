@@ -4,18 +4,19 @@ block content
 	-var renderfooter = true
 	-var subpage = true
 	header.nav.primary
-		a.logo(href="/")
-			img(src="/images/logo_white.png")
-		include ../static/homenav.pug
+		.contain
+			a.logo(href="/")
+				img(src="/images/logo_white.png")
+			include ../static/homenav.pug
 	section.module.page
 		.contain
-			h2 Getting started with Watch
-			h5 Start tracking your users' actions. It's never too late for gathering crucial analytics.
+			h2 Getting Started
+			h5 Set up Watch and get tracking in minutes.
 	section.module.step
 		.contain
 			.grid-row
 				.xs-12
-					h5 #[span 1] Installation
+					h4 #[span 1] Installation
 				.xs-12.m-6
 					pre
 						code &lt;script src=&quot;/path/to/watch.js&quot;&gt;&lt;/script&gt;
@@ -25,7 +26,7 @@ block content
 		.contain
 			.grid-row
 				.xs-12
-					h5 #[span 2] Create your application key
+					h4 #[span 2] Create your application key
 				.xs-12
 					p #[a(data-modal="in") Log in] or #[a(data-modal="up") create your account] and head over and create a #[a(href="/create/key") new key]. Insert an appropriate name and the full URL of your website, make sure you include the protocol (e.g http/https) and port if you're using one. When all is validated you'll be redirected to your application overview.
 					br
@@ -36,7 +37,7 @@ block content
 		.contain
 			.grid-row
 				.xs-12
-					h5 #[span 3] Initialise Watch
+					h4 #[span 3] Initialise Watch
 				.xs-12.m-6
 					pre
 						code window.WATCH_KEY = "r1drzOF4l"
@@ -47,7 +48,7 @@ block content
 			.grid-row
 				.xs-12
 					i.ion-ios-checkmark.text-green
-					h5 That's it. You're all set up!
+					h4 That's it. You're all set up!
 					p You can now continue with the keys' dashboard to view realtime tracking, check out the #[a Docs] if you need any help.
 	include ../static/authmodal.pug
 	script(src='/js/app.js')

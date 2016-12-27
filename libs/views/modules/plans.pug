@@ -4,9 +4,10 @@ block content
 	-var renderfooter = true
 	-var subpage = true
 	header.nav.dark
-		a.logo(href="/")
-			img(src="/images/logo_white.png")
-		include ../static/homenav.pug
+		.contain
+			a.logo(href="/")
+				img(src="/images/logo_dark.png")
+			include ../static/homenav.pug
 	section.module.pricing
 		.contain
 			h2 Plans &amp; Pricing
@@ -16,30 +17,70 @@ block content
 			.cf
 				.plan.free
 					.head
-						h6.text-yellow Newbie
+						h6.text-yellow Basic
 						h3 Free
 						p Get your tracking and anaytics started. Forever free!
 					.list
 						p Free analytics
 						p Realtime statistics feed
 						p Track all types of variables
-						p Up to 2 Application Keys
+						p Up to 2 application keys
 						p Only last 20 hours of data saved for charts
+					.actions
+						a.button.green.block Choose Free
 				.plan.expert
 					.head
-						h6.text-red Expert
-						h3 $9.99/month
+						h6.text-orange Expert
+						h3 $9.99#[span /month]
 						p For the expert trackers hunting down vital data.
 					.list
 						p Free analytics
 						p Realtime statistics feed
 						p Track all types of variables
-						p Unlimited keys
+						p Unlimited application keys
 						p Chart data is never deleted
 						p Statistics exporting as .csv or JSON
 						p Early access to new features
+					.actions
+						p Coming soon
+				.plan.company
+					.head
+						h6.text-red Company
+						h3 $29.99#[span /month]
+						p Great for large teams and growing businesses
+					.list
+						p Free analytics
+						p Realtime statistics feed
+						p Track all types of variables
+						p Unlimited application keys
+						p Chart data is never deleted
+						p Statistics exporting as .csv or JSON
+						p Early access to new features
+						p 4 users with addon users
+						p Organise users into teams
+						p User roles
+					.actions
+						p Coming soon
+	section.module.plan-info
+		.contain
+			.grid-row
+				.xs-12.m-4
+					i.ion-ios-heart.text-red
+					h5 Free analytics
+					p Data analytics will always be free in Watch, visualise how your data increases on the hour
+				.xs-12.m-4
+					i.ion-arrow-graph-up-right.text-yellow
+					h5 Realtime Statistics
+					p Don't waste your time waiting for data, all stats are sent in realtime to your key dashboard
+				.xs-12.m-4
+					i.ion-ios-paw.text-brown
+					h5 Track It All
+					p No plan limits what you can track, it's all included in the Basic plan at no cost
+
 	include ../static/authmodal.pug
 	script(src='/js/scrollspy.js')
 	script(src='/js/app.js')
 	script.
 		let opt = {}
+
+	include ../static/homefooter.pug

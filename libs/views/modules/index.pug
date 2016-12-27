@@ -3,44 +3,52 @@ extends ../layout
 block content
 	-var renderfooter = true
 	header.nav
-		a.logo(href="/")
-			img(src="/images/logo_white.png")
-		include ../static/homenav.pug
+		.contain
+			a.logo(href="/")
+				img(src="/images/logo_dark.png")
+			include ../static/homenav.pug
 	section.module.hero
 		.contain
-			h2 Web analytics and UI tracking done simple
-			h5 Analyse and improve the structure of your web platform by tracking how customers use it. It only takes a few seconds to sign up, create an application and get tracking, plus it's absolutely free.
+			h1 Web analytics and UI tracking done simple
+			h5 Analyse and improve the structure of your web platform by tracking how your visitors use it. It only takes a few seconds to sign up, create an application and get tracking, plus it's absolutely free.
 			.button-group
 				a.button.primary.large(data-modal="up") Get started, it's free
 				small v1.0.1 / 2016-12-24
 	section.module.bg.o_h
 		.contain
 			.grid-row
-				.xs-12.m-6
-					h4 Extensive analytics for your platform
+				.xs-12.m-7
+					h3 Extensive analytics for your platform
 					p Sort your users into groups by device or country and visualise their actions on your website. Watch offers realtime tracking for any website and with it being dead easy to set up, making it an ideal analytics tool for beginner to expert developers.
-				.xs-12.m-6.low
+				.xs-12.m-5.low
 					#trackers
 						ul#devices
 							li.header #[h5 Devices #[span &nbsp;/ page hit]]
 								div.search #[i.ion-ios-search-strong] #[.filter.hidden(contenteditable="true")]
-									li desktop/Other #[span 234]
-									li phone/iPhone #[span 181]
-									li phone/iPod #[span 48]
-									li tablet/iPad #[span 143]
-				.grid-row.types
-					.xs-12.s-6.m-3
-						h5 #[i.ion-android-hand.yellow] Element clicks
-						p Keep track of what your users are clicking. Edit your HTML to choose what to track.
-					.xs-12.s-6.m-3
-						h5 #[i.ion-ios-pulse-strong.purple] Page hits
-						p Simply initiate Watch.js on each page you want and it'll be added to the watchlist.
-					.xs-12.s-6.m-3
-						h5 #[i.ion-android-globe.blue] Top countries
-						p Group your users by country to see where most visitors originate from.
-					.xs-12.s-6.m-3
-						h5 #[i.ion-android-phone-landscape.teal] Device type
-						p Are your visitors viewing your site from a desktop, tablet, phone or even a car? Track it!
+							li desktop/Other #[span 234]
+							li phone/iPhone #[span 181]
+							li phone/iPod #[span 48]
+							li tablet/iPad #[span 143]
+	section.module.types
+		.contain
+			.grid-row.text-center
+				.xs-12
+					h3 What can I track?
+					p In the first release you can track element clicks, page hits and visitor information; such as device type and their country of origin. In the next few releases of Watch average session times will be tracked, along with user inputs from text fields.
+			.grid-row.type
+				.xs-12.m-6
+					h5 #[i.ion-android-hand.yellow] Element clicks
+					p Keep track of what your users are clicking. Edit your HTML to choose what to track.
+				.xs-12.m-6
+					h5 #[i.ion-ios-pulse-strong.purple] Page hits
+					p Simply initiate Watch.js on each page you want and it'll be added to the watchlist.
+			.grid-row.type
+				.xs-12.m-6
+					h5 #[i.ion-android-globe.blue] Top countries
+					p Group your users by country to see where most visitors originate from.
+				.xs-12.m-6
+					h5 #[i.ion-android-phone-landscape.teal] Device type
+					p Are your visitors viewing your site from a desktop, tablet, phone or even a car? Track it!
 
 	section.module.hasimg
 		.contain
@@ -49,9 +57,8 @@ block content
 					img(src="/images/chart-tc-t.png")
 					img(src="/images/chart-ph-t.png")
 				.xs-12.m-6
-					h4 Performance obsessed
+					h3 Performance obsessed
 					p You only notice speed when it isn't there. Good, because the only thing you'll notice are your stats going up in real time. With a robust, high performance database such as RethinkDB, ensure all tracking data transmitted by your users are picked up and stored securely on our servers.
-
 
 	section.module.bg
 		.contain

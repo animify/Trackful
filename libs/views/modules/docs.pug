@@ -4,15 +4,16 @@ block content
 	-var renderfooter = true
 	-var subpage = true
 	nav#docs.nav.dark
-		a.logo(href="/")
-			img(src="/images/logo_dark.png")
-		include ../static/homenav.pug
+		.contain
+			a.logo(href="/")
+				img(src="/images/logo_dark.png")
+			include ../static/homenav.pug
 	.contain
 		nav.docnav
 			include ../static/docsnav.pug
 		.docs
 			.doc#welcome
-				h4 Watch Documentation
+				h3 Watch Documentation
 				p Watch is a simple but powerful web platform analytics tool aimed for beginner to expert developers looking to explore how their users use the site and gather more information about the customers.
 				p Use these docs as a guideline to navigate and manage your way through from setup to analysing your collected data.
 				.resources
