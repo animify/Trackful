@@ -22,7 +22,7 @@ $(window).scroll(function(){
 	var fromTop = $(this).scrollTop()
 
 	let cur = scrollItems.map(function(){
-		if ($(this).offset().top < fromTop + 1) return this
+		if ($(this).offset().top < fromTop + 85) return this
 	})
 
 	cur = cur[cur.length-1]

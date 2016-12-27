@@ -99,7 +99,7 @@ html {
   width: 100%;
 }
 body {
-  font-family: "Avenir W01";
+  font-family: "Avenir Next W01";
   font-size: 15px;
   color: #919ca4;
   height: 100%;
@@ -113,32 +113,32 @@ body.dark {
   background-color: #18212d;
 }
 h1 {
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.34em;
   font-size: 2.8em;
 }
 h2 {
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.34em;
   font-size: 2.4em;
 }
 h3 {
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.34em;
   font-size: 2em;
 }
 h4 {
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.34em;
   font-size: 1.6em;
 }
 h5 {
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.34em;
   font-size: 1.4em;
 }
 h6 {
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.34em;
   font-size: 1.2em;
 }
@@ -2197,7 +2197,7 @@ ol.ordered li[value]:before {
 }
 .input input,
 .input textarea {
-  font-family: "Avenir W01";
+  font-family: "Avenir Next W01";
   font-size: 15px;
   color: #3f4349;
   margin: 0;
@@ -3162,10 +3162,10 @@ header.nav .logo img {
   margin-top: 3.4em;
 }
 .docs .desc p {
-  padding-left: 4rem;
+  padding-left: 4.4rem;
 }
 .docs .desc h5 {
-  padding-left: 4rem;
+  padding-left: 4.4rem;
   position: relative;
 }
 .docs .desc h5:before {
@@ -3173,7 +3173,7 @@ header.nav .logo img {
   font-size: 1em;
   position: absolute;
   left: 0;
-  top: 0.44em;
+  top: 0.2em;
   width: 2.3em;
   height: 2.3em;
   line-height: 2.3em;
@@ -3219,7 +3219,7 @@ header.nav .logo img {
 }
 .docs .doc > h5,
 .docs .desc > h5 {
-  margin: 2rem 0 1rem 0;
+  margin: 2rem 0 0.5rem 0;
 }
 .docs .doc > p,
 .docs .desc > p {
@@ -3354,9 +3354,13 @@ header.nav .logo img {
 .plan-info .grid-row {
   text-align: center;
 }
+.plan-info .grid-row h5 {
+  line-height: 1.34em;
+  margin-bottom: 0.5rem;
+}
 .plan-info .grid-row i {
   font-size: 3em;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.8rem;
   display: inline-block;
 }
 .text-primary {
