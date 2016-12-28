@@ -1,4 +1,5 @@
 $(() => {
+	var _width
 
 	call = (url, type, data, callback) => {
 		$.ajax({
@@ -328,11 +329,11 @@ $(() => {
 				width: 130
 			}, 200, () => {
 				$(this).addClass('open')
-				$(this).find('.filter').removeClass('hidden').focus()
+				$(this).find('.filter').removeClass('forcehidden').focus()
 			})
 		} else if ($(this).find('.filter').is(":empty")) {
 			$(this).removeClass('open')
-			$(this).find('.filter').addClass('hidden')
+			$(this).find('.filter').addClass('forcehidden')
 			$(this).animate({
 				width: _width
 			}, 200)
@@ -401,17 +402,52 @@ $(() => {
 	$(document).keyup((e) => {
 		if (e.keyCode === 27 && $('.modal').is(":visible")) toggleModal()
 	}).mouseup(function (e) {
-		var filterinput = $('.search')
-		var filter = $('.search.open')
-		console.log(filter.find('.filter').text() != "");
-		if (!filterinput.is(e.target) && filterinput.has(e.target).length === 0 && (filter.find('.filter').text() == "")) {
+		let filterinput = $('.search')
+		let filter = $('.search.open')
+		if (!filterinput.is(e.target) && filterinput.has(e.target).length === 0 && (filter.find('.filter').text() == "" && _width != undefined)) {
 			filterinput.removeClass('open')
-			filterinput.find('.filter').addClass('hidden')
+			filterinput.find('.filter').addClass('forcehidden')
 			filterinput.animate({
 				width: _width
 			}, 200)
 		}
 	})
+
+	let didScroll
+	let lastScrollTop = 0
+	const delta = 5
+	const navbarHeight = $('header.nav').outerHeight()
+
+	$(window).scroll(function() {
+		didScroll = true
+	})
+
+	setInterval(function() {
+		if (didScroll) {
+			hasScrolled()
+			didScroll = false
+		}
+	}, 250);
+
+	hasScrolled = () => {
+		var st = $(this).scrollTop()
+
+		if (st <= 0) $('header.nav').removeClass('fx')
+
+		if(Math.abs(lastScrollTop - st) <= delta) return
+
+		if (st > navbarHeight) {
+			if (st > lastScrollTop){
+				$('header.nav').slideUp('fast', () => {
+					$('header.nav').removeClass('fx').addClass('nav-up')
+				})
+			} else {
+				if(st + $(window).height() < $(document).height() && st > 0) $('header.nav').removeClass('nav-up').addClass('fx').slideDown('fast')
+			}
+		}
+		lastScrollTop = st
+	}
+
 
 	initialise = () => {
 		if ($('.graph .sparkline').highcharts != undefined) {

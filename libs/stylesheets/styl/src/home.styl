@@ -152,11 +152,25 @@ section.step
 
 header.nav
 	width 100%
-	padding 1em 3em
+	padding 1em 0
 	absolute top left
 	z-index 3000
-	&.dark
-		background-color transparent
+	.d
+		display none
+	&.nav-up
+		top -63px
+	&.fx
+		display none
+		fixed top left
+		background-color #fff
+		box-shadow: 0 1px 2px 0 rgba(33,44,61,.15)
+		.l
+			display none
+		.d
+			display block
+		.options
+			& > a, .toggle
+				color body-light
 	.logo
 		display inline-block
 		vertical-align top
@@ -181,12 +195,13 @@ header.nav
 #docs
 	fixed top left
 	width 100%
-	padding 1em 3em
+	padding 1em 0
 	background rgba(251, 252, 253, .7)
 	-webkit-backdrop-filter blur(30px)
 	backdrop-filter blur(30px)
 	z-index 4000
 	border-bottom 1px solid border-gray
+
 	.logo
 		display inline-block
 		vertical-align top
@@ -199,6 +214,10 @@ header.nav
 	border-left 1px solid border-gray
 	position relative
 	padding 7em 0 7em 4em
+	+below('s')
+		margin-left auto
+		border-left 0
+		padding 7em 0
 	.resources
 		margin-top 3.4em
 	.desc

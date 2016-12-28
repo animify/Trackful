@@ -182,7 +182,6 @@ router.post('/endpoint/update/avatar', (req, res) => {
 		if (!err) {
 			return res.send(result)
 		}
-		console.log('err', err);
 		res.json(err)
 	})
 })

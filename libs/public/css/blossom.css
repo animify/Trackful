@@ -1306,7 +1306,7 @@ strong {
   display: inline-block;
   vertical-align: top;
   cursor: pointer;
-  color: #949191;
+  color: #7b7878;
   position: relative;
   line-height: 2em;
   font-weight: 600;
@@ -1417,6 +1417,9 @@ strong {
   position: fixed;
 }
 .hidden {
+  display: none;
+}
+.forcehidden {
   display: none !important;
 }
 .invisible {
@@ -3129,14 +3132,36 @@ section.step .gs_key img {
 }
 header.nav {
   width: 100%;
-  padding: 1em 3em;
+  padding: 1em 0;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 3000;
 }
-header.nav.dark {
-  background-color: transparent;
+header.nav .d {
+  display: none;
+}
+header.nav.nav-up {
+  top: -63px;
+}
+header.nav.fx {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(33,44,61,0.15);
+  box-shadow: 0 1px 2px 0 rgba(33,44,61,0.15);
+}
+header.nav.fx .l {
+  display: none;
+}
+header.nav.fx .d {
+  display: block;
+}
+header.nav.fx .options > a,
+header.nav.fx .options .toggle {
+  color: #7b7878;
 }
 header.nav .logo {
   display: inline-block;
@@ -3166,7 +3191,7 @@ header.nav .logo img {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 1em 3em;
+  padding: 1em 0;
   background: rgba(251,252,253,0.7);
   -webkit-backdrop-filter: blur(30px);
   backdrop-filter: blur(30px);
@@ -3187,6 +3212,13 @@ header.nav .logo img {
   border-left: 1px solid #edecec;
   position: relative;
   padding: 7em 0 7em 4em;
+}
+@media only screen and (max-width: 768px) {
+  .docs {
+    margin-left: auto;
+    border-left: 0;
+    padding: 7em 0;
+  }
 }
 .docs .resources {
   margin-top: 3.4em;
