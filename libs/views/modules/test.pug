@@ -1,10 +1,12 @@
 extends ../layout
 
 block content
-	a.tra(data-watch="Account") Account
-	a.tra(data-watch="Root") Root
-	a.tra(data-watch="Contact") Contact
-	a.tra(data-watch="Options") Options
-	a.tra(data-watch="Sign in") Sign in
-	a.tra(data-watch="Log out") Log out
-	script(src='/js/watch.js')
+	a.tra(data-track="Account") Account
+	a.tra(data-track="Root") Root
+	a.tra(data-track="Contact") Contact
+	a.tra(data-track="Options") Options
+	a.tra(data-track="Sign in") Sign in
+	a.tra(data-track="Log out") Log out
+	script.
+		window.TRACKFUL_KEY = "ByJTiOWHx"
+	script(src='/js/trackful.min.js')

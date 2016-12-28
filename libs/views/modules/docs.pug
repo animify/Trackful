@@ -13,8 +13,8 @@ block content
 			include ../static/docsnav.pug
 		.docs
 			.doc#welcome
-				h3 Watch Documentation
-				p Watch is a simple but powerful web platform analytics tool aimed for beginner to expert developers looking to explore how their users use the site and gather more information about the customers.
+				h3 Trackful Documentation
+				p Trackful is a simple but powerful web platform analytics tool aimed for beginner to expert developers looking to explore how their users use the site and gather more information about the customers.
 				p Use these docs as a guideline to navigate and manage your way through from setup to analysing your collected data.
 				.resources
 					h4 Additional Resources
@@ -30,12 +30,12 @@ block content
 				.divider
 			.doc#setup
 				h4 Setup
-				p Follow the below steps to get up and running with WatchJS on the client side.
+				p Follow the below steps to get up and running with TrackfulJS on the client side.
 
 				h5 Installation
 				pre
-					code &lt;script src=&quot;/path/to/watch.js&quot;&gt;&lt;/script&gt;
-				p Get the #[a latest version] of Watch.js and include it in just before the #[code &lt;/body&gt;] tag of your HTML markup. Include Watch.js on each page you want to track.
+					code &lt;script src=&quot;/path/to/trackful.js&quot;&gt;&lt;/script&gt;
+				p Get the #[a latest version] of Trackful.js and include it in just before the #[code &lt;/body&gt;] tag of your HTML markup. Include Trackful.js on each page you want to track.
 
 				h5 Create your application key
 				p #[a(data-modal="in") Log in] and navigate to #[span.text-dark /create/key] to create a #[a(href="/create/key") new key]. Insert an appropriate name and the full URL of your website, make sure you include the protocol (e.g http/https) and port if you're using one. When all is validated you'll be redirected to your application overview.
@@ -46,8 +46,8 @@ block content
 
 				h5 Initialisation
 				pre
-					code window.WATCH_KEY = "r1drzOF4l"
-				p Copy the key from step 2 and declare it as a global variable on the #[code window] object just before Watch.js is called.
+					code window.TRACKFUL_KEY = "r1drzOF4l"
+				p Copy the key from step 2 and declare it as a global variable on the #[code window] object just before Trackful.js is called.
 				.divider
 			.doc#creating
 				h4 Creating a key
@@ -72,9 +72,9 @@ block content
 				.divider
 			.doc#overview
 				h4 Application Overview
-				p Once Watch.js is initialised on a page, any client that connects and visits that page counts towards the total #[span.text-dark page hits]. More data about that specific user is analysed such as the #[span.text-dark device type] and #[span.text-dark country] of origin.
-				p If a user then clicks on any HTML elements that are initialised, those click statistics are also sent to Watch and grouped according to their #[a data-watch] attribute.
-				p All statistics sent to Watch are displayed in realtime as long as the status on your application key dashboard is #[b.text-green connected].
+				p Once Trackful.js is initialised on a page, any client that connects and visits that page counts towards the total #[span.text-dark page hits]. More data about that specific user is analysed such as the #[span.text-dark device type] and #[span.text-dark country] of origin.
+				p If a user then clicks on any HTML elements that are initialised, those click statistics are also sent to Trackful and grouped according to their #[a data-track] attribute.
+				p All statistics sent to Trackful are displayed in realtime as long as the status on your application key dashboard is #[b.text-green connected].
 				.divider
 			.doc#analytics
 				h4 Analytics
