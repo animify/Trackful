@@ -28,7 +28,7 @@ block content
 				.xs-12
 					h4 #[span 2] Create your application key
 				.xs-12
-					p #[a(data-modal="in") Log in] or #[a(data-modal="up") create your account] and head over and create a #[a(href="/create/key") new key]. Insert an appropriate name and the full URL of your website, make sure you include the protocol (e.g http/https) and port if you're using one. When all is validated you'll be redirected to your application overview.
+					p #[a(data-modal="in") Log in] and navigate to #[span.text-dark /create/key] to create a #[a(href="/create/key") new key]. Insert an appropriate name and the full URL of your website, make sure you include the protocol (e.g http/https) and port if you're using one. When all is validated you'll be redirected to your application overview.
 					br
 					p The key can be found in the web address of the page #[code /key/{your_key}] or in the info bar of the dashboard:
 					.gs_key
@@ -49,7 +49,7 @@ block content
 				.xs-12
 					i.ion-ios-checkmark.text-green
 					h4 That's it. You're all set up!
-					p You can now continue with the keys' dashboard to view realtime tracking, check out the #[a Docs] if you need any help.
+					p You can now continue with the keys' dashboard to view realtime tracking, check out the #[a(href="/docs") Docs] if you need further help.
 	include ../static/authmodal.pug
 	script(src='/js/app.js')
 	script.

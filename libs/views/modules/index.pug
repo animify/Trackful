@@ -10,21 +10,21 @@ block content
 	section.module.hero
 		.contain
 			.grid-row
-				.xs-12.m-6
+				.xs-12.m-6.breakpoint-s-center
 					h1 Web analytics and UI tracking done simple
-					p Analyse and improve the structure of your web platform by tracking how your visitors use it. It only takes a few seconds to sign up, create an application and get tracking, plus it's absolutely free.
+					p Analyse and improve the structure of your web platform by tracking how your visitors use it. You don't need to create an account, just sign in with an integration. It's absolutely free.
 					.button-group
-						a.button.primary.large(data-modal="up") Get started now - for free #[i.ion-arrow-right-c]
+						a.button.primary.large(data-modal="in") Get started now - for free #[i.ion-arrow-right-c]
 						small v1.0.1 / 2016-12-24
-				.xs-12.m-6.infochart
+				.xs-12.m-6.infochart.breakpoint-s-hide
 					img(src="/images/infochart.png")
 
-	section.module.bg.o_h
+	section.module.o_h
 		.contain
 			.grid-row
 				.xs-12.m-7
-					h3 Extensive analytics for your platform
-					p Sort your users into groups by device or country and visualise their actions on your website. Watch offers realtime tracking for any website and with it being dead easy to set up, making it an ideal analytics tool for beginner to expert developers.
+					h3 Realtime analytics for your platform
+					p Sort your visitors into groups by device or country and visualise current actions on your website. Watch offers realtime tracking for your web platform and with it being dead easy to set up, it's an ideal analytics tool for beginner to expert developers.
 				.xs-12.m-5.low
 					#trackers
 						ul#devices
@@ -34,46 +34,53 @@ block content
 							li phone/iPhone #[span 181]
 							li phone/iPod #[span 48]
 							li tablet/iPad #[span 143]
+
 	section.module.types
 		.contain
 			.grid-row.text-center
 				.xs-12
 					h3 What can I track?
 					p In this first release several variables can be tracked, such as element clicks, page hits and visitor information; including device type and their country of origin. In the next few releases of Watch, average session times will be tracked, along with user inputs from search &amp; text fields.
-			.grid-row.type
-				.xs-12.m-6
+			.grid-row
+				.xs-12.m-6.type
 					h5 #[i.ion-android-hand.yellow] Element clicks
 					p Keep track of what your users are clicking. Edit your HTML to choose what to track.
-				.xs-12.m-6
+				.xs-12.m-6.type
 					h5 #[i.ion-ios-pulse-strong.purple] Page hits
 					p Simply initiate Watch.js on each page you want and it'll be added to the watchlist.
-			.grid-row.type
-				.xs-12.m-6
+			.grid-row
+				.xs-12.m-6.type
 					h5 #[i.ion-android-globe.blue] Top countries
 					p Group your users by country to see where most visitors originate from.
-				.xs-12.m-6
+				.xs-12.m-6.type
 					h5 #[i.ion-android-phone-landscape.teal] Device type
 					p Are your visitors viewing your site from a desktop, tablet, phone or even a car? Track it!
 
-	section.module.hasimg
+	section.module.plan-info.bg-grad
 		.contain
 			.grid-row
-				.xs-12.m-6.heroimg
-					img(src="/images/chart-tc-t.png")
-					img(src="/images/chart-ph-t.png")
-				.xs-12.m-6
-					h3 Performance obsessed
-					p You only notice speed when it isn't there. Good, because the only thing you'll notice are your stats going up in real time. With a robust, high performance database such as RethinkDB, ensure all tracking data transmitted by your users are picked up and stored securely on our servers.
+				.xs-12.m-4
+					i.ion-speedometer
+					h5 Performance Obsessed
+					p Using state of the art databases, ensure all tracking data is picked up and stored safely.
+				.xs-12.m-4
+					i.ion-paintbrush
+					h5 Beautifully Designed
+					p Watch was built with the user in mind, a simple and clean UI will help you focus on what matters.
+				.xs-12.m-4
+					i.ion-arrow-graph-up-right
+					h5 Live Statistics
+					p Everything on your dashboard updates automatically, so you'll never need to refresh.
 
-	section.module.bg
+	section.module.bg.pre-footer
 		.contain
 			.grid-row
 				.xs-12.m-6
-					h4 #[a(href="/getting-started") Getting started #[i.ion-ios-arrow-forward]]
+					h5 #[a(href="/getting-started") Getting started #[i.ion-ios-arrow-forward]]
 					p Learn more about how to get started with Watch. We'll cover the basics and get you started with a new application in no time.
 				.xs-12.m-6
-					h4 #[a(href="/docs") Explore the docs #[i.ion-ios-arrow-forward]]
-					p Our documentation covers all you need to know to get an application key set up and running in minutes.
+					h5 #[a(href="/docs") Explore the docs #[i.ion-ios-arrow-forward]]
+					p Our documentation covers all you need to know to get an application key set up and running in minutes to data analysis and manipulation.
 
 	include ../static/authmodal.pug
 

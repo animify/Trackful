@@ -1,53 +1,9 @@
 section.module
 	padding 7em 0
 	position relative
-	.intro_letter
-		absolute top -4em left -4em
-		z-index 1
-		img
-			max-width 170px
+	overflow-x hidden
 	h3
-		margin-bottom .5rem
-	.contain > h5
-		margin-top .5rem
-	.low
-		height 2em
-		margin-top -1.2em
-	&.o_h
-		overflow hidden
-	#trackers
-		padding 0 !important
-		box-shadow 0 8px 16px rgba(0, 0, 0, .08), 0 2px 6px rgba(0, 0, 0, .04)
-		#devices
-			background-color #fff
-	.grid-row:not(.types)
-		margin 0 -3em
-		& > *
-			padding 0 3em
-			vertical-align middle
-	&.types
-		.grid-row + .grid-row
-			margin-top 3em
-		.text-center
-			margin-bottom 5em
-		.type
-			p
-				font-size 1rem
-		h5
-			margin-bottom .5rem
-			color body-dark
-			line-height 1.34em
-		i
-			width 1.6rem
-			height 1.6rem
-			line-height 1.7rem
-			text-align center
-			border-radius 50%
-			color #fff
-			font-size .825rem
-			display inline-block
-			margin-right .4rem
-			relative top -2px
+		margin-bottom .7rem
 	h4
 		color body-dark
 		line-height 1.34em
@@ -63,8 +19,6 @@ section.module
 		font-size font-size-hero
 		& + h4
 			margin-top 1.6em
-	&.hasimg
-		padding 6em 0
 	&.hero
 		padding 14em 0 12em 0
 		.infochart
@@ -92,6 +46,48 @@ section.module
 					margin-left .4em
 					relative top 1px
 					color color-primary-text
+	.contain > h5
+		margin-top .5rem
+	.low
+		height 2em
+		margin-top -1.2em
+		+below('s')
+			margin-top 3em
+			height auto
+	&.o_h
+		overflow hidden
+		border-top 1px solid border-gray
+		border-bottom 1px solid border-gray
+	#trackers
+		padding 0 !important
+		box-shadow 0 8px 16px rgba(0, 0, 0, .08), 0 2px 6px rgba(0, 0, 0, .04)
+		#devices
+			background-color #fff
+	.grid-row:not(.types)
+		margin 0 -3em
+		& > *
+			padding 0 3em
+			vertical-align middle
+	&.types
+		.type
+			margin-top 3em
+		.text-center
+			margin-bottom 5em
+		h5
+			margin-bottom .5rem
+			color body-dark
+			line-height 1.34em
+		i
+			width 1.8rem
+			height 1.8rem
+			line-height 1.9rem
+			text-align center
+			border-radius 50%
+			color #fff
+			font-size 1rem
+			display inline-block
+			margin-right .4rem
+			relative top -1px
 	&.gradient
 		background linear-gradient(60deg, color-primary, #FD8788)
 		text-align center
@@ -101,29 +97,19 @@ section.module
 			color #fff
 		h5
 			color color-primary-text
+	&.bg-grad
+		background linear-gradient(60deg, color-primary, #FD8788)
 	&.pricing
 		text-align center
 		padding 8em 0 12em 0
 		margin-bottom 2em
-		background url('/images/pricing.png')
+		background url('/images/plans.png')
 		background-size cover
 		h5
 			color body-light
 	&.status
 		margin-top -12em
 		padding-bottom 3em
-	.heroimg
-		height 2em
-		text-align center
-		img
-			border-radius 8px
-			box-shadow 0 8px 16px rgba(0, 0, 0, .08), 0 2px 6px rgba(0, 0, 0, .04)
-			relative top -3.4em
-			max-width 90%
-			pointer-events none
-			& + img
-				top -6em
-				max-width 100%
 	&.bg
 		background-color light-color-smoke
 
@@ -357,6 +343,18 @@ header.nav
 	&:after
 		clear both
 
+.pre-footer
+	.xs-12 + .xs-12
+		border-left 1px solid border-gray
+		+below('s')
+			border-left 0
+			margin-top 3rem
+	h5
+		line-height 1.34em
+		margin-bottom .5rem
+	i
+		margin-left .3em
+		relative top 1px
 .plan-info
 	.grid-row
 		text-align center
@@ -367,3 +365,13 @@ header.nav
 			font-size 3em
 			margin-bottom 1.8rem
 			display inline-block
+	&.bg-grad
+		.xs-12 + .xs-12
+			+below('s')
+				margin-top 3rem
+		h5
+			color #fff !important
+		p
+			color color-primary-text
+		i
+			color lighten(color-primary, 70%)
