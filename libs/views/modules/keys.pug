@@ -10,7 +10,7 @@ block content
 				h6.sub.text-green Active applications
 				if keys
 					each key in keys
-						a.key(href="/key/" + key.id)
+						a.record(href="/key/" + key.id)
 							.float-left
 								h6 #{key.name}
 								small #{key.domain}

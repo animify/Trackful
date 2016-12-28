@@ -3039,11 +3039,9 @@ section.module.hero .button-group a.button i {
   margin-left: 0.4em;
   position: relative;
   top: 1px;
-  opacity: 0.6;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
-  filter: alpha(opacity=60);
+  color: #ffcecf;
 }
-section.module.page {
+section.module.gradient {
   background: -webkit-linear-gradient(30deg, #ff5d5f, #fd8788);
   background: -moz-linear-gradient(30deg, #ff5d5f, #fd8788);
   background: -o-linear-gradient(30deg, #ff5d5f, #fd8788);
@@ -3053,10 +3051,10 @@ section.module.page {
   padding: 8em 0 6em 0;
   margin-bottom: 2em;
 }
-section.module.page h2 {
+section.module.gradient h2 {
   color: #fff;
 }
-section.module.page h5 {
+section.module.gradient h5 {
   color: #ffcecf;
 }
 section.module.pricing {
@@ -3070,6 +3068,10 @@ section.module.pricing {
 }
 section.module.pricing h5 {
   color: #7b7878;
+}
+section.module.status {
+  margin-top: -12em;
+  padding-bottom: 3em;
 }
 section.module .heroimg {
   height: 2em;
@@ -4253,10 +4255,6 @@ body.auto {
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
-.sub {
-  padding: 0 0 0.8em 0;
-  font-size: 1.1em;
-}
 .sparkline {
   width: 100%;
   height: 7em;
@@ -4288,7 +4286,12 @@ body.auto {
 #keys:after {
   clear: both;
 }
-#keys .key {
+#keys .sub {
+  padding: 0 0 0.8rem 0;
+  font-size: 1em;
+  font-weight: 600;
+}
+.record {
   display: block;
   *zoom: 1;
   float: left;
@@ -4297,40 +4300,51 @@ body.auto {
   width: 100%;
   margin-left: 0%;
   margin-right: 0%;
-  padding: 1.8em 0;
-  border-top: 1px solid #edecec;
+  padding: 1.4em 2em;
+  border: 1px solid #edecec;
+  border-bottom: 0;
+  background-color: #fff;
 }
-#keys .key:before,
-#keys .key:after {
+.record:before,
+.record:after {
   content: '';
   display: table;
 }
-#keys .key:after {
+.record:after {
   clear: both;
 }
-#keys .key:hover h6 {
-  color: #ff5d5f;
+.record:first-of-type {
+  -webkit-border-radius: 3px 3px 0 0;
+  border-radius: 3px 3px 0 0;
 }
-#keys .key h6 {
+.record:last-of-type {
+  -webkit-border-radius: 0 0 3px 3px;
+  border-radius: 0 0 3px 3px;
+  border-bottom: 1px solid #edecec;
+}
+.record h6 {
   display: block;
   color: #353434;
 }
-#keys .key .float-left,
-#keys .key span {
+.record .float-left,
+.record span {
   display: inline-block;
   vertical-align: middle;
 }
-#keys .key span {
+.record span {
   position: relative;
   top: 1em;
   float: right;
 }
-#keys .key span i {
+.record span i {
   margin-left: 1em;
 }
-#keys .key small {
+.record small {
   display: block;
   color: #7b7878;
+}
+a.record:hover h6 {
+  color: #ff5d5f;
 }
 #key_info {
   padding: 1.4rem 0;
@@ -4517,7 +4531,7 @@ body.auto {
   padding: 6em;
 }
 footer.footer {
-  padding: 1.4rem 0;
+  padding: 1.6rem 0;
   border-top: 1px solid #edecec;
 }
 footer.footer.noborder {

@@ -7,6 +7,7 @@ const config = require(libs + 'config')
 
 const watcher = require(libs + '/controllers/watcher')
 const actions = require(libs + '/controllers/actions')
+const status = require(libs + '/controllers/status')
 const auth = require(libs + 'auth/auth')
 
 const request = require('request')
@@ -29,6 +30,43 @@ router.get('/docs', (req, res) => {
 
 router.get('/pricing', (req, res) => {
 	res.render('plans', {title: "Plans & Pricing - Watch"})
+})
+
+router.get('/status', (req, res) => {
+	async.parallel({
+		trackers: (callback) => {
+			status.trackers(req, res, (err, current) => {
+				if (!err)
+					callback(null, current)
+			})
+		},
+		users: (callback) => {
+			status.users(req, res, (err, current) => {
+				if (!err)
+					callback(null, current)
+			})
+		},
+		data: (callback) => {
+			status.data(req, res, (err, current) => {
+				if (!err)
+					callback(null, current)
+			})
+		},
+		live: (callback) => {
+			status.live(req, res, (err, current) => {
+				if (!err)
+					callback(null, current)
+			})
+		},
+		sessions: (callback) => {
+			status.sessions(req, res, (err, current) => {
+				if (!err)
+					callback(null, current)
+			})
+		}
+	}, (err, arr) => {
+		res.render('status', {title: "Status - Watch", data: arr.data, trackers: arr.trackers, users: arr.users, live: arr.live, sessions: arr.sessions})
+	})
 })
 
 router.get('/account', auth.presets, (req, res) => {

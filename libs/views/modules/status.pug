@@ -1,0 +1,66 @@
+extends ../layout
+
+block content
+	-var renderfooter = true
+	-var subpage = true
+	header.nav.light
+		.contain
+			a.logo(href="/")
+				img(src="/images/logo_white.png")
+			include ../static/homenav.pug
+	section.module.gradient
+		.contain
+			h2 Current Status
+			h5 The current status of all Watch APIs and systems
+	section.module.status
+		.contain
+			.record
+				.float-left
+					h6 Users API
+					small API for user authentication
+				if users
+					span.text-green Operational
+				else
+					span.text-orange Interrupted
+			.record
+				.float-left
+					h6 Session API
+					small API for user sessions
+				if sessions
+					span.text-green Operational
+				else
+					span.text-orange Interrupted
+			.record
+				.float-left
+					h6 Trackers API
+					small API for recieving and sending tracking data
+				if trackers
+					span.text-green Operational
+				else
+					span.text-orange Interrupted
+			.record
+				.float-left
+					h6 Data API
+					small API for hourly gathering of data
+				if data
+					span.text-green Operational
+				else
+					span.text-orange Interrupted
+			.record
+				.float-left
+					h6 Live feed
+					small Ability to send live updates to dashboards
+				if live
+					span.text-green Operational
+				else
+					span.text-orange Interrupted
+
+
+
+	include ../static/authmodal.pug
+	script(src='/js/scrollspy.js')
+	script(src='/js/app.js')
+	script.
+		let opt = {}
+
+	include ../static/homefooter.pug
