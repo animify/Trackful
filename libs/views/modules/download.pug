@@ -1,0 +1,13 @@
+extends ../layout
+
+
+block content
+	-var nofooter = true
+	.downloading
+		.centered
+			.cf.animation-bounce
+				h1 Downloading Trackful.min.js
+				h3 This window will close soon
+	script.
+		window.location.href = 'download/js'
+		setTimeout("open(location, '_self').close()", 3000)

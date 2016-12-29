@@ -76,6 +76,16 @@ router.get('/account', auth.presets, (req, res) => {
 	res.render('account', {user: req.user, title: "Account - Trackful"})
 })
 
+router.get('/download', function(req, res){
+	res.render('download')
+})
+
+router.get('/download/js', function(req, res){
+	const trackfulJS = libs + '/public/js/trackful.min.js';
+	res.download(trackfulJS)
+})
+
+
 router.get('/create/key', auth.presets, (req, res) => {
 	res.render('createkey', {user: req.user, title: "Create Key - Trackful"})
 })
@@ -125,7 +135,6 @@ router.get('/root', (req, res) => {
 	res.render('test')
 })
 
-
 router.post('/endpoint/clicks', (req, res) => {
 	watcher.incrementClickTrack(req, res, req.body.key, req.body.tracker, (err, result) => {
 		if (!err) {
@@ -163,6 +172,7 @@ router.get('/endpoint/data/clicks', (req, res) => {
 		res.status(500).json({ message: 'Error getting click data' })
 	})
 })
+log
 
 router.get('/endpoint/data/hits', (req, res) => {
 	actions.getHitData(req, res, req.query.key, (err, result) => {
@@ -174,8 +184,6 @@ router.get('/endpoint/data/hits', (req, res) => {
 })
 
 router.post('/endpoint/key/delete', (req, res) => {
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.setHeader('Access-Control-Allow-Credentials', true); // If needed
 	watcher.deleteTracker(req, res, req.body.key, (err, result) => {
 		if (!err) {
 			return res.send(result)
@@ -185,10 +193,6 @@ router.post('/endpoint/key/delete', (req, res) => {
 })
 
 router.post('/endpoint/update/avatar', (req, res) => {
-	res.setHeader('Access-Control-Allow-Origin', '*');
-
-	res.setHeader('Access-Control-Allow-Credentials', true); // If needed
-
 	actions.updateAvatar(req, res, req.body.avatar, (err, result) => {
 		if (!err) {
 			return res.send(result)

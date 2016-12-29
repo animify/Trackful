@@ -1,9 +1,9 @@
 {
-	"port": 3000,
+	"port": 80,
 	"ports": {
-		"http":3000
+		"http":80
 	},
-	"url": "localhost",
+	"url": "trackful",
 	"security": {
 		"tokenLife" : 3600
 	},

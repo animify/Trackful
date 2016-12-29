@@ -38,7 +38,7 @@ app.use(cookieParser())
 	.use(session({
 		secret: 'keyboard cat',
 		cookie: {
-			maxAge: 8460000
+			maxAge: 84600000
 		},
 		store: rdbStore,
 		resave: true,
@@ -51,17 +51,16 @@ app.use(cookieParser())
 	.use(bodyParser.json())
 	.use(device.capture({ parseUserAgent : true }))
 
+app.use(cors())
+
 app.set('port', process.env.PORT || config.get('port') || 80)
 	.set('views', __dirname + '/libs/views/modules')
 	.set('view engine', 'pug')
 	.set('view options', { layout: false })
 
-app.options('/endpoint/clicks', cors())
-app.options('/endpoint/hits', cors())
-
 app.use('/', root)
 	.use('/auth', authRouter)
 
 http.listen(app.get('port'), function () {
-	log.info('Listening on ' + app.get('port'))
+	log.info('Trackful server running on port: ' + app.get('port'))
 })

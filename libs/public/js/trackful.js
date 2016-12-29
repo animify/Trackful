@@ -14,7 +14,7 @@
 			let sender = new XMLHttpRequest()
 			sender.open("POST", url, true)
 			sender.setRequestHeader("Content-Type", "application/json")
-			sender.withCredentials = false;
+			sender.withCredentials = false
 			sender.onreadystatechange = function () {
 			if (sender.readyState != 4 && sender.status != 200)
 				console.error("Trackful: Somethings going wrong with tracking. Visit http://trackful.io to cross check your setup again.")
@@ -42,6 +42,5 @@
 	} else {
 		console.debug("Trackful: You haven't initalised your track key. Assign it to window.TRACKFUL_KEY")
 	}
-
 
 })()
