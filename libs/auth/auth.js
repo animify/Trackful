@@ -49,11 +49,11 @@ const loginCallbackHandler = function (objectMapper, type) {
 	}
 }
 
-const callbackURL = 'http://' + config.get('url') + ':' + config.get('port') + '/auth/login/callback'
+const callbackURL = 'https://' + ((process.env.NODE_ENV == 'development') ? config.get('url') : config.get('production_url')) + ':' + config.get('port') + '/auth/login/callback'
 
 passport.use(new GitHubStrategy({
-		clientID: config.get('github').clientID,
-		clientSecret: config.get('github').clientSecret,
+		clientID: (process.env.NODE_ENV == 'development') ? config.get('github_dev').clientID : config.get('github').clientID,
+		clientSecret: (process.env.NODE_ENV == 'development') ? config.get('github_dev').clientSecret : config.get('github').clientSecret,
 		callbackURL: callbackURL + '/github'
 	},
 	loginCallbackHandler(function (profile) {
@@ -70,8 +70,8 @@ passport.use(new GitHubStrategy({
 ))
 
 passport.use(new TwitterStrategy({
-		consumerKey: config.get('twitter').consumerKey,
-		consumerSecret: config.get('twitter').consumerSecret,
+		consumerKey: (process.env.NODE_ENV == 'development') ? config.get('twitter_dev').consumerKey : config.get('twitter').consumerKey,
+		consumerSecret: (process.env.NODE_ENV == 'development') ? config.get('twitter_dev').consumerSecret : config.get('twitter').consumerSecret,
 		callbackURL: callbackURL + '/twitter'
 	},
 	loginCallbackHandler(function (profile) {

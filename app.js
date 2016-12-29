@@ -2,10 +2,16 @@
 
 const express = require('express')
 const app = express()
-const http = require('http').Server(app)
-const io = require('socket.io')(http)
-global.socketIO = io
 const fs = require('fs')
+
+const credentials = {
+	key: (process.env.NODE_ENV == 'development') ? fs.readFileSync('ssl/localhost.key') : fs.readFileSync('ssl/trackful_io.key'),
+	cert: (process.env.NODE_ENV == 'development') ? fs.readFileSync('ssl/localhost.crt') : fs.readFileSync('ssl/trackful_io.crt')
+}
+
+const https = require('https').Server(credentials, app)
+const io = require('socket.io')(https)
+global.socketIO = io
 
 const libs = process.cwd() + '/libs/'
 const log = require(libs + 'logs/log')(module)
@@ -18,6 +24,7 @@ const session = require('express-session')
 const RDBStore = require('session-rethinkdb')(session)
 const device = require('express-device')
 const cors = require('cors')
+const helmet = require('helmet')
 
 const root = require(libs + 'routes/root')
 const cron = require(libs + 'cron/cron')
@@ -28,13 +35,20 @@ const auth = require(libs + 'auth/auth')
 const authRouter = require(libs + 'routes/auth')
 
 const rdbStore = new RDBStore(r, {
-	browserSessionsMaxAge: 60000,
+	browserSessionsMaxAge: 600000,
 	table: 'session'
 })
 
 app.enable('trust proxy')
 
-app.use(cookieParser())
+app.use(function(req, res, next) {
+		if (req.secure){
+			return next()
+		}
+		res.redirect("https://" + req.headers.host + req.url)
+	})
+	.use(cookieParser())
+	.use(helmet())
 	.use(session({
 		secret: 'keyboard cat',
 		cookie: {
@@ -50,8 +64,7 @@ app.use(cookieParser())
 	.use(bodyParser())
 	.use(bodyParser.json())
 	.use(device.capture({ parseUserAgent : true }))
-
-app.use(cors())
+	.use(cors())
 
 app.set('port', process.env.PORT || config.get('port') || 80)
 	.set('views', __dirname + '/libs/views/modules')
@@ -61,6 +74,6 @@ app.set('port', process.env.PORT || config.get('port') || 80)
 app.use('/', root)
 	.use('/auth', authRouter)
 
-http.listen(app.get('port'), function () {
+https.listen(app.get('port'), function () {
 	log.info('Trackful server running on port: ' + app.get('port'))
 })

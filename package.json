@@ -4,8 +4,8 @@
   "description": "Collaboration coding",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "test": "test"
+    "prod": "NODE_ENV='production' node --use-strict app.js",
+    "dev": "NODE_ENV='development' nodemon --use-strict app.js --opt1 --verbose"
   },
   "author": "Stefan Mansson <st.mansson@icloud.com> (http://mansson.io)",
   "license": "MIT",
@@ -24,6 +24,7 @@
     "express-session-rethinkdb": "^0.4.1",
     "fs": "0.0.1-security",
     "geoip-lite": "^1.1.8",
+    "helmet": "^3.2.0",
     "nconf": "^0.8.4",
     "passport": "^0.3.2",
     "passport-github": "^1.1.0",

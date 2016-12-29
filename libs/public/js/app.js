@@ -19,82 +19,82 @@ $(() => {
 		const clickValues = []
 		const clickCat = []
 		let options = {
-				chart: {
-					type: 'areaspline',
-					backgroundColor: null,
-					style: {"fontFamily":"\"Avenir W01\", sans-serif","fontSize":"12px"},
-					margin: [0,0,0,0],
-					spacingLeft: 0
+			chart: {
+				type: 'areaspline',
+				backgroundColor: null,
+				style: {"fontFamily":"\"Avenir W01\", sans-serif","fontSize":"12px"},
+				margin: [0,0,0,0],
+				spacingLeft: 0
+			},
+			title : {
+					text: null
+			},
+			credits: {
+				enabled: false
+			},
+			xAxis: {
+				title: {
+						enabled: false
 				},
-				title : {
-						text: null
+				labels: {
+						enabled: false
 				},
-				credits: {
-					enabled: false
+				tickLength: 0,
+				gridLineWidth: 0,
+				minorGridLineWidth: 0,
+				lineWidth: 0,
+				tickmarkPlacement: 'on',
+				minPadding:0,
+				maxPadding:0
+			},
+			yAxis: {
+				title: {
+						enabled: false
 				},
-				xAxis: {
-					title: {
-							enabled: false
-					},
-					labels: {
-							enabled: false
-					},
-					tickLength: 0,
-					gridLineWidth: 0,
-					minorGridLineWidth: 0,
-					lineWidth: 0,
-					tickmarkPlacement: 'on',
-					minPadding:0,
-					maxPadding:0
+				labels: {
+						enabled: false
 				},
-				yAxis: {
-					title: {
-							enabled: false
-					},
-					labels: {
-							enabled: false
-					},
-					gridLineWidth: 0,
-					minorGridLineWidth: 0,
-					TickLength: 0
-				},
-				tooltip: {
-					shared: true,
-					useHTML: true,
-					borderWidth: 0,
-					borderRadius: 4,
-					padding: 11,
-					shadow: false,
-					headerFormat: '<div style="color: {series.color}">{point.x} </div>',
-					pointFormat: '<h6><b>{point.y}</b></h6>',
-					style: {
-						color: "#fff"
-					}
-				},
-				plotOptions: {
-					areaspline: {
-						fillColor: "rgba(255,255,255,.3)",
-						marker: {
-							enabled: false,
-							radius: 1,
-							states: {
-								hover: {
-									enabled: false
-								}
+				gridLineWidth: 0,
+				minorGridLineWidth: 0,
+				TickLength: 0
+			},
+			tooltip: {
+				shared: true,
+				useHTML: true,
+				borderWidth: 0,
+				borderRadius: 4,
+				padding: 11,
+				shadow: false,
+				headerFormat: '<div style="color: {series.color}">{point.x} </div>',
+				pointFormat: '<h6><b>{point.y}</b></h6>',
+				style: {
+					color: "#fff"
+				}
+			},
+			plotOptions: {
+				areaspline: {
+					fillColor: "rgba(255,255,255,.3)",
+					marker: {
+						enabled: false,
+						radius: 1,
+						states: {
+							hover: {
+								enabled: false
 							}
 						}
 					}
-				},
-				series: [{
-					color: "#fff"
-				}],
-				legend: {
-					enabled: false
-				},
-				noData: {
-					style: {"color": "#fff"},
-					useHTML: true
 				}
+			},
+			series: [{
+				color: "#fff"
+			}],
+			legend: {
+				enabled: false
+			},
+			noData: {
+				style: {"color": "#fff"},
+				useHTML: true
+			}
 		}
 
 		opt.hitOptions = JSON.parse(JSON.stringify(options))
@@ -288,7 +288,7 @@ $(() => {
 		}
 	}
 
-	$('input').bind('change', function() {
+	$('input').bind('keydown', function() {
 		$(this).removeClass('error')
 	})
 
@@ -301,7 +301,7 @@ $(() => {
 			contentType: 'application/json',
 			success: function(data) {
 				if (data.status) {
-					$('.error').slideDown('fast').find('p').html(`<i class="ion-android-alert"/> ${data.message}`).parent().delay(8000).slideUp('fast')
+					$('.error').stop().slideDown('fast').find('p').html(`<i class="ion-android-alert"/> ${data.message}`).parent().delay(8000).slideUp('fast')
 					$(`#${data.element}`).addClass('error').delay(8000).queue(function(){
 						$(this).removeClass("error").dequeue()
 					})

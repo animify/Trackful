@@ -88,3 +88,4 @@ $RECYCLE.BIN/
 *.lnk
 
 rethinkdb_data
+ssl

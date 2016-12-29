@@ -1,9 +1,10 @@
 {
-	"port": 80,
+	"port": 443,
 	"ports": {
-		"http":80
+		"http": 443
 	},
-	"url": "trackful",
+	"url": "localhost",
+	"production_url": "trackful.io",
 	"security": {
 		"tokenLife" : 3600
 	},
@@ -18,6 +19,14 @@
 	"twitter": {
 		"consumerKey": "h68DhVEVPvO7drPOXb5kEFGj3",
 		"consumerSecret": "wX72GxdY0I2pYAQbZyaUsWtT2nArmh87fqUdwObl1Mw7KVUrVa"
+	},
+	"twitter_dev": {
+		"consumerKey": "aJw4GZPgu7jYwbN5zBoiEKLIH",
+		"consumerSecret": "WY8AubEoMbHNv7UF8tJDX3GDsXpwzDiJWY26yG3bu2dAxDslUu"
+	},
+	"github_dev": {
+		"clientID": "ecfb4df98656f229a4c9",
+		"clientSecret": "354a8ecdb6d7239e92b5b708cbf083cd6236e088"
 	},
 	"github": {
 		"clientID": "02b2f929c71d539808a0",

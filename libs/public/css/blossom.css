@@ -2245,6 +2245,8 @@ ol.ordered li[value]:before {
 .input input.error,
 .input textarea.error {
   border-color: #ff4949;
+  color: #ff4949;
+  background-color: #ffeded;
 }
 .input input:focus,
 .input textarea:focus {
