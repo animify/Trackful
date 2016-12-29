@@ -36,6 +36,25 @@
 				color body-dark
 				i
 					color primary-color
+		&.desktop
+			+below('s')
+				fixed top 3em left
+				margin 0
+				width 100%
+				text-align center
+				z-index -1
+				a
+					padding 1em 0
+					background-color #fff
+					width 100%
+					margin 0 !important
+					border-bottom 1px solid border-gray
+		&.mobile
+			display none
+			& > i
+				font-size 1.9em
+				relative top 3px
+				display block
 
 	&.light
 		.options

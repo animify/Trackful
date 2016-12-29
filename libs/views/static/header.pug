@@ -2,21 +2,20 @@ head
 	block vars
 	block head
 	title= title
-	
+
 	meta(charset="UTF-8")
 	meta(name="description", content="Trackful.io is a free web analytics tool tracking how visitors use your website")
 	meta(name="keywords", content="analytics,statistics,")
-	meta(name="author", content="Hege Refsnes")
+	meta(name="author", content="Stefan Mansson")
 	meta(name="robots", content="index, follow")
+	meta(name="viewport", content="width=device-width, initial-scale=1")
 
 	link(rel="icon" type="image/png" href="/images/favicon.png")
-	link(rel="stylesheet", type="text/css", href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700")
-	link(rel="stylesheet", type="text/css", href="//fonts.googleapis.com/icon?family=Material+Icons")
 	link(rel="stylesheet", type="text/css", href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css")
 	link(rel="stylesheet", type="text/css", href="//fast.fonts.net/cssapi/2dc1fe03-ff13-4dc6-8e5f-d2b0fc3de8cc.css")
 	link(rel="stylesheet", href="/css/blossom.min.css")
 
-	script(src='//code.jquery.com/jquery.js')
-	script(src="/js/pace.js")
 body
 	block content
+	script(src='//code.jquery.com/jquery.js')
+	script(src="/js/pace.js")

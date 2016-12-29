@@ -358,6 +358,17 @@ $(() => {
 		}
 	}
 
+	$('.mobilenav').bind('click', function() {
+		if ($('.options.desktop').is(":visible")) {
+			$('.options.desktop').slideUp('fast', () => {
+				$('.nav').removeClass('fx')
+			})
+		} else {
+			$('.nav').addClass('fx')
+			$('.options.desktop').slideDown('fast')
+		}
+	})
+
 	$('[data-modal]').bind('click', function() {
 		let id = $(this).attr('data-modal')
 		toggleModal(id)
@@ -414,6 +425,7 @@ $(() => {
 
 	let didScroll
 	let lastScrollTop = 0
+	let width = 0
 	const delta = 5
 	const navbarHeight = $('header.nav').outerHeight()
 
@@ -429,14 +441,15 @@ $(() => {
 	}, 250);
 
 	hasScrolled = () => {
-		var st = $(this).scrollTop()
+		let st = $(this).scrollTop()
+		let dw = $( document ).width()
 
 		if (st <= 0) $('header.nav').removeClass('fx')
 
 		if(Math.abs(lastScrollTop - st) <= delta) return
 
 		if (st > navbarHeight) {
-			if (st > lastScrollTop){
+			if (st > lastScrollTop && dw > 768){
 				$('header.nav').slideUp('fast', () => {
 					$('header.nav').removeClass('fx').addClass('nav-up')
 				})
@@ -445,8 +458,8 @@ $(() => {
 			}
 		}
 		lastScrollTop = st
-	}
 
+	}
 
 	initialise = () => {
 		if ($('.graph .sparkline').highcharts != undefined) {
