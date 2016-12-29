@@ -81,7 +81,7 @@ router.get('/download', function(req, res){
 })
 
 router.get('/download/js', function(req, res){
-	const trackfulJS = libs + '/public/js/trackful.min.js';
+	const trackfulJS = libs + '/public/js/trackful.min.js'
 	res.download(trackfulJS)
 })
 
@@ -122,7 +122,7 @@ router.get('/key/:key', auth.presets, (req, res) => {
 				}
 			}, (err, arr) => {
 				const trackR = io.of(`/track_${req.params.key}`)
-				res.render('key', {user: req.user, title: "Key Dashboard - Trackful", clicktrackers: arr.trackers[0], hittrackers: arr.trackers[1], countrytrackers: arr.trackers[2], devicetrackers: arr.trackers[3], hasTrackers: arr.trackers[4], trackKey: req.params.key, key: arr.key[0]})
+				res.render('key', {user: req.user, title: "Dashboard - Trackful", clicktrackers: arr.trackers[0], hittrackers: arr.trackers[1], countrytrackers: arr.trackers[2], devicetrackers: arr.trackers[3], hasTrackers: arr.trackers[4], trackKey: req.params.key, key: arr.key[0]})
 			})
 
 		} else {
@@ -199,6 +199,16 @@ router.post('/endpoint/update/avatar', (req, res) => {
 		}
 		res.json(err)
 	})
+})
+
+router.use(function(req, res, next){
+	res.status(404)
+
+	if (req.accepts('html')) return res.render('404', { url: req.url })
+
+	if (req.accepts('json')) return res.send({ error: 404, message: 'Trackful: Page not found' })
+
+	res.type('txt').send('Trackful 404: Page not found')
 })
 
 module.exports = router

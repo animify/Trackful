@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+	-var nofooter = true
+	.not_found
+		.centered
+			.logo
+				img(src="/images/logo_white.png")
+			.cf.animation-bounce
+				h1 Oh oh. #[b 404].
+				h3 We couldn't find what you're looking for.

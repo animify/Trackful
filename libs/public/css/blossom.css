@@ -4646,7 +4646,8 @@ div.error p i {
   position: relative;
   top: 1px;
 }
-.downloading {
+.downloading,
+.not_found {
   width: 100%;
   height: 100%;
   background: -webkit-linear-gradient(30deg, #ff5d5f, #fd8788);
@@ -4655,14 +4656,31 @@ div.error p i {
   background: -ms-linear-gradient(30deg, #ff5d5f, #fd8788);
   background: linear-gradient(60deg, #ff5d5f, #fd8788);
 }
-.downloading .cf {
+.downloading .logo,
+.not_found .logo {
+  position: relative;
+  top: -4em;
+  width: 100%;
   text-align: center;
 }
-.downloading h1 {
+.downloading .logo img,
+.not_found .logo img {
+  max-height: 2em;
+  opacity: 0.4;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+  filter: alpha(opacity=40);
+}
+.downloading .cf,
+.not_found .cf {
+  text-align: center;
+}
+.downloading h1,
+.not_found h1 {
   font-weight: 300;
   color: #fff;
 }
-.downloading h3 {
+.downloading h3,
+.not_found h3 {
   color: #ffcecf;
 }
 .flash {
