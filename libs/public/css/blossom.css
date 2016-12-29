@@ -3026,24 +3026,31 @@ section.module.types .type {
 section.module.types .text-center {
   margin-bottom: 5em;
 }
-section.module.types h5 {
-  margin-bottom: 0.5rem;
-  color: #353434;
-  line-height: 1.34em;
+@media only screen and (max-width: 768px) {
+  section.module.types.bg-grad .xs-12 + .xs-12 {
+    margin-top: 3rem;
+  }
 }
-section.module.types i {
+section.module.types.bg-grad h3 {
+  color: #fff;
+}
+section.module.types.bg-grad h5 {
+  margin-bottom: 0.5rem;
+  line-height: 1.34em;
+  color: #fff !important;
+}
+section.module.types.bg-grad p {
+  color: #ffcecf;
+}
+section.module.types.bg-grad i {
+  color: #ffcecf;
   width: 1.8rem;
   height: 1.8rem;
-  line-height: 1.9rem;
-  text-align: center;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-  color: #fff;
-  font-size: 1rem;
-  display: inline-block;
-  margin-right: 0.4rem;
+  margin-right: 0.2rem;
   position: relative;
-  top: -1px;
+  top: 1px;
+  display: inline-block;
+  text-align: center;
 }
 section.module.gradient {
   background: -webkit-linear-gradient(30deg, #ff5d5f, #fd8788);
@@ -3226,42 +3233,37 @@ header.nav .logo img {
   margin-top: 3.4em;
 }
 .docs .desc p {
-  padding-left: 4.4rem;
+  padding-left: 4.6rem;
 }
 .docs .desc h5 {
-  padding-left: 4.4rem;
+  padding-left: 4.6rem;
   position: relative;
 }
 .docs .desc h5:before {
-  font-family: 'Ionicons';
-  font-size: 1em;
   position: absolute;
   left: 0;
-  top: 0.2em;
-  width: 2.3em;
-  height: 2.3em;
-  line-height: 2.3em;
-  color: #fff;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-  text-align: center;
+  top: 0;
+  background: url("/images/icons.png") no-repeat;
+  -webkit-background-size: 3em;
+  -moz-background-size: 3em;
+  background-size: 3em;
+  width: 2.9em;
+  height: 2.9em;
   vertical-align: top;
   display: inline-block;
+  content: '';
 }
 .docs .desc.gt {
   margin-top: -1em;
 }
 .docs .desc.gt h5:before {
-  content: '\f279';
-  background-color: #4692ff;
+  background-position: 0 0;
 }
 .docs .desc.hs h5:before {
-  content: '\f27c';
-  background-color: #ff6d6d;
+  background-position: 0 -236px;
 }
 .docs .desc.ss h5:before {
-  content: '\f3cd';
-  background-color: #12df6c;
+  background-position: 0 -412px;
 }
 .docs .doc,
 .docs .desc {
@@ -3415,6 +3417,36 @@ header.nav .logo img {
 .plan:after {
   clear: both;
 }
+.pre-footer p {
+  padding-left: 6rem;
+  font-size: 1rem !important;
+}
+.pre-footer h5 {
+  padding-left: 6rem;
+  position: relative;
+  line-height: 1.34em;
+  margin-bottom: 0.5rem;
+}
+.pre-footer h5:before {
+  position: absolute;
+  left: -1.1rem;
+  top: 0;
+  background: url("/images/icons.png") no-repeat;
+  -webkit-background-size: 4.6em;
+  -moz-background-size: 4.6em;
+  background-size: 4.6em;
+  width: 4.4em;
+  height: 4.4em;
+  vertical-align: top;
+  display: inline-block;
+  content: '';
+}
+.pre-footer .pf_gt h5:before {
+  background-position: 0 0;
+}
+.pre-footer .pf_ed h5:before {
+  background-position: 0 -90px;
+}
 .pre-footer .xs-12 + .xs-12 {
   border-left: 1px solid #edecec;
 }
@@ -3423,10 +3455,6 @@ header.nav .logo img {
     border-left: 0;
     margin-top: 3rem;
   }
-}
-.pre-footer h5 {
-  line-height: 1.34em;
-  margin-bottom: 0.5rem;
 }
 .pre-footer i {
   margin-left: 0.3em;
@@ -3439,25 +3467,30 @@ header.nav .logo img {
 .plan-info .grid-row h5 {
   line-height: 1.34em;
   margin-bottom: 0.5rem;
+  padding-top: 2.2em;
 }
-.plan-info .grid-row i {
-  font-size: 3em;
-  margin-bottom: 1.8rem;
-  display: inline-block;
+.plan-info .grid-row h5:before {
+  position: relative;
+  top: -1.6em;
+  background: url("/images/icons.png") no-repeat;
+  -webkit-background-size: 5.6em;
+  -moz-background-size: 5.6em;
+  background-size: 5.6em;
+  width: 5.4em;
+  height: 5.4em;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  content: '';
 }
-@media only screen and (max-width: 768px) {
-  .plan-info.bg-grad .xs-12 + .xs-12 {
-    margin-top: 3rem;
-  }
+.plan-info .grid-row .pf_po h5:before {
+  background-position: 0 -762px;
 }
-.plan-info.bg-grad h5 {
-  color: #fff !important;
+.plan-info .grid-row .pf_bd h5:before {
+  background-position: 0 -655px;
 }
-.plan-info.bg-grad p {
-  color: #ffcecf;
-}
-.plan-info.bg-grad i {
-  color: #ffcecf;
+.plan-info .grid-row .pf_ls h5:before {
+  background-position: 0 -210px;
 }
 .text-primary {
   color: #ff5d5f !important;

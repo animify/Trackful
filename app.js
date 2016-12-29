@@ -74,6 +74,17 @@ app.set('port', process.env.PORT || config.get('port') || 80)
 app.use('/', root)
 	.use('/auth', authRouter)
 
+
+app.use((req, res, next) => {
+	res.status(404)
+
+	if (req.accepts('html')) return res.render('404')
+
+	if (req.accepts('json')) return res.send({ error: 404, message: 'Trackful: Page not found' })
+
+	res.type('txt').send('Trackful 404: Page not found')
+})
+
 https.listen(app.get('port'), function () {
 	log.info('Trackful server running on port: ' + app.get('port'))
 })

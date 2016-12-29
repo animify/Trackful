@@ -201,14 +201,4 @@ router.post('/endpoint/update/avatar', (req, res) => {
 	})
 })
 
-router.use(function(req, res, next){
-	res.status(404)
-
-	if (req.accepts('html')) return res.render('404', { url: req.url })
-
-	if (req.accepts('json')) return res.send({ error: 404, message: 'Trackful: Page not found' })
-
-	res.type('txt').send('Trackful 404: Page not found')
-})
-
 module.exports = router

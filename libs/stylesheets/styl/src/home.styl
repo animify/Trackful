@@ -73,21 +73,26 @@ section.module
 			margin-top 3em
 		.text-center
 			margin-bottom 5em
-		h5
-			margin-bottom .5rem
-			color body-dark
-			line-height 1.34em
-		i
-			width 1.8rem
-			height 1.8rem
-			line-height 1.9rem
-			text-align center
-			border-radius 50%
-			color #fff
-			font-size 1rem
-			display inline-block
-			margin-right .4rem
-			relative top -1px
+		&.bg-grad
+			.xs-12 + .xs-12
+				+below('s')
+					margin-top 3rem
+			h3
+				color #fff
+			h5
+				margin-bottom .5rem
+				line-height 1.34em
+				color #fff !important
+			p
+				color color-primary-text
+			i
+				color lighten(color-primary, 70%)
+				width 1.8rem
+				height 1.8rem
+				margin-right .2rem
+				relative top 1px
+				display inline-block
+				text-align center
 	&.gradient
 		background linear-gradient(60deg, color-primary, #FD8788)
 		text-align center
@@ -222,33 +227,27 @@ header.nav
 		margin-top 3.4em
 	.desc
 		p
-			padding-left 4.4rem
+			padding-left 4.6rem
 		h5
-			padding-left 4.4rem
+			padding-left 4.6rem
 			position relative
 			&:before
-				font-family 'Ionicons'
-				font-size 1em
-				absolute left 0 top .2em
-				width 2.3em
-				height 2.3em
-				line-height 2.3em
-				color #fff
-				border-radius 50%
-				text-align center
+				absolute left top
+				background url('/images/icons.png') no-repeat
+				background-size 3em
+				width 2.9em
+				height 2.9em
 				vertical-align top
 				display inline-block
+				content ''
 		&.gt
 			margin-top -1em
 			h5:before
-				content '\f279'
-				background-color lighten(color-blue, 20%)
+				background-position 0 0
 		&.hs h5:before
-			content '\f27c'
-			background-color lighten(color-red, 20%)
+			background-position 0 -236px
 		&.ss h5:before
-			content '\f3cd'
-			background-color lighten(color-green, 10%)
+			background-position 0 -412px
 
 	.doc, .desc
 		padding-top 1em
@@ -363,14 +362,32 @@ header.nav
 		clear both
 
 .pre-footer
+	p
+		padding-left 6rem
+		font-size 1rem !important
+	h5
+		padding-left 6rem
+		position relative
+		line-height 1.34em
+		margin-bottom .5rem
+		&:before
+			absolute left -1.1rem top
+			background url('/images/icons.png') no-repeat
+			background-size 4.6em
+			width 4.4em
+			height 4.4em
+			vertical-align top
+			display inline-block
+			content ''
+	.pf_gt h5:before
+		background-position 0 0
+	.pf_ed h5:before
+		background-position 0 -90px
 	.xs-12 + .xs-12
 		border-left 1px solid border-gray
 		+below('s')
 			border-left 0
 			margin-top 3rem
-	h5
-		line-height 1.34em
-		margin-bottom .5rem
 	i
 		margin-left .3em
 		relative top 1px
@@ -380,17 +397,20 @@ header.nav
 		h5
 			line-height 1.34em
 			margin-bottom .5rem
-		i
-			font-size 3em
-			margin-bottom 1.8rem
-			display inline-block
-	&.bg-grad
-		.xs-12 + .xs-12
-			+below('s')
-				margin-top 3rem
-		h5
-			color #fff !important
-		p
-			color color-primary-text
-		i
-			color lighten(color-primary, 70%)
+			padding-top 2.2em
+			&:before
+				relative top -1.6em
+				background url('/images/icons.png') no-repeat
+				background-size 5.6em
+				width 5.4em
+				height 5.4em
+				text-align center
+				display block
+				margin 0 auto
+				content ''
+		.pf_po h5:before
+			background-position 0 -762px
+		.pf_bd h5:before
+			background-position 0 -655px
+		.pf_ls h5:before
+			background-position 0 -210px
