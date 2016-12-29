@@ -209,7 +209,6 @@ $(() => {
 					updateClickTrackers(r.change)
 					break
 				case "hit":
-					console.log(r.change);
 					updateHitTrackers(r.change)
 					break
 			}

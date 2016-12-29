@@ -1,3 +1,5 @@
+"use strict"
+
 const express = require('express')
 const router = express.Router()
 
@@ -13,6 +15,7 @@ const auth = require(libs + 'auth/auth')
 const request = require('request')
 const fs = require('fs')
 const async = require('async')
+const cors = require('cors')
 
 let io = global.socketIO
 
@@ -108,7 +111,7 @@ router.get('/key/:key', auth.presets, (req, res) => {
 					})
 				}
 			}, (err, arr) => {
-				trackR = io.of(`/track_${req.params.key}`)
+				const trackR = io.of(`/track_${req.params.key}`)
 				res.render('key', {user: req.user, title: "Key Dashboard - Trackful", clicktrackers: arr.trackers[0], hittrackers: arr.trackers[1], countrytrackers: arr.trackers[2], devicetrackers: arr.trackers[3], hasTrackers: arr.trackers[4], trackKey: req.params.key, key: arr.key[0]})
 			})
 
@@ -122,10 +125,11 @@ router.get('/root', (req, res) => {
 	res.render('test')
 })
 
+
 router.post('/endpoint/clicks', (req, res) => {
 	watcher.incrementClickTrack(req, res, req.body.key, req.body.tracker, (err, result) => {
 		if (!err) {
-			trackR = io.of(`/track_${req.body.key}`)
+			const trackR = io.of(`/track_${req.body.key}`)
 			trackR.emit('change',{
 				change: result,
 				type: 'click'
@@ -139,7 +143,7 @@ router.post('/endpoint/clicks', (req, res) => {
 router.post('/endpoint/hits', (req, res) => {
 	watcher.incrementHitTrack(req, res, req.body.key, req.body.page, (err, result) => {
 		if (!err) {
-			trackR = io.of(`/track_${req.body.key}`)
+			const trackR = io.of(`/track_${req.body.key}`)
 			trackR.emit('change',{
 				change: result,
 				type: 'hit'
@@ -149,6 +153,7 @@ router.post('/endpoint/hits', (req, res) => {
 		res.send(err)
 	})
 })
+
 
 router.get('/endpoint/data/clicks', (req, res) => {
 	actions.getClickData(req, res, req.query.key, (err, result) => {
@@ -169,6 +174,8 @@ router.get('/endpoint/data/hits', (req, res) => {
 })
 
 router.post('/endpoint/key/delete', (req, res) => {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Credentials', true); // If needed
 	watcher.deleteTracker(req, res, req.body.key, (err, result) => {
 		if (!err) {
 			return res.send(result)
@@ -178,6 +185,10 @@ router.post('/endpoint/key/delete', (req, res) => {
 })
 
 router.post('/endpoint/update/avatar', (req, res) => {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+
+	res.setHeader('Access-Control-Allow-Credentials', true); // If needed
+
 	actions.updateAvatar(req, res, req.body.avatar, (err, result) => {
 		if (!err) {
 			return res.send(result)

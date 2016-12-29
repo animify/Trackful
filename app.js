@@ -1,3 +1,5 @@
+"use strict"
+
 const express = require('express')
 const app = express()
 const http = require('http').Server(app)
@@ -15,6 +17,7 @@ const request = require('request').defaults({ encoding: null })
 const session = require('express-session')
 const RDBStore = require('session-rethinkdb')(session)
 const device = require('express-device')
+const cors = require('cors')
 
 const root = require(libs + 'routes/root')
 const cron = require(libs + 'cron/cron')
@@ -52,6 +55,9 @@ app.set('port', process.env.PORT || config.get('port') || 80)
 	.set('views', __dirname + '/libs/views/modules')
 	.set('view engine', 'pug')
 	.set('view options', { layout: false })
+
+app.options('/endpoint/clicks', cors())
+app.options('/endpoint/hits', cors())
 
 app.use('/', root)
 	.use('/auth', authRouter)

@@ -7,13 +7,14 @@
 	if (trackfulKey != null) {
 		hit = (trackfulKey) => {
 			hitData = {"key": trackfulKey, "page": window.location.href}
-			useSender('/endpoint/hits', hitData)
+			useSender('//trackful.io/endpoint/hits', hitData)
 		}
 
 		useSender = (url, senderData) => {
 			let sender = new XMLHttpRequest()
 			sender.open("POST", url, true)
 			sender.setRequestHeader("Content-Type", "application/json")
+			sender.withCredentials = false;
 			sender.onreadystatechange = function () {
 			if (sender.readyState != 4 && sender.status != 200)
 				console.error("Trackful: Somethings going wrong with tracking. Visit http://trackful.io to cross check your setup again.")
@@ -23,7 +24,7 @@
 
 		trackHandler = (e) => {
 			trackData = {"key": trackfulKey, "tracker": e.target.getAttribute('data-track')}
-			useSender('/endpoint/clicks', trackData)
+			useSender('//trackful.io/endpoint/clicks', trackData)
 		}
 
 		newTrackMap = (e) => {

@@ -101,7 +101,7 @@ exports.getKeyInfo = (req, res, key, callback) => {
 exports.getTrackers = (req, res, key, callback) => {
 	r.db(config.get("rethink").trackDB).table('trackers').filter({key:key})
 	.run((err, rest) => {
-		hasTrackers = false
+		let hasTrackers = false
 		if (rest[0]) {
 			if (Object.keys(rest[0].clicks).length > 0 || Object.keys(rest[0].hits).length > 0 || Object.keys(rest[0].countries).length > 0 || Object.keys(rest[0].devices).length > 0)
 				hasTrackers = true

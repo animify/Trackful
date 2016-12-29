@@ -1,3 +1,5 @@
+"use strict"
+
 const libs = process.cwd() + '/libs/'
 const log = require(libs + 'logs/log')(module)
 const config = require(libs + 'config')

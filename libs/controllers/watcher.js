@@ -1,3 +1,5 @@
+"use strict"
+
 const libs = process.cwd() + '/libs/'
 const log = require(libs + 'logs/log')(module)
 const config = require(libs + 'config')
@@ -14,7 +16,7 @@ exports.incrementClickTrack = (req, res, key, track, callback) => {
 		{returnChanges: true}
 	).run(function(err, cursor) {
 		if (cursor.changes) return callback(false, [track, cursor.changes[0].new_val.clicks[track]])
-		
+
 		callback(true, null)
 	})
 }

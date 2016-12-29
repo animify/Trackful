@@ -1,3 +1,5 @@
+"use strict"
+
 let authController = {}
 
 authController.getUser = function (req, res) {

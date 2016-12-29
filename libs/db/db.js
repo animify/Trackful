@@ -1,3 +1,5 @@
+"use strict"
+
 const r = require('rethinkdbdash')({
 	db: 'users'
 })
