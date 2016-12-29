@@ -3257,7 +3257,7 @@ header.nav .logo img {
   margin-top: -1em;
 }
 .docs .desc.gt h5:before {
-  background-position: 0 0;
+  background-position: 0 4px;
 }
 .docs .desc.hs h5:before {
   background-position: 0 -236px;
@@ -3442,7 +3442,7 @@ header.nav .logo img {
   content: '';
 }
 .pre-footer .pf_gt h5:before {
-  background-position: 0 0;
+  background-position: 0 4px;
 }
 .pre-footer .pf_ed h5:before {
   background-position: 0 -90px;
