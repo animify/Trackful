@@ -25,6 +25,7 @@ exports.incrementClickTrack = (req, res, key, track, callback) => {
 exports.incrementHitTrack = (req, res, key, href, callback) => {
 	const preUrl = url.parse(href)
 	const originUrl = url.parse(req.headers.origin)
+	console.log(originUrl);
 	const originHost = originUrl.host
 	const page = preUrl.pathname + (preUrl.search != null ? preUrl.search : '') + (preUrl.hash != null ? preUrl.hash : '')
 	const device = req.device.type + '/' + req.device.name

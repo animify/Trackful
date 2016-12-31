@@ -23,20 +23,22 @@
 		}
 
 		trackHandler = (e) => {
-			trackData = {"key": trackfulKey, "tracker": e.target.getAttribute('data-track')}
+			let trackData = {"key": trackfulKey, "tracker": e.target.getAttribute('data-track')}
 			useSender('//trackful.io/endpoint/clicks', trackData)
+			return true
 		}
 
 		newTrackMap = (e) => {
-			trackMap = document.querySelectorAll('[data-track]')
+			let trackMap = document.querySelectorAll('[data-track]')
+			for (let i = 0; i < trackMap.length; i++) {
+				let current = trackMap[i]
+				current.addEventListener('click', trackHandler)
+			}
 		}
 
 		newTrackMap(null)
 
-		for (let i = 0; i < trackMap.length; i++) {
-			let current = trackMap[i]
-			current.addEventListener('click', trackHandler, false)
-		}
+
 
 		hit(trackfulKey)
 	} else {
