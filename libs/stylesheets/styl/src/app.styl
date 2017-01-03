@@ -305,6 +305,40 @@ div.error
 		color #fff
 	h3
 		color color-primary-text
+
+#activity
+	padding 2em 0
+
+.activity
+	border-left 2px solid border-gray
+	padding 1em 0 1em 2em
+	margin-left 1em
+	cf()
+	p:before
+		font-family 'Ionicons'
+		absolute left -1.9em
+		background-color #fff
+		border-radius 50%
+		font-size 1.4em
+		width 1em
+		text-align center
+	&.a_hit
+		p:before
+			color color-purple
+			content '\f262'
+	&.a_click
+		p:before
+			content '\f2e3'
+			color color-yellow
+	p
+		display inline-block
+		position relative
+		color body-light
+	small
+		display inline-block
+		margin-left .5rem
+		opacity .5
+
 .flash
 	animation-name flash
 	animation-duration 1s

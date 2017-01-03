@@ -112,6 +112,33 @@ exports.getTrackers = (req, res, key, callback) => {
 	})
 }
 
+exports.addActivity = (req, res, key, type, element, page, country, device, callback) => {
+	r.db('data').table('activity').insert({
+		key: key,
+		type: type,
+		element: element,
+		page: page,
+		country: country,
+		device: device,
+		time: r.now().toEpochTime()
+	}).run((err, cu) => {
+		if (cu.inserted == 1) {
+			return callback(null, true)
+		}
+		callback(true, null)
+	})
+}
+
+exports.getActivity = (req, res, key, callback) => {
+	r.db('data').table('activity').filter({key:key}).orderBy(r.desc('time')).limit(80)
+	.run((err, cu) => {
+		if (cu) {
+			return callback(null, cu)
+		}
+		callback(true, null)
+	})
+}
+
 exports.getClickData = (req, res, key, callback) => {
 	r.db('data').table('sloth').get(key)
 	.run((err, rest) => {

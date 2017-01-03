@@ -131,6 +131,22 @@ router.get('/key/:key', auth.presets, (req, res) => {
 	})
 })
 
+router.get('/activity/:key', auth.presets, (req, res) => {
+	actions.validateKeyOwner(req, res, req.params.key, (err, owner) => {
+		if (!err && owner) {
+			actions.getActivity(req, res, req.params.key, (err, activity) => {
+				if (err) return res.redirect('/keys/all')
+				const trackR = io.of(`/track_${req.params.key}`)
+				console.log(activity);
+				res.render('activity', {user: req.user, title: "Activity - Trackful", activities: activity, trackKey: req.params.key})
+			})
+
+		} else {
+
+		}
+	})
+})
+
 router.get('/root', (req, res) => {
 	res.render('test')
 })

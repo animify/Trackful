@@ -18,7 +18,8 @@ block content
 			.info Name: #[span=key.name]
 			.info ID: #[span=key.id]
 			.info Domain: #[span=key.domain]
-			.info.float-right #[a(data-modal, data-track="Delete Key").text-red #[i.ion-ios-trash-outline]]
+			.info.float-right #[a(data-modal, data-track="Delete Key") #[i.ion-trash-b]]
+			a.info.float-right(href=`/activity/${key.id}`) #[i.ion-android-notifications-none]
 
 		section#trackers
 			.grid-row
@@ -40,11 +41,11 @@ block content
 								li(data-click=index) #{index}
 									span #{val}
 
-					ul#devices
-						li.header #[h5 Devices #[span &nbsp;/ page hit]]
+					ul#countries
+						li.header #[h5 Countries #[span &nbsp;/ page hit]]
 							div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
-							each val, index in devicetrackers
-								li(data-device=index) #{index}
+							each val, index in countrytrackers
+								li(data-country=index) #{index}
 									span #{val}
 
 				.xs-12.m-6(class=hasTrackers ? "" : "hidden")
@@ -64,11 +65,11 @@ block content
 								li(data-hit=index) #{index}
 									span #{val}
 
-					ul#countries
-						li.header #[h5 Countries #[span &nbsp;/ page hit]]
+					ul#devices
+						li.header #[h5 Devices #[span &nbsp;/ page hit]]
 							div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
-							each val, index in countrytrackers
-								li(data-country=index) #{index}
+							each val, index in devicetrackers
+								li(data-device=index) #{index}
 									span #{val}
 
 				#empty.xs-12(class=hasTrackers ? "hidden" : "")

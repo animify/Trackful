@@ -9,6 +9,9 @@ const credentials = {
 	cert: (process.env.NODE_ENV == 'development') ? fs.readFileSync('ssl/localhost.crt') : fs.readFileSync('ssl/trackful_io.crt')
 }
 
+app.locals.moment = require('moment')
+process.env.NODE_ENV == 'development' ? app.locals.env = 'development' : app.locals.env = 'production'
+
 const https = require('https').Server(credentials, app)
 const io = require('socket.io')(https)
 global.socketIO = io
