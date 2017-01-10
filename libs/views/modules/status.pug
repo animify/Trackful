@@ -48,6 +48,14 @@ block content
 					span.text-orange Interrupted
 			.record
 				.float-left
+					h6 Activity API
+					small API for managing user activity
+				if activity
+					span.text-green Operational
+				else
+					span.text-orange Interrupted
+			.record
+				.float-left
 					h6 Live feed
 					small Ability to send live updates to dashboards
 				if live

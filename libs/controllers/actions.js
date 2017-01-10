@@ -102,11 +102,18 @@ exports.getTrackers = (req, res, key, callback) => {
 	r.db(config.get("rethink").trackDB).table('trackers').filter({key:key})
 	.run((err, rest) => {
 		let hasTrackers = false
-		if (rest[0]) {
-			if (Object.keys(rest[0].clicks).length > 0 || Object.keys(rest[0].hits).length > 0 || Object.keys(rest[0].countries).length > 0 || Object.keys(rest[0].devices).length > 0)
-				hasTrackers = true
+		let sessionTime = 0
 
-			return callback(null, rest[0].clicks, rest[0].hits, rest[0].countries, rest[0].devices, hasTrackers)
+		if (rest[0]) {
+			if (Object.keys(rest[0].clicks).length > 0 || Object.keys(rest[0].hits).length > 0 ||  Object.keys(rest[0].countries).length > 0 || Object.keys(rest[0].devices).length > 0) {
+				hasTrackers = true
+				if (rest[0].sessions) {
+					let sessionTimeArray = Object.keys(rest[0].sessions).map(k => rest[0].sessions[k])
+					sessionTime = sessionTimeArray.reduce((a, b) => a + b, 0)
+				}
+			}
+
+			return callback(null, rest[0].clicks, rest[0].hits, rest[0].countries, rest[0].devices, sessionTime, hasTrackers)
 		}
 		callback(null, true)
 	})
@@ -122,7 +129,7 @@ exports.addActivity = (req, res, key, type, element, page, country, device, call
 		device: device,
 		time: r.now().toEpochTime()
 	}).run((err, cu) => {
-		if (cu.inserted == 1) {
+		if (cu) {
 			return callback(null, true)
 		}
 		callback(true, null)

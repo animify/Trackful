@@ -10,6 +10,21 @@ const async = require('async')
 const geoip = require('geoip-lite')
 const countries = require('country-data').countries
 
+exports.sessionTrack = (req, res, key, href, ms, callback) => {
+	const preUrl = url.parse(href)
+	const page = preUrl.pathname + (preUrl.search != null ? preUrl.search : '') + (preUrl.hash != null ? preUrl.hash : '')
+	const originUrl = url.parse(req.headers.origin)
+	const originHost = originUrl.host
+	console.log(ms);
+	r.db(config.get("rethink").trackDB).table('trackers').filter({key: key, domain:originHost, status: "active"}).update(
+		{sessions: {[page] : r.row('sessions')(page).default(0).add(ms)} },
+		{returnChanges: true}
+	).run(function(err, cursor) {
+		if (cursor.changes) return callback(null, [page, ms])
+		callback(true, null)
+	})
+}
+
 exports.incrementClickTrack = (req, res, key, track, callback) => {
 	const originUrl = url.parse(req.headers.origin)
 	const originHost = originUrl.host
@@ -34,9 +49,6 @@ exports.incrementClickTrack = (req, res, key, track, callback) => {
 		if (err) return callback(err, null)
 		callback(null, arr.tracker)
 	})
-
-
-
 }
 
 exports.incrementHitTrack = (req, res, key, href, callback) => {

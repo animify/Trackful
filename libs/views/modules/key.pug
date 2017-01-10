@@ -1,21 +1,23 @@
 extends ../layout
 
 block content
-	- var maintitle = "Dashboard"
-	- var sub = "Overview"
+	- var maintitle = key.name
+	- var sub = "Dashboard"
+	- var status = true
 	- var clickstotal = 0
 	- var hitstotal = 0
 	if hasTrackers
 		each val, index in clicktrackers
 			-clickstotal = clickstotal + val
-	if hasTrackers
 		each val, index in hittrackers
 			-hitstotal = hitstotal + val
+		- var avgsession = moment.unix(sessiontime / clickstotal).format("HH:mm:ss")
+	else
+		- var avgsession = "N/A"
 	.contain
 		include ../static/nav.pug
 		section#key_info
-			.info.signal Status: #[span]
-			.info Name: #[span=key.name]
+			.info.session Avg. session: #[span 0]
 			.info ID: #[span=key.id]
 			.info Domain: #[span=key.domain]
 			.info.float-right #[a(data-modal, data-track="Delete Key") #[i.ion-trash-b]]
@@ -89,6 +91,7 @@ block footer
 		opt.trackR = '/track_#{trackKey}'
 		opt.clickTotal = #{clickstotal}
 		opt.hitTotal = #{hitstotal}
+		opt.avgsession = #{sessiontime / hitstotal}
 		opt.clickLast = 0
 		opt.hitLast = 0
 		opt.lastTime = 0

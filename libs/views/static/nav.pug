@@ -1,7 +1,10 @@
 section.header
 	.head
 		h6=sub
-		h3=maintitle
+		h3
+			if status
+				i.ion-ios-circle-filled.signal
+			| #{maintitle}
 	.options
 		.dropdown.right.floating
 			a.toggle #[img(src=user.avatarUrl)] #[i.ion-arrow-down-b]

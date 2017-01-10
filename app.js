@@ -12,6 +12,7 @@ const credentials = {
 app.locals.moment = require('moment')
 process.env.NODE_ENV == 'development' ? app.locals.env = 'development' : app.locals.env = 'production'
 
+const http = require('http').Server(app)
 const https = require('https').Server(credentials, app)
 const io = require('socket.io')(https)
 global.socketIO = io
@@ -42,26 +43,20 @@ const rdbStore = new RDBStore(r, {
 	table: 'session'
 })
 
-let wwwRedirect = (req, res, next) => {
-	if (req.headers.host.slice(0, 4) === 'www.') {
-		var newHost = req.headers.host.slice(4)
-		return res.redirect(301, req.protocol + '://' + newHost + req.originalUrl)
+let ensureSecure = (req, res, next) => {
+	if(req.secure){
+		return next()
 	}
-	next()
+	res.redirect('https://' + req.hostname + req.url)
 }
 
+app.all('*', ensureSecure)
+
 app.set('trust proxy', true)
-app.use(wwwRedirect)
 
 app.enable('trust proxy')
 
-app.use(function(req, res, next) {
-		if (req.secure){
-			return next()
-		}
-		res.redirect("https://" + req.headers.host + req.url)
-	})
-	.use(cookieParser())
+app.use(cookieParser())
 	.use(helmet())
 	.use(session({
 		secret: 'keyboard cat',
@@ -80,7 +75,8 @@ app.use(function(req, res, next) {
 	.use(device.capture({ parseUserAgent : true }))
 	.use(cors())
 
-app.set('port', process.env.PORT || config.get('port') || 80)
+app.set('port', process.env.PORT || config.get('port') || 443)
+	.set('http_port', config.get('http_port') || 80)
 	.set('views', __dirname + '/libs/views/modules')
 	.set('view engine', 'pug')
 	.set('view options', { layout: false })
@@ -97,6 +93,10 @@ app.use((req, res, next) => {
 	if (req.accepts('json')) return res.send({ error: 404, message: 'Trackful: Page not found' })
 
 	res.type('txt').send('Trackful 404: Page not found')
+})
+
+http.listen(app.get('http_port'), function () {
+	log.info('Trackful server running on port: ' + app.get('http_port'))
 })
 
 https.listen(app.get('port'), function () {

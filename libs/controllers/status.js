@@ -45,6 +45,16 @@ exports.sessions = (req, res, callback) => {
 	})
 }
 
+exports.activity = (req, res, callback) => {
+	r.db('data').table('activity').limit(1).run(function(err, cursor) {
+		if (cursor != undefined) {
+			callback(null, true)
+		} else {
+			callback(null, false)
+		}
+	})
+}
+
 exports.live = (req, res, callback) => {
 	if (global.socketIO != undefined) {
 		callback(null, true)

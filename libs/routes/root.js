@@ -66,9 +66,15 @@ router.get('/status', (req, res) => {
 				if (!err)
 					callback(null, current)
 			})
+		},
+		activity: (callback) => {
+			status.activity(req, res, (err, current) => {
+				if (!err)
+					callback(null, current)
+			})
 		}
 	}, (err, arr) => {
-		res.render('status', {title: "Status - Trackful", data: arr.data, trackers: arr.trackers, users: arr.users, live: arr.live, sessions: arr.sessions})
+		res.render('status', {title: "Status - Trackful", data: arr.data, trackers: arr.trackers, users: arr.users, live: arr.live, sessions: arr.sessions, activity: arr.activity})
 	})
 })
 
@@ -110,9 +116,9 @@ router.get('/key/:key', auth.presets, (req, res) => {
 		if (!err && owner) {
 			async.parallel({
 				trackers: (callback) => {
-					actions.getTrackers(req, res, req.params.key, (err, clicksTrackers, hitsTrackers, countriesTrackers, devicesTrackers, hasClickTrackers) => {
+					actions.getTrackers(req, res, req.params.key, (err, clicksTrackers, hitsTrackers, countriesTrackers, devicesTrackers, sessionTime, hasClickTrackers) => {
 						if (!err)
-							callback(null, clicksTrackers, hitsTrackers, countriesTrackers, devicesTrackers, hasClickTrackers)
+							callback(null, clicksTrackers, hitsTrackers, countriesTrackers, devicesTrackers, sessionTime, hasClickTrackers)
 					})
 				},
 				key: (callback) => {
@@ -122,7 +128,7 @@ router.get('/key/:key', auth.presets, (req, res) => {
 				}
 			}, (err, arr) => {
 				const trackR = io.of(`/track_${req.params.key}`)
-				res.render('key', {user: req.user, title: "Dashboard - Trackful", clicktrackers: arr.trackers[0], hittrackers: arr.trackers[1], countrytrackers: arr.trackers[2], devicetrackers: arr.trackers[3], hasTrackers: arr.trackers[4], trackKey: req.params.key, key: arr.key[0]})
+				res.render('key', {user: req.user, title: "Dashboard - Trackful", clicktrackers: arr.trackers[0], hittrackers: arr.trackers[1], countrytrackers: arr.trackers[2], devicetrackers: arr.trackers[3], sessiontime: arr.trackers[4], hasTrackers: arr.trackers[5], trackKey: req.params.key, key: arr.key[0]})
 			})
 
 		} else {
@@ -214,6 +220,20 @@ router.post('/endpoint/update/avatar', (req, res) => {
 			return res.send(result)
 		}
 		res.json(err)
+	})
+})
+
+router.post('/endpoint/session/time', (req, res) => {
+	watcher.sessionTrack(req, res, req.body.key, req.body.page, req.body.ms, (err, result) => {
+		if (!err) {
+			const trackR = io.of(`/track_${req.body.key}`)
+			trackR.emit('change',{
+				change: result,
+				type: 'session'
+			})
+			return res.sendStatus(200)
+		}
+		res.send(err)
 	})
 })
 
