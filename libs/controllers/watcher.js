@@ -41,7 +41,10 @@ exports.incrementClickTrack = (req, res, key, track, callback) => {
 				{clicks: {[track] : r.row('clicks')(track).default(0).add(1)} },
 				{returnChanges: true}
 			).run(function(err, cursor) {
-				if (cursor.changes) return callback(null, [track, cursor.changes[0].new_val.clicks[track]])
+				if (cursor.changes) {
+					if (cursor.changes[0] === undefined) return callback(true, null)
+					return callback(null, [track, cursor.changes[0].new_val.clicks[track]])
+				}
 				callback(true, null)
 			})
 		}
