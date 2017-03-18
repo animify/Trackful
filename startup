@@ -1,0 +1,2 @@
+ rethinkdb --directory /var/lib/rethinkdb/instance1/data --bind all &
+ npm run prod &
