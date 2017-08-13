@@ -365,20 +365,7 @@ $(() => {
   toggleModal = (id) => {
     $('.confirm').attr('class', 'confirm')
     $('.cancel').attr('class', 'cancel')
-    $('.modal').fadeToggle('fast')
-    if (id) {
-      if ($(`.modal #${id}`).is(":visible")) {
-        $(`.modal #${id}`).slideUp('fast')
-      } else {
-        $(`.modal #${id}`).slideDown('fast')
-      }
-    } else {
-      if ($(`.modal .box`).is(":visible")) {
-        $(`.modal .box`).slideUp('fast')
-      } else {
-        $(`.modal .box`).slideDown('fast')
-      }
-    }
+    $('.modal').toggleClass('open')
   }
 
   $('.mobilenav').bind('click', function() {

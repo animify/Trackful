@@ -10,8 +10,6 @@ html
 body
   font-family font-family-standard
   font-size font-size-standard
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
   color text-default
   height 100%
   width 100%
@@ -19,11 +17,16 @@ body
   padding 0
   overflow hidden
 
+body, input, select
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+  text-rendering optimizeLegibility
+
 for h in (1..6)
   h{h}
     line-height 1.8em
     font-size lookup('font-size-h' + h)
-    letter-spacing -.02em
+    letter-spacing -.03em
     font-weight 500
     color color-heading
 

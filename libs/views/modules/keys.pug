@@ -14,7 +14,8 @@ block content
         if keys
           each key in keys
             tr
-              td=key.name
+              td 
+                b=key.name
               td
                 a(href=`http://${key.domain}`, target="_blank")=key.domain
               td=key.id

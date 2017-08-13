@@ -7,6 +7,7 @@ block content
       .details
         .input.disabled
           label User ID
+          small Your uniquely assigned user ID
           input(type="text", value=user.id)
         .input.disabled
           label Login name
@@ -32,7 +33,7 @@ block content
     .modal
       .overlay
         a.close(data-modal)
-          i.ion-ios-close-empty
+          i(data-feather="x")
         .box#image
           .box-body
             h5 Update your profile picture

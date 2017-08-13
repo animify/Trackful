@@ -3,25 +3,30 @@ aside.sidebar
     .options.compact
       a(href="/create/key") #[i(data-feather="search")]
       a(href="/create/key") #[i(data-feather="plus")]
-      
+      if isKey
+        span.divider
+        a(href="/getting-started") #[i(data-feather="layout")]
+        a(href="/keys/all") #[i(data-feather="layers")]
+        a(href="/keys/all") #[i(data-feather="activity")]
     .options.bottom.compact
       a(href="/docs") #[i(data-feather="book")]
       a(href="/account") #[i(data-feather="settings")]
       a(href="/auth/logout") #[i(data-feather="log-out")]
-      //- .dropdown
-      //-   a.toggle #[img(src=user.avatarUrl)]
-      //-   ul.menu
-      //-     li.info=user.name
-      //-     li #[a(href="/account") Account settings]
-      //-     li.divider
-      //-     li.logout #[a(href="/auth/logout", data-track="Sign Out") Sign out]
   .outerbar
     .options.main
-      a(href="/getting-started") #[i(data-feather="layout")] #[span Overview]
-      a(href="/keys/all") #[i(data-feather="layers")] #[span Project keys]
-      a(href="/keys/all") #[i(data-feather="activity")] #[span Activity]
+      if isKey
+        h6.detail=heading
+        a(href=`/key/${key.id}/activity`) #[i(data-feather="activity")] #[span Activity]
+        a(href=`/key/${key.id}/clicks`) #[i(data-feather="navigation")] #[span Clicks]
+        a(href=`/key/${key.id}/hits`) #[i(data-feather="eye")] #[span Page hits]
+        a(href=`/key/${key.id}/countries`) #[i(data-feather="globe")] #[span Countries]
+        a(href=`/key/${key.id}/devices`) #[i(data-feather="smartphone")] #[span Devices]
+      else
+        a(href="/getting-started") #[i(data-feather="layout")] #[span Overview]
+        a(href="/keys/all") #[i(data-feather="layers")] #[span Project keys]
+        a(href="/keys/all") #[i(data-feather="activity")] #[span Activity]
     .options.bottom
-      a.user-item
+      a.user-item(href="/account")
         .user-image
           img(src=user.avatarUrl)
         .user-info

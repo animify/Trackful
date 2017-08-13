@@ -155,14 +155,9 @@ body
   padding 2em 0
   .info
     h5
-      font-size 1em
       margin-bottom .6em
       display block
-    p
-      color text-disabled
-      line-height 1.8em
-      & + p
-        margin-top .8em
+
 #account
   padding 2rem 0
   .details, .profile_image
@@ -319,6 +314,13 @@ aside.sidebar
     letter-spacing -.4px
   .options
     width 100%
+    span.divider
+      content ' '
+      display block
+      width 80%
+      height 1px
+      margin .6rem auto
+      border-color lighten(color-primary, 30%)
     &.bottom
       align-self flex-end
       margin-top auto
@@ -330,7 +332,7 @@ aside.sidebar
       max-width 100%
       overflow hidden
       span
-        relative top 1px left 1rem
+        relative top 1px left .7rem
       svg.feather
         display inline-block
         vertical-align middle
@@ -340,6 +342,7 @@ aside.sidebar
         background-color darken(color-primary, 17%)
       &.user-item
         white-space nowrap
+        padding 0.4rem 1.3rem
         & > *
           display inline-block
           vertical-align middle
@@ -364,7 +367,7 @@ aside.sidebar
         margin-top -.5rem
   .options.compact
     a
-      padding 0.65rem  .66rem
+      padding 0.65rem .66rem
       border-radius 50%
       width 2.9rem
       height 2.9rem
@@ -378,12 +381,13 @@ aside.sidebar
   .outerbar
     width 75%
     padding 1rem 1rem 1rem 0rem
+    h6.detail
+      font-size font-size-standard
+      color text-primary-inverse
+      padding .3rem 1.3rem
   .outerbar, .innerbar
     flex-direction column
     display flex
-  .dropdown
-    a
-      color link-light
 
 section.display
   padding-left 18rem
@@ -395,5 +399,6 @@ section.display
     padding 2rem 2.5rem
     & > h6
       color text-disabled
+      text-transform capitalize
     & > h3
       margin-top -.5rem

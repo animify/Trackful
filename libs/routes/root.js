@@ -111,9 +111,9 @@ router.get('/keys/all', auth.presets, (req, res) => {
   })
 })
 
-router.get('/key/:key', auth.presets, (req, res) => {
+router.get('/key/:key/:type*?', auth.presets, (req, res) => {
   actions.validateKeyOwner(req, res, req.params.key, (err, owner) => {
-    if (!err && owner) {
+    if (!err && owner && ['activity', 'clicks', 'hits', 'countries', 'devices', undefined].includes(req.params.type)) {
       async.parallel({
         trackers: (callback) => {
           actions.getTrackers(req, res, req.params.key, (err, clicksTrackers, hitsTrackers, countriesTrackers, devicesTrackers, sessionTime, hasClickTrackers) => {
@@ -125,29 +125,23 @@ router.get('/key/:key', auth.presets, (req, res) => {
           actions.getKeyInfo(req, res, req.params.key, (err, info) => {
             if (!err) callback(null, info)
           })
+        },
+        activity: (callback) => {
+          if (req.params.type == 'activity') {
+            actions.getActivity(req, res, req.params.key, (err, activity) => {
+              if (!err) callback(null, activity)
+            })
+          } else {
+            callback(null, [false])
+          }
         }
       }, (err, arr) => {
         const trackR = io.of(`/track_${req.params.key}`)
-        res.render('key', {user: req.user, title: "Dashboard - Trackful", clicktrackers: arr.trackers[0], hittrackers: arr.trackers[1], countrytrackers: arr.trackers[2], devicetrackers: arr.trackers[3], sessiontime: arr.trackers[4], hasTrackers: arr.trackers[5], trackKey: req.params.key, key: arr.key[0], heading: arr.key[0].name, subtype: 'Overview'})
+        res.render('key', {user: req.user, title: "Dashboard - Trackful", clicktrackers: arr.trackers[0], hittrackers: arr.trackers[1], countrytrackers: arr.trackers[2], devicetrackers: arr.trackers[3], sessiontime: arr.trackers[4], hasTrackers: arr.trackers[5], trackKey: req.params.key, key: arr.key[0], heading: arr.key[0].name, subtype: req.params.type, isKey: true, activities: arr.activity[0]})
       })
 
     } else {
       res.redirect('/keys/all')
-    }
-  })
-})
-
-router.get('/activity/:key', auth.presets, (req, res) => {
-  actions.validateKeyOwner(req, res, req.params.key, (err, owner) => {
-    if (!err && owner) {
-      actions.getActivity(req, res, req.params.key, (err, activity) => {
-        if (err) return res.redirect('/keys/all')
-        const trackR = io.of(`/track_${req.params.key}`)
-        res.render('activity', {user: req.user, title: "Activity - Trackful", activities: activity, trackKey: req.params.key, heading: 'Recent activity', subtype: 'Overview'})
-      })
-
-    } else {
-
     }
   })
 })
