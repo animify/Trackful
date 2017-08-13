@@ -2,53 +2,47 @@ extends ../layout
 
 
 block content
-	- var maintitle = "Your account"
-	- var sub = user.name
-	.contain
-		include ../static/nav.pug
+  if user
+    section#account
+      .details
+        .input.disabled
+          label User ID
+          input(type="text", value=user.id)
+        .input.disabled
+          label Login name
+          small The username you sign in with
+          input(type="text", value=user.login)
+        .input.disabled
+          label Full name
+          small Your name, pulled in by the service you logged in with
+          input(type="text", value=user.name)
+        .input.disabled
+          label Your URL
+          small The URL pulled in by the service you logged in with
+          input(type="text", value=user.url)
+        .input.disabled
+          label Login type
+          small The type of service you used to make your account
+          input(type="text", value=user.type)
+        //- .input
+          //- a.button.in-input Update changes
+      .profile_image
+        img(src=user.avatarUrl)
+        a(data-modal="image") Change profile picture
+    .modal
+      .overlay
+        a.close(data-modal)
+          i.ion-ios-close-empty
+        .box#image
+          .box-body
+            h5 Update your profile picture
+            p Enter the URL of the image you want to update your profile picture with
+            .input.block
+              input#avatarUrl(type="text", value=user.avatarUrl)
+          .box-footer
+            .buttons.float-right.simple
+              a.cancel(data-modal) Cancel
+              a.update_avatar Update
 
-		if user
-			section#account
-				.details
-					.input
-						label User ID
-						small Your uniquely assigned user ID
-						input(type="text", value=user.id, disabled)
-					.input
-						label Login name
-						small The username you sign in with
-						input(type="text", value=user.login, disabled)
-					.input
-						label Full name
-						small Your name, pulled in by the service you logged in with
-						input(type="text", value=user.name, disabled)
-					.input
-						label Your URL
-						small The URL pulled in by the service you logged in with
-						input(type="text", value=user.url, disabled)
-					.input
-						label Login type
-						small The type of service you used to make your account
-						input(type="text", value=user.type, disabled)
-					//- .input
-						//- a.button.in-input Update changes
-				.profile_image
-					img(src=user.avatarUrl)
-					a(data-modal="image") Change profile picture
-			.modal
-				.overlay
-					a.close(data-modal)
-						i.ion-ios-close-empty
-					.box#image
-						.box-body
-							h5 Update your profile picture
-							p Enter the URL of the image you want to update your profile picture with
-							.input.block
-								input#avatarUrl(type="text", value=user.avatarUrl)
-						.box-footer
-							.buttons.float-right.simple
-								a.cancel(data-modal) Cancel
-								a.update_avatar Update
-
-	script.
-		let opt = {}
+  script.
+    let opt = {}

@@ -1,18 +1,14 @@
 extends ../layout
 
 block content
-	- var maintitle = "Recent Activity"
-	- var sub = "Dashboard"
-	.contain
-		include ../static/nav.pug
-		section#activity
-			if activities
-				each activity in activities
-					if activity.type == 'hit'
-						.activity.a_hit
-							p A user visited #[b.text-dark=activity.page] from #[b.text-dark=activity.country] on device #[b.text-dark=activity.device]
-							small= moment(activity.time * 1000).fromNow()
-					else
-						.activity.a_click
-							p A user clicked on #[b.text-dark=activity.element]
-							small= moment(activity.time * 1000).fromNow()
+  section#activity
+    if activities
+      each activity in activities
+        if activity.type == 'hit'
+          .activity.a_hit
+            p A user visited #[b.text-dark=activity.page] from #[b.text-dark=activity.country] on device #[b.text-dark=activity.device]
+            small= moment(activity.time * 1000).fromNow()
+        else
+          .activity.a_click
+            p A user clicked on #[b.text-dark=activity.element]
+            small= moment(activity.time * 1000).fromNow()

@@ -1,17 +1,29 @@
-section.header
-	.head
-		h6=sub
-		h3
-			if status
-				i.ion-ios-circle-filled.signal
-			| #{maintitle}
-	.options
-		.dropdown.right.floating
-			a.toggle #[img(src=user.avatarUrl)] #[i.ion-arrow-down-b]
-			ul.menu
-				li.info=user.name
-				li #[a(href="/create/key") Create key]
-				li #[a(href="/keys/all") All keys]
-				li #[a(href="/account") Your account]
-				li.divider
-				li.logout #[a(href="/auth/logout", data-track="Sign Out") Sign out]
+aside.sidebar
+  .innerbar
+    .options.compact
+      a(href="/create/key") #[i(data-feather="search")]
+      a(href="/create/key") #[i(data-feather="plus")]
+      
+    .options.bottom.compact
+      a(href="/docs") #[i(data-feather="book")]
+      a(href="/account") #[i(data-feather="settings")]
+      a(href="/auth/logout") #[i(data-feather="log-out")]
+      //- .dropdown
+      //-   a.toggle #[img(src=user.avatarUrl)]
+      //-   ul.menu
+      //-     li.info=user.name
+      //-     li #[a(href="/account") Account settings]
+      //-     li.divider
+      //-     li.logout #[a(href="/auth/logout", data-track="Sign Out") Sign out]
+  .outerbar
+    .options.main
+      a(href="/getting-started") #[i(data-feather="layout")] #[span Overview]
+      a(href="/keys/all") #[i(data-feather="layers")] #[span Project keys]
+      a(href="/keys/all") #[i(data-feather="activity")] #[span Activity]
+    .options.bottom
+      a.user-item
+        .user-image
+          img(src=user.avatarUrl)
+        .user-info
+          small=user.name
+          small.text.muted @#{user.login}

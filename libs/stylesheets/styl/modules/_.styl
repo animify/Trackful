@@ -1,0 +1,399 @@
+html
+  min-height 100%
+  width 100%
+  height 100%
+  &.auto
+    height auto
+
+body
+  color text-default
+  cf()
+  min-height 100%
+  &.auto
+    height auto
+
+.contain
+  padding-bottom .2em
+
+.header
+  padding 3.2em 0 1.4rem 0
+  border-bottom 1px solid border-grey
+  & > *
+    vertical-align top
+    display inline-block
+  .head
+    i
+      font-size .5em
+      line-height 1em
+      relative top -.2em
+      margin-right .7em
+      cursor default !important
+      color color-red !important
+      &.connected
+        color color-green !important
+    h6
+      color text-disabled
+      font-weight 400
+      line-height 1.4em
+
+.sparkline
+  width 100%
+  height 7em
+  .highcharts-label.highcharts-no-data
+    top 27px !important
+    span
+      opacity .7
+      font-size 1.2em
+
+#key_info
+  padding 1.4rem 0
+  border-bottom 1px solid border-grey
+  .info
+    display inline-block
+    vertical-align top
+    color text-disabled
+    i
+      font-size 1.4em
+      color text-disabled
+      cursor pointer
+      relative top -2px
+      &:hover
+        color text-dark
+    span
+      color text-dark
+    & + .info
+      margin-left 1.4em
+
+#trackers
+  padding 2rem 0
+  .graph
+    width 100%
+    height 15em
+    background-color #fff
+    margin-bottom 2em
+    position relative
+    border-radius border-radius-normal
+    color #fff
+    overflow hidden
+    .sparkline
+      absolute bottom 0
+    .stats
+      padding 1.4em 2em 1.2em 2em
+    .sum
+      vertical-align top
+      display inline-block
+    .current
+      vertical-align top
+      display inline-block
+    span
+      display inline-block
+      float right
+      relative top 1.9em
+      .increase
+        text-align right
+        display block
+      small
+        display block
+        margin-top .4em
+        color rgba(color-primary, 80%)
+      i
+        opacity .8
+        margin-left .2em
+    &_clicks
+      background-color #fff
+      border 1px solid border-grey
+    &_hits
+      background-color #fff
+      border 1px solid border-grey
+  ul
+    & + ul
+      margin-top 2em
+    li
+      border 1px solid border-grey
+      border-top 0
+      padding .8rem 1rem
+      color text-disabled
+      &.header
+        h5
+          font-size 1.1em
+          display inline-block
+          vertical-align top
+          color text-default
+          span
+            color lighten(text-disabled, 35%)
+        .search
+          float right
+          cursor pointer
+          i
+            font-size 1.32em
+            color lighten(primary-color, 40%)
+            &:hover
+              color primary-color
+          & > *
+            display inline-block
+            vertical-align top
+          .filter
+            font-size 1em
+            padding-left .4em
+            line-height 1.32em
+            color primary-color
+            &:empty:before
+              content 'Filter...'
+      span
+        float right
+        color text-default
+      &:first-of-type
+        border-top 1px solid border-grey
+        border-radius border-radius-normal border-radius-normal 0 0
+
+.highcharts-tooltip-box
+  fill rgba(255,255,255,.94)
+  stroke border-grey
+  stroke-width 1
+
+#create
+  padding 2em 0
+  .info
+    h5
+      font-size 1em
+      margin-bottom .6em
+      display block
+    p
+      color text-disabled
+      line-height 1.8em
+      & + p
+        margin-top .8em
+#account
+  padding 2rem 0
+  .details, .profile_image
+    display inline-block
+    vertical-align top
+  .profile_image
+    float right
+    padding 3em 4em
+    background-color light-color-smoke
+    a
+      display block
+      margin-top 1.4em
+      color text-default
+      text-align center
+      &:hover
+        color text-dark
+    img
+      height 10em
+      border-radius 50%
+
+.empty
+  background-color light-color-smoke
+  text-align center
+  color text-dark
+  padding 6em
+
+footer.footer
+  padding 1.6rem 0
+  border-top 1px solid border-grey
+  &.noborder
+    border-top 0
+    +below('s')
+      border-top 1px solid border-grey
+  ul
+    li
+      display inline-block
+      vertical-align top
+      +below('s')
+        padding 1em 0
+        text-align center
+      & + li
+        margin-left 2em
+      p
+        color text-disabled
+        line-height 1em !important
+        font-weight 600
+        a
+          color text-dark
+      a
+        color text-disabled
+        font-weight 600
+        span
+          color text-dark
+        &:hover
+          color color-primary
+
+.signal
+  span
+    cursor default !important
+    color color-red !important
+    &:before
+      content 'Disconnected'
+    &.connected
+      color color-green !important
+      &:before
+        content 'Connected'
+
+div.error
+  background-color lighten(color-red, 85%)
+  border 1px solid lighten(color-red, 65%)
+  padding 1em
+  border-radius border-radius-normal
+  margin-top 2em
+  display none
+  p
+    color color-red
+    i
+      margin-right .4em
+      relative top 1px
+
+.downloading, .not_found
+  width 100%
+  height 100%
+  background linear-gradient(60deg, color-primary, #FD8788)
+  .logo
+    relative top -4em
+    width 100%
+    text-align center
+    img
+      max-height 2em
+      opacity .4
+  .cf
+    text-align center
+  h1
+    font-weight 300
+    color #fff
+  h3
+    color text-default
+
+#activity
+  padding 2em 0
+
+.activity
+  border-left 2px solid border-grey
+  padding .64rem 0 .64rem 2em
+  margin-left 1em
+  cf()
+  p:before
+    font-family 'Ionicons'
+    absolute left -1.9em
+    background-color #fff
+    border-radius 50%
+    font-size 1.4em
+    width 1em
+    text-align center
+  &.a_hit
+    p:before
+      color color-purple
+      content '\f262'
+  &.a_click
+    p:before
+      content '\f2e3'
+      color color-yellow
+  p
+    display inline-block
+    position relative
+    color text-default
+  small
+    display inline-block
+    margin-left .5rem
+    opacity .5
+
+.flash
+  animation-name flash
+  animation-duration 1s
+
+@keyframes flash
+  0%, 50%, 100%
+    background-color #fff
+  25%, 75%
+    background-color rgba(#FAF1C4,.4)
+
+aside.sidebar
+  fixed top left
+  height 100%
+  width 18rem
+  color #fff
+  background-color color-primary
+  display flex
+  flex-direction row
+  a
+    color #fff
+    font-weight 600
+    letter-spacing -.4px
+  .options
+    width 100%
+    &.bottom
+      align-self flex-end
+      margin-top auto
+    a
+      display block
+      border-radius border-radius-normal
+      width 100%
+      padding .82rem 1.3rem
+      max-width 100%
+      overflow hidden
+      span
+        relative top 1px left 1rem
+      svg.feather
+        display inline-block
+        vertical-align middle
+        width 20px
+        height 20px
+      &:hover
+        background-color darken(color-primary, 17%)
+      &.user-item
+        white-space nowrap
+        & > *
+          display inline-block
+          vertical-align middle
+        .user-info
+          width 80%
+        .user-image
+          margin-right 1rem
+          width 20%
+          img
+            relative top 2px
+            max-width 2.44rem
+            max-height 2.44rem
+            border-radius 50%
+            border 2px solid rgba(255,255,255,.7)
+    small
+      display block
+      width 100%
+      line-height 1.7rem
+      overflow hidden
+      text-overflow ellipsis
+      & + small
+        margin-top -.5rem
+  .options.compact
+    a
+      padding 0.65rem  .66rem
+      border-radius 50%
+      width 2.9rem
+      height 2.9rem
+      text-align center
+      svg.feather
+        width 24px
+        height 24px
+  .innerbar
+    width 25%
+    padding 1rem .8rem
+  .outerbar
+    width 75%
+    padding 1rem 1rem 1rem 0rem
+  .outerbar, .innerbar
+    flex-direction column
+    display flex
+  .dropdown
+    a
+      color link-light
+
+section.display
+  padding-left 18rem
+  height 100%
+  width 100%
+  overflow-y auto
+  .inner
+    span(1/1)
+    padding 2rem 2.5rem
+    & > h6
+      color text-disabled
+    & > h3
+      margin-top -.5rem

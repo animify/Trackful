@@ -1,97 +1,93 @@
 extends ../layout
 
 block content
-	- var maintitle = key.name
-	- var sub = "Dashboard"
-	- var status = true
-	- var clickstotal = 0
-	- var hitstotal = 0
-	if hasTrackers
-		each val, index in clicktrackers
-			-clickstotal = clickstotal + val
-		each val, index in hittrackers
-			-hitstotal = hitstotal + val
-		- var avgsession = moment.unix(sessiontime / clickstotal).format("HH:mm:ss")
-	else
-		- var avgsession = "N/A"
-	.contain
-		include ../static/nav.pug
-		section#key_info
-			.info.session Avg. session: #[span 0]
-			.info ID: #[span=key.id]
-			.info Domain: #[span=key.domain]
-			.info.float-right #[a(data-modal, data-track="Delete Key") #[i.ion-trash-b]]
-			a.info.float-right(href=`/activity/${key.id}`) #[i.ion-android-notifications-none]
+  - var status = true
+  - var clickstotal = 0
+  - var hitstotal = 0
+  if hasTrackers
+    each val, index in clicktrackers
+      -clickstotal = clickstotal + val
+    each val, index in hittrackers
+      -hitstotal = hitstotal + val
+    - var avgsession = moment.unix(sessiontime / clickstotal).format("HH:mm:ss")
+  else
+    - var avgsession = "N/A"
+  section#key_info
+    .info.session Avg. session: #[span 0]
+    .info ID: #[span=key.id]
+    .info Domain: #[span=key.domain]
+    .info.float-right #[a(data-modal, data-track="Delete Key") #[i.ion-trash-b]]
+    a.info.float-right(href=`/activity/${key.id}`) #[i.ion-android-notifications-none]
 
-		section#trackers
-			.grid-row
-				.xs-12.m-6(class=hasTrackers ? "" : "hidden")
-					.graph.graph_clicks
-						.stats
-							.sum
-								p Total clicks
-								h2=clickstotal
-							span
-								.increase #[b.prc]% #[i.ion-arrow-up-b]
-								small.updated
-						#chart_c.sparkline
+  section#trackers
+    .row
+      .equal(class=hasTrackers ? "" : "hidden")
+        .graph.graph_clicks
+          .stats
+            .sum
+              p Total clicks
+              h2=clickstotal
+            span
+              .increase #[b.prc]% #[i.ion-arrow-up-b]
+              small.updated
+          #chart_c.sparkline
 
-					ul#clicks
-						li.header #[h5 Clicks]
-							div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
-							each val, index in clicktrackers
-								li(data-click=index) #{index}
-									span #{val}
+        ul#clicks
+          li.header #[h5 Clicks]
+            div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
+            each val, index in clicktrackers
+              li(data-click=index) #{index}
+                span #{val}
 
-					ul#countries
-						li.header #[h5 Countries #[span &nbsp;/ page hit]]
-							div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
-							each val, index in countrytrackers
-								li(data-country=index) #{index}
-									span #{val}
+        ul#countries
+          li.header #[h5 Countries #[span &nbsp;/ page hit]]
+            div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
+            each val, index in countrytrackers
+              li(data-country=index) #{index}
+                span #{val}
 
-				.xs-12.m-6(class=hasTrackers ? "" : "hidden")
-					.graph.graph_hits
-						.stats
-							.sum
-								p Total page hits
-								h2=hitstotal
-							span
-								.increase #[b.prc]% #[i.ion-arrow-up-b]
-								small.updated
-						#chart_h.sparkline
-					ul#hits
-						li.header #[h5 Page hits]
-							div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
-							each val, index in hittrackers
-								li(data-hit=index) #{index}
-									span #{val}
+      .equal(class=hasTrackers ? "" : "hidden")
+        .graph.graph_hits
+          .stats
+            .sum
+              p Total page hits
+              h2=hitstotal
+            span
+              .increase #[b.prc]% #[i.ion-arrow-up-b]
+              small.updated
+          #chart_h.sparkline
+        ul#hits
+          li.header #[h5 Page hits]
+            div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
+            each val, index in hittrackers
+              li(data-hit=index) #{index}
+                span #{val}
 
-					ul#devices
-						li.header #[h5 Devices #[span &nbsp;/ page hit]]
-							div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
-							each val, index in devicetrackers
-								li(data-device=index) #{index}
-									span #{val}
+        ul#devices
+          li.header #[h5 Devices #[span &nbsp;/ page hit]]
+            div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
+            each val, index in devicetrackers
+              li(data-device=index) #{index}
+                span #{val}
 
-				#empty.xs-12(class=hasTrackers ? "hidden" : "")
-					.empty
-						h4 There isn't enough data here to show just yet.
-		include ../static/modal.pug
+      #empty.xs-12(class=hasTrackers ? "hidden" : "")
+        .empty
+          h4 There isn't enough data here to show just yet.
+  include ../static/modal.pug
 
 block footer
-	script(src="//momentjs.com/downloads/moment.min.js")
-	script(src="//code.highcharts.com/highcharts.js")
-	script(src="//code.highcharts.com/modules/no-data-to-display.js")
-	script(src="/socket.io/socket.io.js")
-	script.
-		let opt = {}
-		opt.key = '#{trackKey}'
-		opt.keyName = '#{key.name}'
-		opt.trackR = '/track_#{trackKey}'
-		opt.clickTotal = #{clickstotal}
-		opt.hitTotal = #{hitstotal}
-		opt.avgsession = #{sessiontime / hitstotal}
-		opt.clickLast = 0
-		opt.hitLast = 0
-		opt.lastTime = 0
+  script(src="//momentjs.com/downloads/moment.min.js")
+  script(src="//code.highcharts.com/highcharts.js")
+  script(src="//code.highcharts.com/modules/no-data-to-display.js")
+  script(src="/socket.io/socket.io.js")
+  script.
+    let opt = {}
+    opt.key = '#{trackKey}'
+    opt.keyName = '#{key.name}'
+    opt.trackR = '/track_#{trackKey}'
+    opt.clickTotal = #{clickstotal}
+    opt.hitTotal = #{hitstotal}
+    opt.avgsession = #{sessiontime / hitstotal}
+    opt.clickLast = 0
+    opt.hitLast = 0
+    opt.lastTime = 0

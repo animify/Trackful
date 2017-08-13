@@ -1,17 +1,22 @@
 extends ../layout
 
 block content
-	- var maintitle = "Your keys"
-	- var sub = "Applications"
-	.contain
-		include ../static/nav.pug
-		section#keys
-			.activekeys
-				h6.sub.text-green Active applications
-				if keys
-					each key in keys
-						a.record(href="/key/" + key.id)
-							.float-left
-								h6 #{key.name}
-								small #{key.domain}
-							span /#{key.id} #[i.ion-ios-arrow-forward]
+  .activekeys
+    h6.sub.text-green Active applications
+    table.table.basic
+      thead
+        tr
+          th Name
+          th Domain
+          th Key Id
+          th
+      tbody
+        if keys
+          each key in keys
+            tr
+              td=key.name
+              td
+                a(href=`http://${key.domain}`, target="_blank")=key.domain
+              td=key.id
+              td
+                a(href=`/key/${key.id}`) View

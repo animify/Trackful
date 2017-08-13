@@ -1,13 +1,8 @@
 doctype html
 html(lang="en", class=typeof gradient === "undefined" ? "" : "auto")
-	include ./static/header.pug
+  include ./static/header.pug
 
-	block content
-
-	if env == 'development'
-		script(src='/js/trackful_dev.js')
-	else
-		script(src='/js/trackful.js')
-
-	if (!nofooter)
-		include ./static/footer.pug
+  if env == 'development'
+    script(src='/js/trackful_dev.js')
+  else
+    script(src='/js/trackful.js')

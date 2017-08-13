@@ -1,23 +1,43 @@
 head
-	block vars
-	block head
-	title= title
+  block vars
+  block head
+  title= title
 
-	meta(charset="UTF-8")
-	meta(name="description", content="Trackful.io is a free web analytics tool tracking how visitors use your website and gather more information about your general audience.")
-	meta(name="keywords", content="analytics,statistics,")
-	meta(name="author", content="Stefan Mansson")
-	meta(name="robots", content="index, follow")
-	meta(name="viewport", content="width=device-width, initial-scale=1")
+  meta(charset="UTF-8")
+  meta(name="description", content="Trackful.io is a free web analytics tool tracking how visitors use your website and gather more information about your general audience.")
+  meta(name="keywords", content="analytics,statistics,")
+  meta(name="author", content="Stefan Mansson")
+  meta(name="robots", content="index, follow")
+  meta(name="viewport", content="width=device-width, initial-scale=1")
 
-	link(rel="icon" type="image/png" href="/images/favicon.png")
-	link(rel="stylesheet", type="text/css", href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css")
-	link(rel="stylesheet", type="text/css", href="//fast.fonts.net/cssapi/2dc1fe03-ff13-4dc6-8e5f-d2b0fc3de8cc.css")
-	link(rel="stylesheet", href="/css/blossom.min.css")
+  link(rel="icon" type="image/png" href="/images/favicon.png")
+  link(rel="stylesheet", type="text/css", href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css")
+  link(rel="stylesheet", type="text/css", href="//fast.fonts.net/cssapi/2dc1fe03-ff13-4dc6-8e5f-d2b0fc3de8cc.css")
+  link(rel="stylesheet", href="/css/blossom.css")
 
 body
-	block content
-	script(src='//code.jquery.com/jquery.js')
-	script(src="/js/pace.js")
-	script.
-		window.TRACKFUL_KEY = "SJX-CIZ8l"
+  if (user)
+    include ../static/nav.pug
+    section.display
+      .inner
+        h6=subtype
+        h3
+          if status
+            i.ion-ios-circle-filled.signal
+          | #{heading}
+        block content
+        //- if (!nofooter)
+          //- include ./footer.pug   
+  else 
+    block content
+               
+  script(src='//code.jquery.com/jquery.js')
+  script(src="/js/pace.js")
+  script(src="//unpkg.com/feather-icons/dist/feather.min.js")
+  script.
+    window.TRACKFUL_KEY = "SJX-CIZ8l"
+    feather.replace()
+  script(src='/js/blossom.min.js')
+  script(src='/js/app.js')
+  script(src='//code.jquery.com/ui/1.12.0-rc.2/jquery-ui.min.js')
+  block footer
