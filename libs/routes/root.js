@@ -23,10 +23,6 @@ router.get('/', (req, res) => {
   res.render('index', {title: "Trackful"})
 })
 
-router.get('/ret', (req, res) => {
-    res.send(req.id);
-});
-
 router.get('/getting-started', (req, res) => {
   res.render('getstarted', {title: "Getting Started - Trackful"})
 })
@@ -96,11 +92,11 @@ router.get('/download/js', function(req, res){
 })
 
 
-router.get('/create/key', auth.presets, (req, res) => {
-  res.render('createkey', {user: req.user, title: "Create Project Key - Trackful", heading: 'Create new project key', subtype: 'Applications'})
+router.get('/create/app', auth.presets, (req, res) => {
+  res.render('createkey', {user: req.user, title: "Create Project Key - Trackful", heading: 'Create new application', subtype: 'Applications'})
 })
 
-router.post('/create/key', auth.presets, (req, res) => {
+router.post('/create/app', auth.presets, (req, res) => {
   actions.createKey(req, res, (err, shortKey) => {
     if (!err) {
       return res.send(shortKey)
@@ -109,20 +105,24 @@ router.post('/create/key', auth.presets, (req, res) => {
   })
 })
 
-router.get('/keys/all', auth.presets, (req, res) => {
+router.get('/apps', auth.presets, (req, res) => {
   actions.getAllKeys(req, res, (err, keys) => {
-    res.render('keys', {user: req.user, title: "All Keys - Trackful", keys: keys, heading: 'Project keys', subtype: 'Applications'})
+    res.render('keys', {user: req.user, title: "All Keys - Trackful", keys: keys, heading: 'Your applications', subtype: 'Applications'})
   })
 })
 
-router.get('/key/:key/:type*?', auth.presets, (req, res) => {
+router.get('/app/:key/:type*?', auth.presets, (req, res) => {
   actions.validateKeyOwner(req, res, req.params.key, (err, owner) => {
-    if (!err && owner && ['activity', 'clicks', 'hits', 'countries', 'devices', undefined].includes(req.params.type)) {
+    if (!err && owner && ['activity', 'clicks', 'hits', 'countries', 'devices', 'sessions', undefined].includes(req.params.type)) {
+
+      if (req.params.type === undefined)
+        req.params.type = 'dashboard';
+
       async.parallel({
         trackers: (callback) => {
-          actions.getTrackers(req, res, req.params.key, (err, clicksTrackers, hitsTrackers, countriesTrackers, devicesTrackers, sessionTime, hasClickTrackers) => {
+          actions.getTrackers(req, res, req.params.key, (err, clicksTrackers, hitsTrackers, countriesTrackers, devicesTrackers, sessionTrackers, sessionTime, hasClickTrackers) => {
             if (!err)
-              callback(null, clicksTrackers, hitsTrackers, countriesTrackers, devicesTrackers, sessionTime, hasClickTrackers)
+              callback(null, clicksTrackers, hitsTrackers, countriesTrackers, devicesTrackers, sessionTrackers, sessionTime, hasClickTrackers)
           })
         },
         key: (callback) => {
@@ -140,7 +140,6 @@ router.get('/key/:key/:type*?', auth.presets, (req, res) => {
           }
         }
       }, (err, arr) => {
-        console.log(arr.activity)
         const trackR = io.of(`/track_${req.params.key}`)
         res.render('key', {
           user: req.user,
@@ -149,8 +148,9 @@ router.get('/key/:key/:type*?', auth.presets, (req, res) => {
           hittrackers: arr.trackers[1],
           countrytrackers: arr.trackers[2],
           devicetrackers: arr.trackers[3],
-          sessiontime: arr.trackers[4],
-          hasTrackers: arr.trackers[5],
+          sessiontrackers: arr.trackers[4],
+          sessiontime: arr.trackers[5],
+          hasTrackers: arr.trackers[6],
           trackKey: req.params.key,
           key: arr.key[0],
           heading: arr.key[0].name,
@@ -161,7 +161,7 @@ router.get('/key/:key/:type*?', auth.presets, (req, res) => {
       })
 
     } else {
-      res.redirect('/keys/all')
+      res.redirect('/apps')
     }
   })
 })
@@ -214,7 +214,7 @@ router.get('/endpoint/data/hits', (req, res) => {
   })
 })
 
-router.post('/endpoint/key/delete', (req, res) => {
+router.post('/endpoint/app/delete', (req, res) => {
   watcher.deleteTracker(req, res, req.body.key, (err, result) => {
     if (!err) {
       return res.send(result)
@@ -233,14 +233,18 @@ router.post('/endpoint/update/avatar', (req, res) => {
 })
 
 router.post('/endpoint/session/time', (req, res) => {
+  console.log(req.body)
   watcher.sessionTrack(req, res, req.body.key, req.body.page, req.body.ms, (err, result) => {
+  log.info(`e - ${result}`)
+
     if (!err) {
+
       const trackR = io.of(`/track_${req.body.key}`)
       trackR.emit('change',{
         change: result,
         type: 'session'
       })
-      return res.sendStatus(200)
+      return res.send(result)
     }
     res.send(err)
   })

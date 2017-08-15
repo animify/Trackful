@@ -295,7 +295,7 @@ $(() => {
   $('.create').bind('click', function() {
     data = { name: $('#appname').val(), domain: $('#domain').val() }
     $.ajax({
-      url: '/create/key',
+      url: '/create/app',
       type: 'POST',
       data: JSON.stringify(data),
       contentType: 'application/json',
@@ -306,7 +306,7 @@ $(() => {
             $(this).removeClass("error").dequeue()
           })
         } else {
-          window.location.href = `/key/${data}`
+          window.location.href = `/app/${data}`
         }
       }
     })
@@ -314,9 +314,9 @@ $(() => {
 
   $('.d_key').bind('click', function() {
     data = {key: opt.key}
-    call('/endpoint/key/delete', 'POST', JSON.stringify(data), (res) => {
+    call('/endpoint/app/delete', 'POST', JSON.stringify(data), (res) => {
       if (res) {
-        window.location.href = '/keys/all'
+        window.location.href = '/apps'
       }
     })
   })

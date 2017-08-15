@@ -3687,6 +3687,9 @@ ol.ordered li[value]:before {
 .text.muted {
   color: #adaef1;
 }
+.text.light {
+  color: #8996a9;
+}
 .loader {
   border-style: solid;
   border-width: 0.5rem;
@@ -6005,18 +6008,31 @@ section.display .inner > h6 {
 section.display .inner > h3 {
   margin-top: -0.5rem;
 }
-table.keys thead th {
+table thead th {
   color: #1c2a40;
 }
-table.keys svg.feather {
+table svg.feather {
   width: 1rem;
   height: 1rem;
   position: relative;
   top: 2px;
   margin-right: 0.1rem;
 }
-table.keys b {
+table b {
   letter-spacing: -0.02rem;
+}
+.infographic {
+  text-align: center;
+  background-color: #f5f7fa;
+  padding: 1.1rem;
+  margin: 1rem 0;
+}
+.infographic svg.feather {
+  width: 1rem;
+  height: 1rem;
+  position: relative;
+  top: 2px;
+  margin-right: 0.1rem;
 }
 @-moz-keyframes flash {
   0%, 50%, 100% {

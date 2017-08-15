@@ -4,7 +4,7 @@
   "ports": {
     "http": 443
   },
-  "url": "localhost",
+  "url": "127.0.0.1",
   "production_url": "trackful.io",
   "security": {
     "tokenLife" : 3600

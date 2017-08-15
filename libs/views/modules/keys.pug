@@ -5,9 +5,9 @@ block content
     table.table.basic.keys
       thead
         tr
-          th Name
-          th Domain
-          th Key Id
+          th Application name
+          th Application domain
+          th Application key
           th
       tbody
         if keys
@@ -19,4 +19,4 @@ block content
                 a(href=`http://${key.domain}`, target="_blank") #[i(data-feather="external-link")] #{key.domain}
               td=key.id
               td
-                a(href=`/key/${key.id}`) View
+                a(href=`/app/${key.id}`) View

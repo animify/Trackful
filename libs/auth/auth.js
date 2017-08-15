@@ -89,8 +89,8 @@ passport.use(new TwitterStrategy({
 
 passport.presets = function (req, res, next) {
   if (req.user) {
-    if (req.user.keys.length < 1 && req.originalUrl != '/create/key')
-      return res.redirect('/create/key')
+    if (req.user.keys.length < 1 && req.originalUrl != '/create/app')
+      return res.redirect('/create/app')
 
     return next()
   }

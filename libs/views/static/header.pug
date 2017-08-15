@@ -20,11 +20,13 @@ body
     include ../static/nav.pug
     section.display
       .inner
-        h6=subtype
-        h3
-          if status
-            i.ion-ios-circle-filled.signal
-          | #{heading}
+        if isKey
+          h6 Applications / #[b=subtype]
+        else
+          h6 #{subtype}
+          
+        h3=heading
+        
         block content
   else 
     block content
@@ -33,7 +35,7 @@ body
   script(src="/js/pace.js")
   script(src="//unpkg.com/feather-icons/dist/feather.min.js")
   script.
-    window.TRACKFUL_KEY = "S1RtmeAPZ"
+    window.TRACKFUL_KEY = "Hy_322gub"
     feather.replace()
   script(src='/js/blossom.min.js')
   script(src='/js/app.js')

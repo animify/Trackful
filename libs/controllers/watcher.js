@@ -60,15 +60,15 @@ exports.incrementHitTrack = (req, res, key, href, callback) => {
   const originHost = originUrl.host
   const page = preUrl.pathname + (preUrl.search != null ? preUrl.search : '') + (preUrl.hash != null ? preUrl.hash : '')
   const device = req.device.type + '/' + req.device.name
-  const geo = geoip.lookup(req.ip)
-  const geo2 = geoip.lookup('91.184.210.191')
-  let country = null
+  const geo2 = geoip.lookup(req.ip)
+  const geo = geoip.lookup('91.184.210.191')
   console.log(geo2)
-  geo == null ? country = "Other" : country = countries[geo.country].name
+  let country = (geo == null) ? "Other" : countries[geo.country].name;
+  let city = (geo == null) ? "Other" : geo.city;
 
   async.parallel({
     activity: (callback) => {
-      actions.addActivity(req, res, key, 'hit', null, page, country, device, (err, current) => {
+      actions.addActivity(req, res, key, 'hit', null, page, city, country, device, (err, current) => {
         if (!err) return callback(null, current)
         callback(true, null)
       })

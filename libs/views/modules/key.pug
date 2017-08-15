@@ -8,40 +8,48 @@ block content
       -clickstotal = clickstotal + val
     each val, index in hittrackers
       -hitstotal = hitstotal + val
-    - var avgsession = moment.unix(sessiontime / clickstotal).format("HH:mm:ss")
+    - var avgsession = moment.utc(sessiontime / hitstotal).format("HH:mm:ss")
   else
     - var avgsession = "N/A"
-  
-  section#key_info
-    .info.session Avg. session: #[span 0]
-    .info Key id: #[span=key.id]
-    .info Domain: #[span=key.domain]
-    .info.float-right #[a(data-modal, data-track="Delete Key") #[i.ion-trash-b]]
-    a.info.float-right(href=`/activity/${key.id}`) #[i.ion-android-notifications-none]
+    
+  //- .info.float-right #[a(data-modal, data-track="Delete Key") #[i.ion-trash-b]]
       
   if page == 'dashboard'
-    .row
-      .equal(class=hasTrackers ? "" : "hidden")
-        .graph.graph_clicks
-          .stats
-            .sum
-              p Total clicks
-              h2=clickstotal
-            span
-              .increase #[b.prc]% #[i.ion-arrow-up-b]
-              small.updated
-          #chart_c.sparkline
-            
-      .equal(class=hasTrackers ? "" : "hidden")
-        .graph.graph_hits
-          .stats
-            .sum
-              p Total page hits
-              h2=hitstotal
-            span
-              .increase #[b.prc]% #[i.ion-arrow-up-b]
-              small.updated
-          #chart_h.sparkline
+    .row.infographics
+      .equal
+        .infographic
+          h5 Average page session
+          p #[i(data-feather="clock")] #{avgsession}
+      .equal
+        .infographic
+          h5 Application domain
+          p
+            a(href=`http://${key.domain}`, target="_blank") #[i(data-feather="external-link")] #{key.domain}
+      .equal
+        .infographic
+          h5 Application key
+          p ##[b=key.id]
+    .chart(class=hasTrackers ? "" : "hidden")
+      .graph.graph_clicks
+        .stats
+          .sum
+            p Total clicks
+            h2=clickstotal
+          span
+            .increase #[b.prc]% #[i.ion-arrow-up-b]
+            small.updated
+        #chart_c.sparkline
+          
+    .chart(class=hasTrackers ? "" : "hidden")
+      .graph.graph_hits
+        .stats
+          .sum
+            p Total page hits
+            h2=hitstotal
+          span
+            .increase #[b.prc]% #[i.ion-arrow-up-b]
+            small.updated
+        #chart_h.sparkline
             
   if page == 'activity'
     section#activity
@@ -51,7 +59,7 @@ block content
             .activity.a_hit
               .icon
                 i(data-feather="eye")
-              p A user visited #[b.text-dark=activity.page] from #[b.text-dark=activity.country] on device #[b.text-dark=activity.device]
+              p A user visited #[b.text-dark=activity.page] from #[b.text-dark #{activity.city}, #{activity.country}] on device #[b.text-dark=activity.device]
               small= moment(activity.time * 1000).fromNow()
           else
             .activity.a_click
@@ -59,39 +67,76 @@ block content
                 i(data-feather="navigation")
               p A user clicked on #[b.text-dark=activity.element]
               small= moment(activity.time * 1000).fromNow()
-  section#trackers
-          
-    if page == 'clicks'
-      ul#clicks
-        li.header #[h5 Clicks]
-          div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
-          each val, index in clicktrackers
-            li(data-click=index) #{index}
-              span #{val}
-              
-    if page == 'hits'
-      ul#hits
-        li.header #[h5 Page hits]
-          div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
-          each val, index in hittrackers
-            li(data-hit=index) #{index}
-              span #{val}
-              
-    if page == 'countries'
-      ul#countries
-        li.header #[h5 Countries #[span &nbsp;/ page hit]]
-          div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
-          each val, index in countrytrackers
-            li(data-country=index) #{index}
-              span #{val}
-              
-    if page == 'devices'
-      ul#devices
-        li.header #[h5 Devices #[span &nbsp;/ page hit]]
-          div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
-          each val, index in devicetrackers
-            li(data-device=index) #{index}
-              span #{val}
+    
+  if page == 'clicks'
+    table.table.basic#clicks
+      thead
+        tr
+          th Click tracker name
+          th Click count
+      tbody
+        each val, index in clicktrackers
+          tr
+            td
+              b=index
+            td=val
+
+            
+  if page == 'hits'
+    table.table.basic#hits
+      thead
+        tr
+          th Page
+          th Hit count
+      tbody
+        each val, index in hittrackers
+          tr
+            td
+              b=index
+            td=val
+            
+  if page == 'sessions'
+    table.table.basic#sessions
+      thead
+        tr
+          th Page
+          th Average time spent
+          th Total time spent
+      tbody
+        each val, index in sessiontrackers
+          tr
+            td
+              b=index
+            td #[i(data-feather="clock")] #{moment.utc(val / hittrackers[index]).format("HH:mm:ss")} #[span.text.light (#{hittrackers[index]} hits)]
+            td #[i(data-feather="clock")] #{moment.utc(val).format("HH:mm:ss")}
+            
+            
+  if page == 'countries'
+    table.table.basic#countries
+      thead
+        tr
+          th Country
+          th Visits
+      tbody
+        each val, index in countrytrackers
+          tr
+            td
+              b=index
+            td=val
+
+  if page == 'devices'
+    table.table.basic#devices
+      thead
+        tr
+          th Device type
+          th Visits
+      tbody
+        each val, index in devicetrackers
+          tr
+            td
+              b=index
+            td=val
+
             
   #empty.xs-12(class=hasTrackers ? "hidden" : "")
     .empty

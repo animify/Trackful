@@ -112,18 +112,19 @@ exports.getTrackers = (req, res, key, callback) => {
         }
       }
 
-      return callback(null, rest[0].clicks, rest[0].hits, rest[0].countries, rest[0].devices, sessionTime, hasTrackers)
+      return callback(null, rest[0].clicks, rest[0].hits, rest[0].countries, rest[0].devices, rest[0].sessions, sessionTime, hasTrackers)
     }
     callback(null, true)
   })
 }
 
-exports.addActivity = (req, res, key, type, element, page, country, device, callback) => {
+exports.addActivity = (req, res, key, type, element, page, city, country, device, callback) => {
   r.db('data').table('activity').insert({
     key: key,
     type: type,
     element: element,
     page: page,
+    city: city,
     country: country,
     device: device,
     time: r.now().toEpochTime()
