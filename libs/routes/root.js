@@ -23,6 +23,10 @@ router.get('/', (req, res) => {
   res.render('index', {title: "Trackful"})
 })
 
+router.get('/ret', (req, res) => {
+    res.send(req.id);
+});
+
 router.get('/getting-started', (req, res) => {
   res.render('getstarted', {title: "Getting Started - Trackful"})
 })
@@ -128,16 +132,32 @@ router.get('/key/:key/:type*?', auth.presets, (req, res) => {
         },
         activity: (callback) => {
           if (req.params.type == 'activity') {
-            actions.getActivity(req, res, req.params.key, (err, activity) => {
-              if (!err) callback(null, activity)
+            actions.getActivity(req, res, req.params.key, (err, activities) => {
+              if (!err) callback(null, activities)
             })
           } else {
             callback(null, [false])
           }
         }
       }, (err, arr) => {
+        console.log(arr.activity)
         const trackR = io.of(`/track_${req.params.key}`)
-        res.render('key', {user: req.user, title: "Dashboard - Trackful", clicktrackers: arr.trackers[0], hittrackers: arr.trackers[1], countrytrackers: arr.trackers[2], devicetrackers: arr.trackers[3], sessiontime: arr.trackers[4], hasTrackers: arr.trackers[5], trackKey: req.params.key, key: arr.key[0], heading: arr.key[0].name, subtype: req.params.type, isKey: true, activities: arr.activity[0]})
+        res.render('key', {
+          user: req.user,
+          title: "Dashboard - Trackful",
+          clicktrackers: arr.trackers[0],
+          hittrackers: arr.trackers[1],
+          countrytrackers: arr.trackers[2],
+          devicetrackers: arr.trackers[3],
+          sessiontime: arr.trackers[4],
+          hasTrackers: arr.trackers[5],
+          trackKey: req.params.key,
+          key: arr.key[0],
+          heading: arr.key[0].name,
+          subtype: req.params.type,
+          isKey: true,
+          activities: arr.activity,
+          page: req.params.type})
       })
 
     } else {

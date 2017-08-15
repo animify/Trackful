@@ -265,22 +265,20 @@ div.error
   padding .64rem 0 .64rem 2em
   margin-left 1em
   cf()
-  p:before
-    font-family 'Ionicons'
-    absolute left -1.9em
-    background-color #fff
-    border-radius 50%
-    font-size 1.4em
-    width 1em
-    text-align center
+  position relative
   &.a_hit
-    p:before
-      color color-purple
-      content '\f262'
+    .icon
+      color color-blue
   &.a_click
-    p:before
-      content '\f2e3'
-      color color-yellow
+    .icon
+      color color-orange
+  .icon
+    absolute left -.8rem top .2rem
+    background-color #fff
+    width 2.3rem
+    height 2.3rem
+    border-radius 50%
+    line-height 3.3rem
   p
     display inline-block
     position relative
@@ -402,3 +400,15 @@ section.display
       text-transform capitalize
     & > h3
       margin-top -.5rem
+
+table.keys
+  thead
+    th
+      color text-dark
+  svg.feather
+    width 1rem
+    height 1rem
+    relative top 2px
+    margin-right .1rem
+  b
+    letter-spacing -.02rem

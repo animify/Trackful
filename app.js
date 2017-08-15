@@ -3,6 +3,7 @@
 const express = require('express')
 const app = express()
 const fs = require('fs')
+const addRequestId = require('express-request-id')()
 
 const credentials = {
   key: (process.env.NODE_ENV == 'development') ? fs.readFileSync('ssl/localhost.key') : fs.readFileSync('ssl/trackful_io.key'),
@@ -58,6 +59,7 @@ app.enable('trust proxy')
 
 app.use(cookieParser())
   .use(helmet())
+  .use(addRequestId)
   .use(session({
     secret: 'keyboard cat',
     cookie: {

@@ -2,8 +2,7 @@ extends ../layout
 
 block content
   .activekeys
-    h6.sub.text-green Active applications
-    table.table.basic
+    table.table.basic.keys
       thead
         tr
           th Name
@@ -17,7 +16,7 @@ block content
               td 
                 b=key.name
               td
-                a(href=`http://${key.domain}`, target="_blank")=key.domain
+                a(href=`http://${key.domain}`, target="_blank") #[i(data-feather="external-link")] #{key.domain}
               td=key.id
               td
                 a(href=`/key/${key.id}`) View

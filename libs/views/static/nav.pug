@@ -16,6 +16,7 @@ aside.sidebar
     .options.main
       if isKey
         h6.detail=heading
+        a(href=`/key/${key.id}`) #[i(data-feather="grid")] #[span Dashboard]
         a(href=`/key/${key.id}/activity`) #[i(data-feather="activity")] #[span Activity]
         a(href=`/key/${key.id}/clicks`) #[i(data-feather="navigation")] #[span Clicks]
         a(href=`/key/${key.id}/hits`) #[i(data-feather="eye")] #[span Page hits]

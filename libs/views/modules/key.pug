@@ -1,5 +1,4 @@
 extends ../layout
-
 block content
   - var status = true
   - var clickstotal = 0
@@ -12,14 +11,15 @@ block content
     - var avgsession = moment.unix(sessiontime / clickstotal).format("HH:mm:ss")
   else
     - var avgsession = "N/A"
+  
   section#key_info
     .info.session Avg. session: #[span 0]
     .info Key id: #[span=key.id]
     .info Domain: #[span=key.domain]
     .info.float-right #[a(data-modal, data-track="Delete Key") #[i.ion-trash-b]]
     a.info.float-right(href=`/activity/${key.id}`) #[i.ion-android-notifications-none]
-
-  section#trackers
+      
+  if page == 'dashboard'
     .row
       .equal(class=hasTrackers ? "" : "hidden")
         .graph.graph_clicks
@@ -31,21 +31,7 @@ block content
               .increase #[b.prc]% #[i.ion-arrow-up-b]
               small.updated
           #chart_c.sparkline
-
-        ul#clicks
-          li.header #[h5 Clicks]
-            div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
-            each val, index in clicktrackers
-              li(data-click=index) #{index}
-                span #{val}
-
-        ul#countries
-          li.header #[h5 Countries #[span &nbsp;/ page hit]]
-            div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
-            each val, index in countrytrackers
-              li(data-country=index) #{index}
-                span #{val}
-
+            
       .equal(class=hasTrackers ? "" : "hidden")
         .graph.graph_hits
           .stats
@@ -56,23 +42,61 @@ block content
               .increase #[b.prc]% #[i.ion-arrow-up-b]
               small.updated
           #chart_h.sparkline
-        ul#hits
-          li.header #[h5 Page hits]
-            div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
-            each val, index in hittrackers
-              li(data-hit=index) #{index}
-                span #{val}
-
-        ul#devices
-          li.header #[h5 Devices #[span &nbsp;/ page hit]]
-            div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
-            each val, index in devicetrackers
-              li(data-device=index) #{index}
-                span #{val}
-
-      #empty.xs-12(class=hasTrackers ? "hidden" : "")
-        .empty
-          h4 There isn't enough data here to show just yet.
+            
+  if page == 'activity'
+    section#activity
+      if activities
+        each activity in activities
+          if activity.type == 'hit'
+            .activity.a_hit
+              .icon
+                i(data-feather="eye")
+              p A user visited #[b.text-dark=activity.page] from #[b.text-dark=activity.country] on device #[b.text-dark=activity.device]
+              small= moment(activity.time * 1000).fromNow()
+          else
+            .activity.a_click
+              .icon
+                i(data-feather="navigation")
+              p A user clicked on #[b.text-dark=activity.element]
+              small= moment(activity.time * 1000).fromNow()
+  section#trackers
+          
+    if page == 'clicks'
+      ul#clicks
+        li.header #[h5 Clicks]
+          div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
+          each val, index in clicktrackers
+            li(data-click=index) #{index}
+              span #{val}
+              
+    if page == 'hits'
+      ul#hits
+        li.header #[h5 Page hits]
+          div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
+          each val, index in hittrackers
+            li(data-hit=index) #{index}
+              span #{val}
+              
+    if page == 'countries'
+      ul#countries
+        li.header #[h5 Countries #[span &nbsp;/ page hit]]
+          div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
+          each val, index in countrytrackers
+            li(data-country=index) #{index}
+              span #{val}
+              
+    if page == 'devices'
+      ul#devices
+        li.header #[h5 Devices #[span &nbsp;/ page hit]]
+          div.search #[i.ion-ios-search-strong] #[.filter.forcehidden(contenteditable="true")]
+          each val, index in devicetrackers
+            li(data-device=index) #{index}
+              span #{val}
+            
+  #empty.xs-12(class=hasTrackers ? "hidden" : "")
+    .empty
+      h4 There isn't enough data here to show just yet.                
+  
   include ../static/modal.pug
 
 block footer
