@@ -1,7 +1,5 @@
-"use strict"
-
 const r = require('rethinkdbdash')({
-	db: 'users'
-})
+    db: 'users'
+});
 
-module.exports = r
+module.exports = r;
