@@ -91,7 +91,6 @@ router.get('/download/js', function(req, res){
   res.download(trackfulJS)
 })
 
-
 router.get('/create/app', auth.presets, (req, res) => {
   res.render('createkey', {user: req.user, title: "Create Project Key - Trackful", heading: 'Create new application', subtype: 'Applications'})
 })
