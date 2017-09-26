@@ -1,5 +1,4 @@
 const libs = `${process.cwd()}/libs/`;
-// const log = require(`${libs}logs/log`)(module);
 const config = require(`${libs}config`);
 const r = require('../db/db');
 
@@ -117,6 +116,7 @@ exports.createKey = (req, res, callback) => {
                     type: 'data',
                     hits: [{ [epoch]: 0 }],
                     clicks: [{ [epoch]: 0 }],
+                    sessions: [{ [epoch]: 0 }],
                 })
                 .run();
 
@@ -129,6 +129,7 @@ exports.createKey = (req, res, callback) => {
                     hits: {},
                     countries: {},
                     devices: {},
+                    sessions: {},
                     domain: preUrl.host,
                     status: 'active',
                 })
@@ -173,11 +174,12 @@ exports.getTrackers = (req, res, key, callback) => {
         .run((err, rest) => {
             let hasTrackers = false;
             let sessionTime = 0;
-
+            console.log(config.get('rethink').trackDB, rest);
             if (rest[0]) {
                 if (Object.keys(rest[0].clicks).length > 0
                     || Object.keys(rest[0].hits).length > 0
                     || Object.keys(rest[0].countries).length > 0
+                    || Object.keys(rest[0].sessions).length > 0
                     || Object.keys(rest[0].devices).length > 0) {
                     hasTrackers = true;
                     if (rest[0].sessions) {
@@ -186,6 +188,7 @@ exports.getTrackers = (req, res, key, callback) => {
                     }
                 }
 
+                console.log('e', rest[0]);
                 return callback(null, rest[0].clicks, rest[0].hits, rest[0].countries, rest[0].devices, rest[0].sessions, sessionTime, hasTrackers);
             }
             callback(null, true);
@@ -206,7 +209,9 @@ exports.addActivity = (req, res, key, type, element, page, city, country, device
             device,
             time: r.now().toEpochTime()
         }).run((err, cursor) => {
-            if (cursor) { return callback(null, true); }
+            if (cursor) {
+                return callback(null, true);
+            }
 
             callback(true, null);
         });

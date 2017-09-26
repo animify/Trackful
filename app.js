@@ -1,4 +1,4 @@
-"use strict"
+process.env.NODE_ENV = 'development';
 
 const express = require('express')
 const app = express()
@@ -9,6 +9,8 @@ const credentials = {
   key: (process.env.NODE_ENV == 'development') ? fs.readFileSync('ssl/localhost.key') : fs.readFileSync('ssl/trackful_io.key'),
   cert: (process.env.NODE_ENV == 'development') ? fs.readFileSync('ssl/localhost.crt') : fs.readFileSync('ssl/trackful_io.crt')
 }
+
+console.log(process.env.NODE_ENV);
 
 app.locals.moment = require('moment')
 process.env.NODE_ENV == 'development' ? app.locals.env = 'development' : app.locals.env = 'production'

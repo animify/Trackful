@@ -1,7 +1,4 @@
-
-
 const express = require('express');
-
 const router = express.Router();
 
 const libs = `${process.cwd()}/libs/`;
@@ -127,6 +124,7 @@ router.get('/app/:key/:type*?', auth.presets, (req, res) => {
                     }
                 }
             }, (e, arr) => {
+                console.log(arr.trackers);
                 res.render('key', {
                     user: req.user,
                     title: 'Dashboard - Trackful',

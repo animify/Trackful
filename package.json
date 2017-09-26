@@ -4,8 +4,8 @@
   "description": "Meaningful web analytics",
   "main": "app.js",
   "scripts": {
-    "prod": "NODE_ENV='production' node --use-strict app.js",
-    "dev": "NODE_ENV='development' nodemon --use-strict app.js --opt1"
+    "prod": "set NODE_ENV='production' node --use-strict app.js",
+    "dev": "nodemon --use-strict app.js --opt1"
   },
   "author": "Stefan Mansson <st.mansson@icloud.com> (http://mansson.io)",
   "license": "MIT",

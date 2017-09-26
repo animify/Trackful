@@ -28,7 +28,7 @@ exports.sessionTrack = (req, res, key, href, ms, callback) => {
         },
         { returnChanges: true })
         .run((err, cursor) => {
-            if (cursor.changes) { return callback(null, [page, ms]); }
+            if (cursor != undefined && cursor.changes) { return callback(null, [page, ms]); }
 
             callback(true, null);
         });
@@ -40,9 +40,9 @@ exports.incrementClickTrack = (req, res, key, track, callback) => {
 
     async.parallel({
         activity: (next) => {
-            actions.addActivity(req, res, key, 'click', track, null, null, null, (err, current) => {
+            actions.addActivity(req, res, key, 'click', track, null, null, null, null, (err, current) => {
                 if (!err) return next(null, current);
-                next(true, null);
+                return next(true, null);
             });
         },
         tracker: (next) => {
@@ -60,7 +60,7 @@ exports.incrementClickTrack = (req, res, key, track, callback) => {
                 },
                 { returnChanges: true })
                 .run((err, cursor) => {
-                    if (cursor.changes) {
+                    if (cursor != undefined && cursor.changes) {
                         if (cursor.changes[0] === undefined) { return next(true, null); }
 
                         return next(null, [track, cursor.changes[0].new_val.clicks[track]]);
@@ -91,7 +91,7 @@ exports.incrementHitTrack = (req, res, key, href, callback) => {
         activity: (next) => {
             actions.addActivity(req, res, key, 'hit', null, page, city, country, device, (err, current) => {
                 if (!err) return next(null, current);
-                next(true, null);
+                return next(true, null);
             });
         },
         tracker: (next) => {
@@ -117,7 +117,7 @@ exports.incrementHitTrack = (req, res, key, href, callback) => {
                 { returnChanges: true }
                 )
                 .run((err, cursor) => {
-                    if (cursor.changes) {
+                    if (cursor != undefined && cursor.changes) {
                         const cr = {};
                         cr.page = [page, cursor.changes[0].new_val.hits[page]];
                         cr.countries = [country, cursor.changes[0].new_val.countries[country]];
